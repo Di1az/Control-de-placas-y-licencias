@@ -6,6 +6,7 @@ package Entidades;
 
 import java.util.List;
 import java.io.Serializable;
+import java.util.ArrayList;
 import java.util.Date;
 import javax.persistence.Basic;
 import javax.persistence.Column;
@@ -36,16 +37,16 @@ public class Persona implements Serializable {
     @Column(name = "Nombre")
     private String nombre;
     @Basic
-    @Column(name = "Apellido paterno")
+    @Column(name = "Apellido_paterno")
     private String apellidoP;
     @Basic
-    @Column(name = "Apellido materno")
+    @Column(name = "Apellido_materno")
     private String apellidoM;
     @Basic
     @Column(name = "Telefono")
     private int telefono;
     @Basic
-    @Column(name = "Fecha de nacimiento")
+    @Column(name = "Fecha_Nacimiento")
     private Date fechaN;
     @Basic
     @Column(name = "Discapacidad")
@@ -78,6 +79,16 @@ public class Persona implements Serializable {
         this.fechaN = fechaN;
         this.discapacidad = discapacidad;
         this.vehiculos = vehiculos;
+    }
+    public Persona(String rfc, String nombre, String apellidoP, String apellidoM, int telefono, Date fechaN, boolean discapacidad) {
+        this.rfc = rfc;
+        this.nombre = nombre;
+        this.apellidoP = apellidoP;
+        this.apellidoM = apellidoM;
+        this.telefono = telefono;
+        this.fechaN = fechaN;
+        this.discapacidad = discapacidad;
+        this.vehiculos= new ArrayList<>();
     }
 
     

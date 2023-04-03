@@ -5,6 +5,8 @@
  */
 package GUI;
 
+import DAO.IPersonaDAO;
+import Entidades.Persona;
 import javax.swing.JOptionPane;
 
 /**
@@ -13,11 +15,32 @@ import javax.swing.JOptionPane;
  */
 public class frmPersona extends javax.swing.JFrame {
 
-    /**
-     * Creates new form Registro
-     */
-    public frmPersona() {
+    private final IPersonaDAO personaDAO;
+
+    public frmPersona(IPersonaDAO personaDao) {
         initComponents();
+        this.personaDAO = personaDao;
+    }
+
+    public void agregar() {
+        long fecha = this.txtFechaN.getDate().getTime();
+        java.sql.Date inicio = new java.sql.Date(fecha);
+        boolean discapacidad = false;
+        if (txtDiscapacidad.getText().equalsIgnoreCase("Si")) {
+            discapacidad = true;
+        }
+
+        Persona persona = new Persona(txtRFC.getText(), txtNombre.getText(), txtApellidoP.getText(), txtApellidoM.getText(), Integer.parseInt(txtTelefono.getText()), inicio, discapacidad);
+        if (personaDAO.registrarPersona(persona) == null) {
+            JOptionPane.showMessageDialog(this, "No se pudo registrar a la persona");
+        } else {
+
+            JOptionPane.showMessageDialog(this, "Registro exitoso");
+            frmMenuPrincipal principal = new frmMenuPrincipal(persona);
+            principal.setVisible(true);
+            this.dispose();
+        }
+
     }
 
     /**
@@ -45,6 +68,8 @@ public class frmPersona extends javax.swing.JFrame {
         txtApellidoM = new javax.swing.JTextField();
         txtTelefono = new javax.swing.JTextField();
         txtFechaN = new com.toedter.calendar.JDateChooser();
+        jLabel8 = new javax.swing.JLabel();
+        txtDiscapacidad = new javax.swing.JTextField();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         getContentPane().setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
@@ -77,7 +102,7 @@ public class frmPersona extends javax.swing.JFrame {
                 btnAceptarActionPerformed(evt);
             }
         });
-        getContentPane().add(btnAceptar, new org.netbeans.lib.awtextra.AbsoluteConstraints(300, 340, -1, -1));
+        getContentPane().add(btnAceptar, new org.netbeans.lib.awtextra.AbsoluteConstraints(300, 360, -1, -1));
 
         btnVolver.setText("Volver");
         btnVolver.addActionListener(new java.awt.event.ActionListener() {
@@ -85,7 +110,7 @@ public class frmPersona extends javax.swing.JFrame {
                 btnVolverActionPerformed(evt);
             }
         });
-        getContentPane().add(btnVolver, new org.netbeans.lib.awtextra.AbsoluteConstraints(190, 340, -1, -1));
+        getContentPane().add(btnVolver, new org.netbeans.lib.awtextra.AbsoluteConstraints(190, 360, -1, -1));
 
         btnCancelar.setText("Cancelar");
         btnCancelar.addActionListener(new java.awt.event.ActionListener() {
@@ -93,7 +118,7 @@ public class frmPersona extends javax.swing.JFrame {
                 btnCancelarActionPerformed(evt);
             }
         });
-        getContentPane().add(btnCancelar, new org.netbeans.lib.awtextra.AbsoluteConstraints(70, 340, -1, -1));
+        getContentPane().add(btnCancelar, new org.netbeans.lib.awtextra.AbsoluteConstraints(70, 360, -1, -1));
         getContentPane().add(txtRFC, new org.netbeans.lib.awtextra.AbsoluteConstraints(189, 56, 191, -1));
         getContentPane().add(txtNombre, new org.netbeans.lib.awtextra.AbsoluteConstraints(189, 96, 191, -1));
         getContentPane().add(txtApellidoP, new org.netbeans.lib.awtextra.AbsoluteConstraints(189, 136, 191, -1));
@@ -101,23 +126,26 @@ public class frmPersona extends javax.swing.JFrame {
         getContentPane().add(txtTelefono, new org.netbeans.lib.awtextra.AbsoluteConstraints(189, 224, 191, -1));
         getContentPane().add(txtFechaN, new org.netbeans.lib.awtextra.AbsoluteConstraints(190, 270, 190, -1));
 
+        jLabel8.setText("¿La persona es discapacitada?");
+        getContentPane().add(jLabel8, new org.netbeans.lib.awtextra.AbsoluteConstraints(60, 310, -1, -1));
+        getContentPane().add(txtDiscapacidad, new org.netbeans.lib.awtextra.AbsoluteConstraints(230, 310, 100, -1));
+
         pack();
         setLocationRelativeTo(null);
     }// </editor-fold>//GEN-END:initComponents
 
     private void btnVolverActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnVolverActionPerformed
         // TODO add your handling code here:
-        frmMenuPrincipal principal= new frmMenuPrincipal();
+        frmMenuPrincipal principal = new frmMenuPrincipal();
         principal.setVisible(true);
         this.dispose();
     }//GEN-LAST:event_btnVolverActionPerformed
 
     private void btnAceptarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnAceptarActionPerformed
         // TODO add your handling code here:
-        JOptionPane.showMessageDialog(this, "La persona se registro correctamente");
-        frmMenuPrincipal principal= new frmMenuPrincipal();
-        principal.setVisible(true);
-        this.dispose();
+
+        this.agregar();
+
     }//GEN-LAST:event_btnAceptarActionPerformed
 
     private void btnCancelarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnCancelarActionPerformed
@@ -127,7 +155,7 @@ public class frmPersona extends javax.swing.JFrame {
         txtNombre.setText("");
         txtRFC.setText("");
         txtTelefono.setText("");
-        
+
     }//GEN-LAST:event_btnCancelarActionPerformed
 
     /**
@@ -163,7 +191,7 @@ public class frmPersona extends javax.swing.JFrame {
         /* Create and display the form */
         java.awt.EventQueue.invokeLater(new Runnable() {
             public void run() {
-                new frmPersona().setVisible(true);
+                //  new frmPersona().setVisible(true);
             }
         });
     }
@@ -179,8 +207,10 @@ public class frmPersona extends javax.swing.JFrame {
     private javax.swing.JLabel jLabel5;
     private javax.swing.JLabel jLabel6;
     private javax.swing.JLabel jLabel7;
+    private javax.swing.JLabel jLabel8;
     private javax.swing.JTextField txtApellidoM;
     private javax.swing.JTextField txtApellidoP;
+    private javax.swing.JTextField txtDiscapacidad;
     private com.toedter.calendar.JDateChooser txtFechaN;
     private javax.swing.JTextField txtNombre;
     private javax.swing.JTextField txtRFC;

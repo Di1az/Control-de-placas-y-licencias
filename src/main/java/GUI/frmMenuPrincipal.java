@@ -4,6 +4,12 @@
  */
 package GUI;
 
+import DAO.ConexionBD;
+import DAO.IConexionBD;
+import DAO.IPersonaDAO;
+import DAO.PersonaDAO;
+import Entidades.Persona;
+
 /**
  *
  * @author oscar
@@ -15,6 +21,11 @@ public class frmMenuPrincipal extends javax.swing.JFrame {
      */
     public frmMenuPrincipal() {
         initComponents();
+    }
+    
+    public frmMenuPrincipal(Persona persona) {
+        initComponents();
+        txtRFC.setText(persona.getRfc());
     }
 
     /**
@@ -105,7 +116,9 @@ public class frmMenuPrincipal extends javax.swing.JFrame {
 
     private void btnPersonaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnPersonaActionPerformed
         // TODO add your handling code here:
-        frmPersona persona= new frmPersona();
+        IConexionBD conexion=new ConexionBD();
+        IPersonaDAO personaDAO= new PersonaDAO(conexion);
+        frmPersona persona= new frmPersona(personaDAO);
         persona.setVisible(true);
         this.dispose();
     }//GEN-LAST:event_btnPersonaActionPerformed
