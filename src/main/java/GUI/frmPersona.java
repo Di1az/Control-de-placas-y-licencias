@@ -30,7 +30,7 @@ public class frmPersona extends javax.swing.JFrame {
             discapacidad = true;
         }
 
-        Persona persona = new Persona(txtRFC.getText(), txtNombre.getText(), txtApellidoP.getText(), txtApellidoM.getText(), Integer.parseInt(txtTelefono.getText()), inicio, discapacidad);
+        Persona persona = new Persona(txtRFC.getText(), txtNombre.getText(), txtApellidoP.getText(), txtApellidoM.getText(), txtTelefono.getText(), inicio, discapacidad);
         if (personaDAO.registrarPersona(persona) == null) {
             JOptionPane.showMessageDialog(this, "No se pudo registrar a la persona");
         } else {
@@ -128,7 +128,7 @@ public class frmPersona extends javax.swing.JFrame {
 
         jLabel8.setText("¿La persona es discapacitada?");
         getContentPane().add(jLabel8, new org.netbeans.lib.awtextra.AbsoluteConstraints(60, 310, -1, -1));
-        getContentPane().add(txtDiscapacidad, new org.netbeans.lib.awtextra.AbsoluteConstraints(230, 310, 100, -1));
+        getContentPane().add(txtDiscapacidad, new org.netbeans.lib.awtextra.AbsoluteConstraints(240, 310, 100, -1));
 
         pack();
         setLocationRelativeTo(null);

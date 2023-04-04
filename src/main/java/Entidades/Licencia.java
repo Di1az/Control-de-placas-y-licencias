@@ -17,7 +17,7 @@ import javax.persistence.Table;
 
 /**
  *
- * @author Usuario
+ * @author Daniel
  */
 @Entity
 @Table(name="Licencias")
@@ -28,8 +28,10 @@ public class Licencia extends Tramite implements Serializable {
     @Column(name="Id_licencia")
     private Integer id;
     
-    @Basic
-    private int Vigencia;
+    @Column(name="Vigencia")
+    private int vigencia;
+    
+    @Column(name="Costo")
     private float costo;
 
     public Licencia() {
@@ -37,22 +39,22 @@ public class Licencia extends Tramite implements Serializable {
 
     public Licencia(Integer id, int Vigencia, float costo) {
         this.id = id;
-        this.Vigencia = Vigencia;
+        this.vigencia = Vigencia;
         this.costo = costo;
     }
 
     public Licencia(int Vigencia, float costo) {
-        this.Vigencia = Vigencia;
+        this.vigencia = Vigencia;
         this.costo = costo;
     }
  
 
     public int getVigencia() {
-        return Vigencia;
+        return vigencia;
     }
 
     public void setVigencia(int Vigencia) {
-        this.Vigencia = Vigencia;
+        this.vigencia = Vigencia;
     }
 
     public float getCosto() {

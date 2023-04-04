@@ -7,27 +7,56 @@ package GUI;
 import DAO.ConexionBD;
 import DAO.IConexionBD;
 import DAO.IPersonaDAO;
+import DAO.IVehiculoDAO;
 import DAO.PersonaDAO;
+import DAO.VehiculoDAO;
 import Entidades.Persona;
+import java.util.List;
+import javax.swing.JOptionPane;
 
 /**
  *
  * @author oscar
  */
 public class frmMenuPrincipal extends javax.swing.JFrame {
-
-    /**
-     * Creates new form MenuPrincipal
-     */
+    
+   /**
+    * Objeto de tipo persona
+    */
+   Persona persona; 
+   
     public frmMenuPrincipal() {
         initComponents();
     }
     
+    /**
+     * Método constructor utilizado para devolver la rfc de la persona registrada
+     * @param persona Persona a la cual se registro
+     */
     public frmMenuPrincipal(Persona persona) {
         initComponents();
         txtRFC.setText(persona.getRfc());
     }
-
+    
+    /**
+     * Método utilizado para encontrar si una persona encuentra almacenada en la bd 
+     * mediante el rfc
+     * @return falso si no lo encuentra, true de lo contrario
+     */
+    public boolean encontrarPersona(){
+        IConexionBD conexion=new ConexionBD();
+        IPersonaDAO personaDAO= new PersonaDAO(conexion);
+        persona=personaDAO.buscarPersona(txtRFC.getText());
+        if(persona==null){
+             JOptionPane.showMessageDialog(this, "No se pudo encontro la persona");
+             return false;
+        }
+        else{
+            return true;
+        }
+        
+    }
+    
     /**
      * This method is called from within the constructor to initialize the form.
      * WARNING: Do NOT modify this code. The content of this method is always
@@ -108,7 +137,7 @@ public class frmMenuPrincipal extends javax.swing.JFrame {
             }
         });
         getContentPane().add(btnHistorial, new org.netbeans.lib.awtextra.AbsoluteConstraints(100, 280, 120, -1));
-        getContentPane().add(txtRFC, new org.netbeans.lib.awtextra.AbsoluteConstraints(170, 70, 110, -1));
+        getContentPane().add(txtRFC, new org.netbeans.lib.awtextra.AbsoluteConstraints(180, 70, 110, -1));
 
         pack();
         setLocationRelativeTo(null);
@@ -122,12 +151,22 @@ public class frmMenuPrincipal extends javax.swing.JFrame {
         persona.setVisible(true);
         this.dispose();
     }//GEN-LAST:event_btnPersonaActionPerformed
-
+    /**
+     * Método que al dar click en el boton si se encuentra a la persona nos
+     * manda al frame de registro de vehículo
+     * @param evt evt
+     */
     private void btnVehiculoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnVehiculoActionPerformed
-        // TODO add your handling code here:
-        frmVehiculo vehiculo= new frmVehiculo();
-        vehiculo.setVisible(true);
-        this.dispose();
+        
+        
+        if (encontrarPersona()) {
+            IConexionBD conexion = new ConexionBD();
+            IVehiculoDAO vehiculoDAO = new VehiculoDAO(conexion);
+            frmVehiculo vehiculo = new frmVehiculo(vehiculoDAO, persona);
+            vehiculo.setVisible(true);
+            this.dispose();
+        }
+
     }//GEN-LAST:event_btnVehiculoActionPerformed
 
     private void btnPlacasActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnPlacasActionPerformed

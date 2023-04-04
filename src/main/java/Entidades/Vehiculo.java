@@ -20,33 +20,32 @@ import javax.persistence.Table;
  * @author oscar
  */
 @Entity
-@Table(name="Vehiculo")
+@Table(name="Vehículos")
 public class Vehiculo implements Serializable {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    @Column(name = "Id_Vehiculo")
+    @Column(name = "Id_Vehículo")
     private Integer id;
-
-    @Basic
-    @Column(name = "Numero")
-    private int numero;
-    @Basic
+    
+    @Column(name = "Número")
+    private String numero;
+   
     @Column(name = "Marca")
     private String marca;
-    @Basic
+    
     @Column(name = "Modelo")
     private String modelo;
-    @Basic
-    @Column(name = "Linea")
+   
+    @Column(name = "Línea")
     private String linea;
-    @Basic
+    
     @Column(name = "Color")
     private String color;
-    @Basic
+    
     @Column(name = "Tipo")
     private String tipo;
-    @Basic
+   
     @Column(name = "Estado")
     private String estado;
     
@@ -57,7 +56,7 @@ public class Vehiculo implements Serializable {
     public Vehiculo() {
     }
 
-    public Vehiculo(Integer id, int numero, String marca, String modelo, String linea, String color, String tipo, String estado, Persona persona) {
+    public Vehiculo(Integer id, String numero, String marca, String modelo, String linea, String color, String tipo, String estado, Persona persona) {
         this.id = id;
         this.numero = numero;
         this.marca = marca;
@@ -69,7 +68,7 @@ public class Vehiculo implements Serializable {
         this.persona = persona;
     }
 
-    public Vehiculo(int numero, String marca, String modelo, String linea, String color, String tipo, String estado, Persona persona) {
+    public Vehiculo(String numero, String marca, String modelo, String linea, String color, String tipo, String estado, Persona persona) {
         this.numero = numero;
         this.marca = marca;
         this.modelo = modelo;
@@ -126,11 +125,11 @@ public class Vehiculo implements Serializable {
         this.persona = persona;
     }
 
-    public int getNumero() {
+    public String getNumero() {
         return numero;
     }
 
-    public void setNumero(int numero) {
+    public void setNumero(String numero) {
         this.numero = numero;
     }
 

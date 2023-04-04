@@ -21,7 +21,7 @@ import javax.persistence.TemporalType;
 
 /**
  *
- * @author Usuario
+ * @author Dany
  */
 @Entity
 @Table(name = "Trámites")
@@ -34,11 +34,12 @@ public abstract class Tramite implements Serializable {
     @Column(name = "Id_trámite")
     private Integer id;
 
-    @Basic
     @Temporal(TemporalType.DATE)
+    @Column(name = "Fecha_recepción")
     private Date fechaRecepcion;
-    @Basic
+   
     @Temporal(TemporalType.DATE)
+    @Column(name = "Fecha_emisión")
     private Date fechaEmision;
 
     public Tramite() {

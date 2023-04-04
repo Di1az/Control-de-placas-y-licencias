@@ -13,6 +13,18 @@ import java.util.List;
  */
 public interface IPersonaDAO {
     public Persona registrarPersona(Persona persona);
+    
+    /**
+     * Método que devuelve una lista de todas las personas
+     * @return lista de personas
+     */
     public List<Persona> listaPersona();
+    
+    /**
+     * Método que comprueba si la rfc introducida existe
+     * @param RFC rfc de la persona
+     * @return persona encontrada, null de lo contrario
+     */
+    public Persona buscarPersona(String RFC);
     }
      

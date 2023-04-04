@@ -17,7 +17,7 @@ public class ConexionBD implements IConexionBD{
 
     @Override
     public EntityManager Conexion() throws PersistenceException{
-        //Creamos un Entitiy Manager factoy
+        //Creamos un Entitiy Manager factory
         EntityManagerFactory managerF = Persistence.createEntityManagerFactory("ConexionPU");
         //Creamos un objeto en la base de datos
         EntityManager entityManager = managerF.createEntityManager();

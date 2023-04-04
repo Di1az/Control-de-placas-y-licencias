@@ -17,7 +17,7 @@ import javax.persistence.Table;
 
 /**
  *
- * @author Dany y ya
+ * @author Dany
  */
 @Entity 
 @Table(name="Placas")
@@ -28,9 +28,13 @@ public class Placa extends Tramite implements Serializable {
     @Column(name="Id_placa")
     private Integer id;
     
-    @Basic 
+    @Column(name="Costo")
     private float costo;
+    
+    @Column(name="Número_placa")
     private String numeroPlaca;
+    
+    @Column(name="Estado")
     private String estado;
    
 

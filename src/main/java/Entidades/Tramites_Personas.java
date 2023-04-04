@@ -5,6 +5,7 @@
 package Entidades;
 
 import java.io.Serializable;
+import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
@@ -21,9 +22,12 @@ public class Tramites_Personas implements Serializable {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
+    @Column(name = "Id_TramitePersona")
     private Integer id;
-
+    
+    @Column(name="Tipo")
     private String tipo;
+    
     public Integer getId() {
         return id;
     }

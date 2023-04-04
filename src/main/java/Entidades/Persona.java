@@ -22,7 +22,7 @@ import javax.persistence.Table;
  * @author oscar
  */
 @Entity
-@Table(name = "Persona")
+@Table(name = "Personas")
 public class Persona implements Serializable {
 
     @Id
@@ -30,25 +30,24 @@ public class Persona implements Serializable {
     @Column(name = "Id_Persona")
     private Integer id;
 
-    @Basic
     @Column(name = "RFC")
     private String rfc;
-    @Basic
+
     @Column(name = "Nombre")
     private String nombre;
-    @Basic
+
     @Column(name = "Apellido_paterno")
     private String apellidoP;
-    @Basic
+
     @Column(name = "Apellido_materno")
     private String apellidoM;
-    @Basic
+
     @Column(name = "Telefono")
-    private int telefono;
-    @Basic
+    private String telefono;
+
     @Column(name = "Fecha_Nacimiento")
     private Date fechaN;
-    @Basic
+    
     @Column(name = "Discapacidad")
     private boolean discapacidad;
 
@@ -58,7 +57,7 @@ public class Persona implements Serializable {
     public Persona() {
     }
 
-    public Persona(Integer id, String rfc, String nombre, String apellidoP, String apellidoM, int telefono, Date fechaN, boolean discapacidad, List<Vehiculo> vehiculos) {
+    public Persona(Integer id, String rfc, String nombre, String apellidoP, String apellidoM, String telefono, Date fechaN, boolean discapacidad, List<Vehiculo> vehiculos) {
         this.id = id;
         this.rfc = rfc;
         this.nombre = nombre;
@@ -70,7 +69,7 @@ public class Persona implements Serializable {
         this.vehiculos = vehiculos;
     }
 
-    public Persona(String rfc, String nombre, String apellidoP, String apellidoM, int telefono, Date fechaN, boolean discapacidad, List<Vehiculo> vehiculos) {
+    public Persona(String rfc, String nombre, String apellidoP, String apellidoM, String telefono, Date fechaN, boolean discapacidad, List<Vehiculo> vehiculos) {
         this.rfc = rfc;
         this.nombre = nombre;
         this.apellidoP = apellidoP;
@@ -80,7 +79,7 @@ public class Persona implements Serializable {
         this.discapacidad = discapacidad;
         this.vehiculos = vehiculos;
     }
-    public Persona(String rfc, String nombre, String apellidoP, String apellidoM, int telefono, Date fechaN, boolean discapacidad) {
+    public Persona(String rfc, String nombre, String apellidoP, String apellidoM, String telefono, Date fechaN, boolean discapacidad) {
         this.rfc = rfc;
         this.nombre = nombre;
         this.apellidoP = apellidoP;
@@ -161,11 +160,11 @@ public class Persona implements Serializable {
         this.apellidoM = apellidoM;
     }
 
-    public int getTelefono() {
+    public String getTelefono() {
         return telefono;
     }
 
-    public void setTelefono(int telefono) {
+    public void setTelefono(String telefono) {
         this.telefono = telefono;
     }
 

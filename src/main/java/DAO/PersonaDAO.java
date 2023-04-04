@@ -7,6 +7,7 @@ package DAO;
 import Entidades.Persona;
 import java.util.List;
 import javax.persistence.EntityManager;
+import javax.persistence.TypedQuery;
 
 /**
  *
@@ -34,9 +35,46 @@ public class PersonaDAO implements IPersonaDAO{
         em.close();
     }
 }
-
+    /**
+     * Método que devuelve la lista de personas
+     * @return lista de personas
+     */
     @Override
     public List<Persona> listaPersona() {
-        throw new UnsupportedOperationException("Not supported yet."); // Generated from nbfs://nbhost/SystemFileSystem/Templates/Classes/Code/GeneratedMethodBody
+        EntityManager em = conexionBD.Conexion();
+        try {
+            em.getTransaction().begin();
+            String jpql = "SELECT p FROM Persona p ";
+            TypedQuery<Persona> query = em.createQuery(jpql, Persona.class);
+            List<Persona> listaPersonas = query.getResultList();
+            em.getTransaction().commit();
+            return listaPersonas;
+        }
+        catch(Exception e){
+            return null;
+        }
+    }
+    
+    /**
+     * Método que por medio del rfc busca si una persona esta registrada en la bd
+     * @param RFC rfc de la persona
+     * @return la persona, null de lo contrario
+     */
+    @Override
+    public Persona buscarPersona(String RFC) {
+       EntityManager em = conexionBD.Conexion();
+        try {
+            em.getTransaction().begin();
+            String jpql = "SELECT p FROM Persona p WHERE p.rfc = :rfc ";
+            TypedQuery<Persona> query = em.createQuery(jpql, Persona.class);
+            query.setParameter("rfc", RFC);
+            Persona persona = query.getSingleResult();
+            em.getTransaction().commit();
+            return persona;
+        }
+        catch(Exception e){
+            return null;
+        }
+       
     }
 }

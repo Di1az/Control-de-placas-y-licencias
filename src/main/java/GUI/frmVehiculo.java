@@ -4,21 +4,61 @@
  */
 package GUI;
 
+
+import DAO.IVehiculoDAO;
+import Entidades.Persona;
+import Entidades.Vehiculo;
 import javax.swing.JOptionPane;
 
 /**
  *
- * @author oscar
+ * @author dany
  */
 public class frmVehiculo extends javax.swing.JFrame {
 
-    /**
-     * Creates new form Vehiculo
-     */
-    public frmVehiculo() {
+   private final IVehiculoDAO vehiculoDAO;
+   private Persona persona;
+    
+   /**
+    * Método constructor que inicializa los atributos
+    * @param vehiculoDAO vehiculoDAO
+    */
+    public frmVehiculo(IVehiculoDAO vehiculoDAO) {
         initComponents();
+        this.vehiculoDAO = vehiculoDAO;
     }
+    
+    /**
+     * Constructor utilizado para devolver el rfc de la persona a la cual se 
+     * le esta registrando el vehículo
+     * @param vehiculoDAO vehículoDAO
+     * @param persona persona
+     */
+    public frmVehiculo(IVehiculoDAO vehiculoDAO, Persona persona) {
+        initComponents();
+        this.vehiculoDAO = vehiculoDAO;
+        this.persona=persona;
+        txtDueño.setText(persona.getRfc());
+    }
+    
+    /**
+     * Método que agrega el vehículo a la bd
+     */
+    public void agregar() {
+        String tipo = (String) cbTipo.getSelectedItem();
+        Vehiculo vehiculo = new Vehiculo(txtNumero.getText(), txtMarca1.getText(), txtModelo.getText(), txtLinea.getText(), txtColor.getText(), tipo, txtEstado.getText(), persona);
+        if (vehiculoDAO.agregarVehiculo(vehiculo) == null) {
+            JOptionPane.showMessageDialog(this, "No se pudo registrar el vehículo");
+        } else {
 
+            JOptionPane.showMessageDialog(this, "Registro exitoso");
+            frmMenuPrincipal principal = new frmMenuPrincipal(persona);
+            principal.setVisible(true);
+            this.dispose();
+        }
+
+    }
+  
     /**
      * This method is called from within the constructor to initialize the form.
      * WARNING: Do NOT modify this code. The content of this method is always
@@ -34,7 +74,7 @@ public class frmVehiculo extends javax.swing.JFrame {
         cbTipo = new javax.swing.JComboBox<>();
         jLabel2 = new javax.swing.JLabel();
         jLabel3 = new javax.swing.JLabel();
-        txtMarca = new javax.swing.JTextField();
+        txtNumero = new javax.swing.JTextField();
         jLabel4 = new javax.swing.JLabel();
         txtModelo = new javax.swing.JTextField();
         jLabel5 = new javax.swing.JLabel();
@@ -48,6 +88,8 @@ public class frmVehiculo extends javax.swing.JFrame {
         jLabel9 = new javax.swing.JLabel();
         txtEstado = new javax.swing.JTextField();
         txtDueño = new javax.swing.JTextField();
+        jLabel7 = new javax.swing.JLabel();
+        txtMarca1 = new javax.swing.JTextField();
 
         jList1.setModel(new javax.swing.AbstractListModel<String>() {
             String[] strings = { "Item 1", "Item 2", "Item 3", "Item 4", "Item 5" };
@@ -68,26 +110,26 @@ public class frmVehiculo extends javax.swing.JFrame {
                 cbTipoActionPerformed(evt);
             }
         });
-        getContentPane().add(cbTipo, new org.netbeans.lib.awtextra.AbsoluteConstraints(155, 40, -1, -1));
+        getContentPane().add(cbTipo, new org.netbeans.lib.awtextra.AbsoluteConstraints(170, 50, -1, -1));
 
         jLabel2.setText("Tipo de vehiculo:");
-        getContentPane().add(jLabel2, new org.netbeans.lib.awtextra.AbsoluteConstraints(62, 43, -1, -1));
+        getContentPane().add(jLabel2, new org.netbeans.lib.awtextra.AbsoluteConstraints(50, 50, -1, -1));
 
-        jLabel3.setText("Marca:");
-        getContentPane().add(jLabel3, new org.netbeans.lib.awtextra.AbsoluteConstraints(116, 77, -1, -1));
-        getContentPane().add(txtMarca, new org.netbeans.lib.awtextra.AbsoluteConstraints(155, 74, 90, -1));
+        jLabel3.setText("Número de serie:");
+        getContentPane().add(jLabel3, new org.netbeans.lib.awtextra.AbsoluteConstraints(50, 90, -1, -1));
+        getContentPane().add(txtNumero, new org.netbeans.lib.awtextra.AbsoluteConstraints(170, 90, 90, -1));
 
         jLabel4.setText("Modelo:");
-        getContentPane().add(jLabel4, new org.netbeans.lib.awtextra.AbsoluteConstraints(108, 111, -1, -1));
-        getContentPane().add(txtModelo, new org.netbeans.lib.awtextra.AbsoluteConstraints(155, 108, 90, -1));
+        getContentPane().add(jLabel4, new org.netbeans.lib.awtextra.AbsoluteConstraints(100, 150, -1, -1));
+        getContentPane().add(txtModelo, new org.netbeans.lib.awtextra.AbsoluteConstraints(170, 150, 90, -1));
 
         jLabel5.setText("Linea:");
-        getContentPane().add(jLabel5, new org.netbeans.lib.awtextra.AbsoluteConstraints(121, 145, -1, -1));
-        getContentPane().add(txtLinea, new org.netbeans.lib.awtextra.AbsoluteConstraints(155, 142, 90, -1));
+        getContentPane().add(jLabel5, new org.netbeans.lib.awtextra.AbsoluteConstraints(110, 180, -1, -1));
+        getContentPane().add(txtLinea, new org.netbeans.lib.awtextra.AbsoluteConstraints(170, 180, 90, -1));
 
         jLabel6.setText("Color:");
-        getContentPane().add(jLabel6, new org.netbeans.lib.awtextra.AbsoluteConstraints(120, 179, -1, -1));
-        getContentPane().add(txtColor, new org.netbeans.lib.awtextra.AbsoluteConstraints(155, 176, 90, -1));
+        getContentPane().add(jLabel6, new org.netbeans.lib.awtextra.AbsoluteConstraints(110, 210, -1, -1));
+        getContentPane().add(txtColor, new org.netbeans.lib.awtextra.AbsoluteConstraints(170, 210, 90, -1));
 
         btnRegresar.setText("Regresar");
         btnRegresar.addActionListener(new java.awt.event.ActionListener() {
@@ -114,20 +156,24 @@ public class frmVehiculo extends javax.swing.JFrame {
         getContentPane().add(btnAceptar, new org.netbeans.lib.awtextra.AbsoluteConstraints(270, 330, -1, -1));
 
         jLabel8.setText("Dueño del vehiculo(RFC):");
-        getContentPane().add(jLabel8, new org.netbeans.lib.awtextra.AbsoluteConstraints(30, 240, -1, 20));
+        getContentPane().add(jLabel8, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 270, -1, 20));
 
         jLabel9.setText("Estado:");
-        getContentPane().add(jLabel9, new org.netbeans.lib.awtextra.AbsoluteConstraints(110, 210, -1, -1));
-        getContentPane().add(txtEstado, new org.netbeans.lib.awtextra.AbsoluteConstraints(160, 210, 90, -1));
-        getContentPane().add(txtDueño, new org.netbeans.lib.awtextra.AbsoluteConstraints(170, 240, 80, -1));
+        getContentPane().add(jLabel9, new org.netbeans.lib.awtextra.AbsoluteConstraints(100, 240, -1, -1));
+        getContentPane().add(txtEstado, new org.netbeans.lib.awtextra.AbsoluteConstraints(170, 240, 90, -1));
+        getContentPane().add(txtDueño, new org.netbeans.lib.awtextra.AbsoluteConstraints(170, 270, 90, -1));
+
+        jLabel7.setText("Marca:");
+        getContentPane().add(jLabel7, new org.netbeans.lib.awtextra.AbsoluteConstraints(110, 120, -1, -1));
+        getContentPane().add(txtMarca1, new org.netbeans.lib.awtextra.AbsoluteConstraints(170, 120, 90, -1));
 
         pack();
         setLocationRelativeTo(null);
     }// </editor-fold>//GEN-END:initComponents
 
     private void btnRegresarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnRegresarActionPerformed
-        // TODO add your handling code here:
-        frmMenuPrincipal principal= new frmMenuPrincipal();
+        
+        frmMenuPrincipal principal= new frmMenuPrincipal(persona);
         principal.setVisible(true);
         this.dispose();
     }//GEN-LAST:event_btnRegresarActionPerformed
@@ -138,17 +184,18 @@ public class frmVehiculo extends javax.swing.JFrame {
         txtDueño.setText("");
         txtEstado.setText("");
         txtLinea.setText("");
-        txtMarca.setText("");
+        txtNumero.setText("");
         txtModelo.setText("");
         
     }//GEN-LAST:event_btnCancelarActionPerformed
-
+    /**
+     * Método que al dar click en el boton hace la acción de agregar el vehículo
+     * a la bd
+     * @param evt evt
+     */
     private void btnAceptarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnAceptarActionPerformed
-        // TODO add your handling code here:
-        JOptionPane.showMessageDialog(this, "El vehiculo se registro correctamente");
-        frmMenuPrincipal principal= new frmMenuPrincipal();
-        principal.setVisible(true);
-        this.dispose();
+        // TODO add your handling code here
+        this.agregar();
     }//GEN-LAST:event_btnAceptarActionPerformed
 
     private void cbTipoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_cbTipoActionPerformed
@@ -186,7 +233,7 @@ public class frmVehiculo extends javax.swing.JFrame {
         /* Create and display the form */
         java.awt.EventQueue.invokeLater(new Runnable() {
             public void run() {
-                new frmVehiculo().setVisible(true);
+                //new frmVehiculo().setVisible(true);
             }
         });
     }
@@ -202,6 +249,7 @@ public class frmVehiculo extends javax.swing.JFrame {
     private javax.swing.JLabel jLabel4;
     private javax.swing.JLabel jLabel5;
     private javax.swing.JLabel jLabel6;
+    private javax.swing.JLabel jLabel7;
     private javax.swing.JLabel jLabel8;
     private javax.swing.JLabel jLabel9;
     private javax.swing.JList<String> jList1;
@@ -210,7 +258,8 @@ public class frmVehiculo extends javax.swing.JFrame {
     private javax.swing.JTextField txtDueño;
     private javax.swing.JTextField txtEstado;
     private javax.swing.JTextField txtLinea;
-    private javax.swing.JTextField txtMarca;
+    private javax.swing.JTextField txtMarca1;
     private javax.swing.JTextField txtModelo;
+    private javax.swing.JTextField txtNumero;
     // End of variables declaration//GEN-END:variables
 }
