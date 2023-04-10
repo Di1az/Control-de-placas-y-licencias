@@ -42,6 +42,30 @@ public class frmPersona extends javax.swing.JFrame {
         }
 
     }
+    
+    /**
+     * Método de validación que solo permite letras y el espacio
+     * @param evento evt
+     */
+    public void validarNombre(java.awt.event.KeyEvent evento){
+        if(evento.getKeyChar()>=33 && evento.getKeyChar() <=64
+                ||evento.getKeyChar()>=91 && evento.getKeyChar() <=96
+                || evento.getKeyChar()>=123 && evento.getKeyChar() <=127){
+            
+            evento.consume();
+            
+        }
+    }
+    
+    public void validarDiscapacidad(java.awt.event.KeyEvent evento){
+        if(evento.getKeyChar()>=32 && evento.getKeyChar() <=77
+                ||evento.getKeyChar()>=79 && evento.getKeyChar() <=88
+                || evento.getKeyChar()>=90 && evento.getKeyChar() <=126){
+            
+            evento.consume();
+            
+        }
+    }
 
     /**
      * This method is called from within the constructor to initialize the form.
@@ -119,16 +143,52 @@ public class frmPersona extends javax.swing.JFrame {
             }
         });
         getContentPane().add(btnCancelar, new org.netbeans.lib.awtextra.AbsoluteConstraints(70, 360, -1, -1));
+
+        txtRFC.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyTyped(java.awt.event.KeyEvent evt) {
+                txtRFCKeyTyped(evt);
+            }
+        });
         getContentPane().add(txtRFC, new org.netbeans.lib.awtextra.AbsoluteConstraints(189, 56, 191, -1));
+
+        txtNombre.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyTyped(java.awt.event.KeyEvent evt) {
+                txtNombreKeyTyped(evt);
+            }
+        });
         getContentPane().add(txtNombre, new org.netbeans.lib.awtextra.AbsoluteConstraints(189, 96, 191, -1));
+
+        txtApellidoP.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyTyped(java.awt.event.KeyEvent evt) {
+                txtApellidoPKeyTyped(evt);
+            }
+        });
         getContentPane().add(txtApellidoP, new org.netbeans.lib.awtextra.AbsoluteConstraints(189, 136, 191, -1));
+
+        txtApellidoM.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyTyped(java.awt.event.KeyEvent evt) {
+                txtApellidoMKeyTyped(evt);
+            }
+        });
         getContentPane().add(txtApellidoM, new org.netbeans.lib.awtextra.AbsoluteConstraints(189, 181, 191, -1));
+
+        txtTelefono.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyTyped(java.awt.event.KeyEvent evt) {
+                txtTelefonoKeyTyped(evt);
+            }
+        });
         getContentPane().add(txtTelefono, new org.netbeans.lib.awtextra.AbsoluteConstraints(189, 224, 191, -1));
         getContentPane().add(txtFechaN, new org.netbeans.lib.awtextra.AbsoluteConstraints(190, 270, 190, -1));
 
-        jLabel8.setText("¿La persona es discapacitada?");
-        getContentPane().add(jLabel8, new org.netbeans.lib.awtextra.AbsoluteConstraints(60, 310, -1, -1));
-        getContentPane().add(txtDiscapacidad, new org.netbeans.lib.awtextra.AbsoluteConstraints(240, 310, 100, -1));
+        jLabel8.setText("¿Es discapacitado? (Y si lo es, N de lo contrario)");
+        getContentPane().add(jLabel8, new org.netbeans.lib.awtextra.AbsoluteConstraints(60, 310, -1, 20));
+
+        txtDiscapacidad.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyTyped(java.awt.event.KeyEvent evt) {
+                txtDiscapacidadKeyTyped(evt);
+            }
+        });
+        getContentPane().add(txtDiscapacidad, new org.netbeans.lib.awtextra.AbsoluteConstraints(340, 310, 40, -1));
 
         pack();
         setLocationRelativeTo(null);
@@ -142,8 +202,7 @@ public class frmPersona extends javax.swing.JFrame {
     }//GEN-LAST:event_btnVolverActionPerformed
 
     private void btnAceptarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnAceptarActionPerformed
-        // TODO add your handling code here:
-
+      
         this.agregar();
 
     }//GEN-LAST:event_btnAceptarActionPerformed
@@ -157,6 +216,64 @@ public class frmPersona extends javax.swing.JFrame {
         txtTelefono.setText("");
 
     }//GEN-LAST:event_btnCancelarActionPerformed
+    /**
+     * Método que validad el campo rfc
+     * @param evt evt
+     */
+    private void txtRFCKeyTyped(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_txtRFCKeyTyped
+        char c = evt.getKeyChar();
+        
+        if((c<'0' || c>'9') && (c<'A' )| c>'Z')evt.consume();
+        
+        if(txtRFC.getText().length()==13){
+            evt.consume();
+        }
+    }//GEN-LAST:event_txtRFCKeyTyped
+    /**
+     * Método que utiliza el validarNombre para solo permitir letras y espacio
+     * @param evt evt
+     */
+    private void txtNombreKeyTyped(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_txtNombreKeyTyped
+        validarNombre(evt);
+    }//GEN-LAST:event_txtNombreKeyTyped
+    /**
+     * Método que utiliza el validarNombre para solo permitir letras y espacio
+     * @param evt evt
+     */
+    private void txtApellidoPKeyTyped(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_txtApellidoPKeyTyped
+        validarNombre(evt);
+    }//GEN-LAST:event_txtApellidoPKeyTyped
+    /**
+     * Método que utiliza el validarNombre para solo permitir letras y espacio
+     * @param evt evt
+     */
+    private void txtApellidoMKeyTyped(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_txtApellidoMKeyTyped
+        validarNombre(evt);
+    }//GEN-LAST:event_txtApellidoMKeyTyped
+    /**
+     * Método que valida el telefono
+     * @param evt evt
+     */
+    private void txtTelefonoKeyTyped(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_txtTelefonoKeyTyped
+        char c = evt.getKeyChar();
+        
+        if((c<'0' || c>'9'))evt.consume();
+        
+        if(txtTelefono.getText().length()==11){
+            evt.consume();
+        }
+    }//GEN-LAST:event_txtTelefonoKeyTyped
+    /**
+     * Método que valida la pregunta de discapacidad
+     * @param evt evt
+     */
+    private void txtDiscapacidadKeyTyped(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_txtDiscapacidadKeyTyped
+        validarDiscapacidad(evt);
+        
+        if(txtDiscapacidad.getText().length()==1){
+            evt.consume();
+        }
+    }//GEN-LAST:event_txtDiscapacidadKeyTyped
 
     /**
      * @param args the command line arguments

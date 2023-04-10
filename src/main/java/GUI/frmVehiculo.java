@@ -15,7 +15,7 @@ import javax.swing.JOptionPane;
  * @author dany
  */
 public class frmVehiculo extends javax.swing.JFrame {
-
+   
    private final IVehiculoDAO vehiculoDAO;
    private Persona persona;
     
@@ -41,8 +41,9 @@ public class frmVehiculo extends javax.swing.JFrame {
         txtDueño.setText(persona.getRfc());
     }
     
+    
     /**
-     * Método que agrega el vehículo a la bd
+     * Método que agrega la licencia a la bd
      */
     public void agregar() {
         String tipo = (String) cbTipo.getSelectedItem();
@@ -57,6 +58,19 @@ public class frmVehiculo extends javax.swing.JFrame {
             this.dispose();
         }
 
+    }
+    
+    /**
+     * Método que valida de manera que solo permite letras y espacio
+     * @param evento evt
+     */
+    public void validarMarca(java.awt.event.KeyEvent evento){
+        if(evento.getKeyChar()>=33 && evento.getKeyChar() <=64
+                ||evento.getKeyChar()>=91 && evento.getKeyChar() <=96
+                || evento.getKeyChar()>=123 && evento.getKeyChar() <=127){
+            
+            evento.consume();
+        }
     }
   
     /**
@@ -102,7 +116,7 @@ public class frmVehiculo extends javax.swing.JFrame {
         getContentPane().setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
         jLabel1.setText("Registrar vehiculo");
-        getContentPane().add(jLabel1, new org.netbeans.lib.awtextra.AbsoluteConstraints(144, 6, -1, -1));
+        getContentPane().add(jLabel1, new org.netbeans.lib.awtextra.AbsoluteConstraints(140, 10, -1, -1));
 
         cbTipo.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Seleccionar", "Automovil" }));
         cbTipo.addActionListener(new java.awt.event.ActionListener() {
@@ -117,18 +131,42 @@ public class frmVehiculo extends javax.swing.JFrame {
 
         jLabel3.setText("Número de serie:");
         getContentPane().add(jLabel3, new org.netbeans.lib.awtextra.AbsoluteConstraints(50, 90, -1, -1));
+
+        txtNumero.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyTyped(java.awt.event.KeyEvent evt) {
+                txtNumeroKeyTyped(evt);
+            }
+        });
         getContentPane().add(txtNumero, new org.netbeans.lib.awtextra.AbsoluteConstraints(170, 90, 90, -1));
 
         jLabel4.setText("Modelo:");
         getContentPane().add(jLabel4, new org.netbeans.lib.awtextra.AbsoluteConstraints(100, 150, -1, -1));
+
+        txtModelo.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyTyped(java.awt.event.KeyEvent evt) {
+                txtModeloKeyTyped(evt);
+            }
+        });
         getContentPane().add(txtModelo, new org.netbeans.lib.awtextra.AbsoluteConstraints(170, 150, 90, -1));
 
         jLabel5.setText("Linea:");
         getContentPane().add(jLabel5, new org.netbeans.lib.awtextra.AbsoluteConstraints(110, 180, -1, -1));
+
+        txtLinea.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyTyped(java.awt.event.KeyEvent evt) {
+                txtLineaKeyTyped(evt);
+            }
+        });
         getContentPane().add(txtLinea, new org.netbeans.lib.awtextra.AbsoluteConstraints(170, 180, 90, -1));
 
         jLabel6.setText("Color:");
         getContentPane().add(jLabel6, new org.netbeans.lib.awtextra.AbsoluteConstraints(110, 210, -1, -1));
+
+        txtColor.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyTyped(java.awt.event.KeyEvent evt) {
+                txtColorKeyTyped(evt);
+            }
+        });
         getContentPane().add(txtColor, new org.netbeans.lib.awtextra.AbsoluteConstraints(170, 210, 90, -1));
 
         btnRegresar.setText("Regresar");
@@ -160,11 +198,22 @@ public class frmVehiculo extends javax.swing.JFrame {
 
         jLabel9.setText("Estado:");
         getContentPane().add(jLabel9, new org.netbeans.lib.awtextra.AbsoluteConstraints(100, 240, -1, -1));
+
+        txtEstado.setEditable(false);
+        txtEstado.setText("Nuevo");
         getContentPane().add(txtEstado, new org.netbeans.lib.awtextra.AbsoluteConstraints(170, 240, 90, -1));
+
+        txtDueño.setEditable(false);
         getContentPane().add(txtDueño, new org.netbeans.lib.awtextra.AbsoluteConstraints(170, 270, 90, -1));
 
         jLabel7.setText("Marca:");
         getContentPane().add(jLabel7, new org.netbeans.lib.awtextra.AbsoluteConstraints(110, 120, -1, -1));
+
+        txtMarca1.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyTyped(java.awt.event.KeyEvent evt) {
+                txtMarca1KeyTyped(evt);
+            }
+        });
         getContentPane().add(txtMarca1, new org.netbeans.lib.awtextra.AbsoluteConstraints(170, 120, 90, -1));
 
         pack();
@@ -201,6 +250,41 @@ public class frmVehiculo extends javax.swing.JFrame {
     private void cbTipoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_cbTipoActionPerformed
         // TODO add your handling code here:
     }//GEN-LAST:event_cbTipoActionPerformed
+    /**
+     * Método que valida el campo de numero de serie
+     * @param evt evt
+     */
+    private void txtNumeroKeyTyped(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_txtNumeroKeyTyped
+        char c = evt.getKeyChar();
+        
+        if((c<'0' || c>'9') && (c<'A' )| c>'Z')evt.consume();
+        
+        if(txtNumero.getText().length()==17){
+            evt.consume();
+        }
+    }//GEN-LAST:event_txtNumeroKeyTyped
+
+    private void txtMarca1KeyTyped(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_txtMarca1KeyTyped
+        validarMarca(evt);
+    }//GEN-LAST:event_txtMarca1KeyTyped
+
+    private void txtModeloKeyTyped(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_txtModeloKeyTyped
+        validarMarca(evt);
+    }//GEN-LAST:event_txtModeloKeyTyped
+
+    private void txtLineaKeyTyped(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_txtLineaKeyTyped
+        char c = evt.getKeyChar();
+        
+        if((c<'0' || c>'9'))evt.consume();
+        
+        if(txtNumero.getText().length()==4){
+            evt.consume();
+        }
+    }//GEN-LAST:event_txtLineaKeyTyped
+
+    private void txtColorKeyTyped(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_txtColorKeyTyped
+        validarMarca(evt);
+    }//GEN-LAST:event_txtColorKeyTyped
 
     /**
      * @param args the command line arguments

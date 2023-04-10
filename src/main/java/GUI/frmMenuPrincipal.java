@@ -6,8 +6,10 @@ package GUI;
 
 import DAO.ConexionBD;
 import DAO.IConexionBD;
+import DAO.ILicenciaDAO;
 import DAO.IPersonaDAO;
 import DAO.IVehiculoDAO;
+import DAO.LicenciaDAO;
 import DAO.PersonaDAO;
 import DAO.VehiculoDAO;
 import Entidades.Persona;
@@ -125,7 +127,7 @@ public class frmMenuPrincipal extends javax.swing.JFrame {
                 btnPersonaActionPerformed(evt);
             }
         });
-        getContentPane().add(btnPersona, new org.netbeans.lib.awtextra.AbsoluteConstraints(100, 120, 124, -1));
+        getContentPane().add(btnPersona, new org.netbeans.lib.awtextra.AbsoluteConstraints(100, 120, 140, -1));
 
         jLabel2.setText("Persona interesada (RFC)");
         getContentPane().add(jLabel2, new org.netbeans.lib.awtextra.AbsoluteConstraints(30, 70, -1, -1));
@@ -136,7 +138,13 @@ public class frmMenuPrincipal extends javax.swing.JFrame {
                 btnHistorialActionPerformed(evt);
             }
         });
-        getContentPane().add(btnHistorial, new org.netbeans.lib.awtextra.AbsoluteConstraints(100, 280, 120, -1));
+        getContentPane().add(btnHistorial, new org.netbeans.lib.awtextra.AbsoluteConstraints(100, 280, 130, -1));
+
+        txtRFC.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyTyped(java.awt.event.KeyEvent evt) {
+                txtRFCKeyTyped(evt);
+            }
+        });
         getContentPane().add(txtRFC, new org.netbeans.lib.awtextra.AbsoluteConstraints(180, 70, 110, -1));
 
         pack();
@@ -177,10 +185,13 @@ public class frmMenuPrincipal extends javax.swing.JFrame {
     }//GEN-LAST:event_btnPlacasActionPerformed
 
     private void btnLicenciaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnLicenciaActionPerformed
-        // TODO add your handling code here:
-        frmLicencia licencia= new frmLicencia();
+        if (encontrarPersona()) {
+        IConexionBD conexion = new ConexionBD();
+        ILicenciaDAO lcd = new LicenciaDAO(conexion);
+        frmLicencia licencia= new frmLicencia(lcd);
         licencia.setVisible(true);
         this.dispose();
+        }
     }//GEN-LAST:event_btnLicenciaActionPerformed
 
     private void btnReporteActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnReporteActionPerformed
@@ -196,6 +207,21 @@ public class frmMenuPrincipal extends javax.swing.JFrame {
         historial.setVisible(true);
         this.dispose();
     }//GEN-LAST:event_btnHistorialActionPerformed
+    /**
+     * Método que valida el campo de rfc
+     * @param evt evt
+     */
+    private void txtRFCKeyTyped(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_txtRFCKeyTyped
+        char c = evt.getKeyChar();
+        
+        if((c<'0' || c>'9') && (c<'A' )| c>'Z')evt.consume();
+        
+        if(txtRFC.getText().length()==13){
+            evt.consume();
+        }
+        
+        
+    }//GEN-LAST:event_txtRFCKeyTyped
 
     /**
      * @param args the command line arguments

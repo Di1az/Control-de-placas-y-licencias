@@ -3,6 +3,7 @@ C:\Users\Usuario\Documents\GITHUB\Control-de-placas-y-licencias\src\main\java\En
 C:\Users\Usuario\Documents\GITHUB\Control-de-placas-y-licencias\src\main\java\DAO\IConexionBD.java
 C:\Users\Usuario\Documents\GITHUB\Control-de-placas-y-licencias\src\main\java\GUI\frmLicencia.java
 C:\Users\Usuario\Documents\GITHUB\Control-de-placas-y-licencias\src\main\java\DAO\PersonaDAO.java
+C:\Users\Usuario\Documents\GITHUB\Control-de-placas-y-licencias\src\main\java\DAO\LicenciaDAO.java
 C:\Users\Usuario\Documents\GITHUB\Control-de-placas-y-licencias\src\main\java\GUI\frmPlacas.java
 C:\Users\Usuario\Documents\GITHUB\Control-de-placas-y-licencias\src\main\java\Entidades\Vehiculo.java
 C:\Users\Usuario\Documents\GITHUB\Control-de-placas-y-licencias\src\main\java\Entidades\Placa.java
@@ -10,9 +11,12 @@ C:\Users\Usuario\Documents\GITHUB\Control-de-placas-y-licencias\src\main\java\GU
 C:\Users\Usuario\Documents\GITHUB\Control-de-placas-y-licencias\src\main\java\DAO\IPersonaDAO.java
 C:\Users\Usuario\Documents\GITHUB\Control-de-placas-y-licencias\src\main\java\GUI\frmVehiculo.java
 C:\Users\Usuario\Documents\GITHUB\Control-de-placas-y-licencias\src\main\java\DAO\ConexionBD.java
+C:\Users\Usuario\Documents\GITHUB\Control-de-placas-y-licencias\src\main\java\DAO\ILicenciaDAO.java
+C:\Users\Usuario\Documents\GITHUB\Control-de-placas-y-licencias\src\main\java\DAO\VehiculoDAO.java
 C:\Users\Usuario\Documents\GITHUB\Control-de-placas-y-licencias\src\main\java\GUI\frmPersona.java
 C:\Users\Usuario\Documents\GITHUB\Control-de-placas-y-licencias\src\main\java\Entidades\Tramites_Personas.java
 C:\Users\Usuario\Documents\GITHUB\Control-de-placas-y-licencias\src\main\java\Entidades\Licencia.java
 C:\Users\Usuario\Documents\GITHUB\Control-de-placas-y-licencias\src\main\java\GUI\Main.java
 C:\Users\Usuario\Documents\GITHUB\Control-de-placas-y-licencias\src\main\java\GUI\frmMenuPrincipal.java
+C:\Users\Usuario\Documents\GITHUB\Control-de-placas-y-licencias\src\main\java\DAO\IVehiculoDAO.java
 C:\Users\Usuario\Documents\GITHUB\Control-de-placas-y-licencias\src\main\java\GUI\frmReporte.java

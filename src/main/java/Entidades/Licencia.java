@@ -47,8 +47,14 @@ public class Licencia extends Tramite implements Serializable {
         this.vigencia = Vigencia;
         this.costo = costo;
     }
- 
 
+    public Licencia(int vigencia, float costo, Date fechaRecepcion, Date fechaEmision) {
+        super(fechaRecepcion, fechaEmision);
+        this.vigencia = vigencia;
+        this.costo = costo;
+    }
+   
+   
     public int getVigencia() {
         return vigencia;
     }

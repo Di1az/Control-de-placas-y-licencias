@@ -4,7 +4,13 @@
  */
 package GUI;
 
+import DAO.ILicenciaDAO;
+import DAO.LicenciaDAO;
+import Entidades.Licencia;
+import Entidades.Persona;
+import java.util.Date;
 import javax.swing.JOptionPane;
+
 
 /**
  *
@@ -12,12 +18,56 @@ import javax.swing.JOptionPane;
  */
 public class frmLicencia extends javax.swing.JFrame {
 
-    /**
-     * Creates new form Licencia
-     */
-    public frmLicencia() {
+    Persona persona;
+    private ILicenciaDAO licenciaDAO;
+    
+    public frmLicencia(ILicenciaDAO licenciaDAO) {
         initComponents();
+        this.licenciaDAO = licenciaDAO;
+        
     }
+    
+    public frmLicencia(Persona persona, LicenciaDAO licenciaDAO) {
+        initComponents();
+        this.persona = persona;
+        this.licenciaDAO = licenciaDAO;
+        txtPersona.setText(persona.getRfc());  
+    }
+    
+    /**
+     * Método que agrega el vehículo a la bd
+     */
+    public void agregar() {
+        int año = Integer.parseInt((String) cbAño.getSelectedItem());
+        float costo = 0;
+        
+        if(año==1){
+            costo=600;
+        }else if(año==2){
+            costo=900;
+        }else if(año==3){
+            costo=1100;
+        }
+        
+        Date fechaEmision = new Date();
+        Date fechaRecepcion = new Date();
+        
+        fechaRecepcion.setYear((fechaRecepcion.getYear()+año));
+        
+        
+        Licencia lic = new Licencia(año, costo,fechaRecepcion,fechaEmision );
+        if (licenciaDAO.agregarLicencia(lic) == null) {
+            JOptionPane.showMessageDialog(this, "No se pudo registrar la licencia");
+        } else {
+
+            JOptionPane.showMessageDialog(this, "Registro exitoso");
+            frmMenuPrincipal principal = new frmMenuPrincipal(persona);
+            principal.setVisible(true);
+            this.dispose();
+        }
+
+    }
+    
 
     /**
      * This method is called from within the constructor to initialize the form.
@@ -32,31 +82,25 @@ public class frmLicencia extends javax.swing.JFrame {
         jLabel3 = new javax.swing.JLabel();
         jLabel4 = new javax.swing.JLabel();
         txtPersona = new javax.swing.JTextField();
-        txtVigencia = new javax.swing.JTextField();
-        jLabel5 = new javax.swing.JLabel();
-        txtFechaR = new com.toedter.calendar.JDateChooser();
         btnRegresar = new javax.swing.JButton();
-        btnCancelar = new javax.swing.JButton();
         btnAceptar = new javax.swing.JButton();
+        cbAño = new javax.swing.JComboBox<>();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         getContentPane().setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
         jLabel1.setFont(new java.awt.Font("Segoe UI", 0, 18)); // NOI18N
         jLabel1.setText("Registrar licencia");
-        getContentPane().add(jLabel1, new org.netbeans.lib.awtextra.AbsoluteConstraints(146, 6, -1, -1));
+        getContentPane().add(jLabel1, new org.netbeans.lib.awtextra.AbsoluteConstraints(140, 20, -1, -1));
 
-        jLabel3.setText("Persona");
+        jLabel3.setText("RFC");
         getContentPane().add(jLabel3, new org.netbeans.lib.awtextra.AbsoluteConstraints(75, 66, -1, -1));
 
         jLabel4.setText("Vigencia");
-        getContentPane().add(jLabel4, new org.netbeans.lib.awtextra.AbsoluteConstraints(80, 110, -1, -1));
-        getContentPane().add(txtPersona, new org.netbeans.lib.awtextra.AbsoluteConstraints(135, 63, 80, -1));
-        getContentPane().add(txtVigencia, new org.netbeans.lib.awtextra.AbsoluteConstraints(140, 110, 80, -1));
+        getContentPane().add(jLabel4, new org.netbeans.lib.awtextra.AbsoluteConstraints(70, 110, -1, -1));
 
-        jLabel5.setText("Fecha recepcion");
-        getContentPane().add(jLabel5, new org.netbeans.lib.awtextra.AbsoluteConstraints(75, 162, -1, -1));
-        getContentPane().add(txtFechaR, new org.netbeans.lib.awtextra.AbsoluteConstraints(180, 160, -1, -1));
+        txtPersona.setEditable(false);
+        getContentPane().add(txtPersona, new org.netbeans.lib.awtextra.AbsoluteConstraints(135, 63, 130, -1));
 
         btnRegresar.setText("Regresar");
         btnRegresar.addActionListener(new java.awt.event.ActionListener() {
@@ -64,15 +108,7 @@ public class frmLicencia extends javax.swing.JFrame {
                 btnRegresarActionPerformed(evt);
             }
         });
-        getContentPane().add(btnRegresar, new org.netbeans.lib.awtextra.AbsoluteConstraints(60, 250, -1, -1));
-
-        btnCancelar.setText("Cancelar");
-        btnCancelar.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                btnCancelarActionPerformed(evt);
-            }
-        });
-        getContentPane().add(btnCancelar, new org.netbeans.lib.awtextra.AbsoluteConstraints(160, 250, -1, -1));
+        getContentPane().add(btnRegresar, new org.netbeans.lib.awtextra.AbsoluteConstraints(100, 180, -1, -1));
 
         btnAceptar.setText("Aceptar");
         btnAceptar.addActionListener(new java.awt.event.ActionListener() {
@@ -80,7 +116,10 @@ public class frmLicencia extends javax.swing.JFrame {
                 btnAceptarActionPerformed(evt);
             }
         });
-        getContentPane().add(btnAceptar, new org.netbeans.lib.awtextra.AbsoluteConstraints(260, 250, -1, -1));
+        getContentPane().add(btnAceptar, new org.netbeans.lib.awtextra.AbsoluteConstraints(210, 180, -1, -1));
+
+        cbAño.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "1", "2", "3" }));
+        getContentPane().add(cbAño, new org.netbeans.lib.awtextra.AbsoluteConstraints(140, 110, 80, -1));
 
         pack();
         setLocationRelativeTo(null);
@@ -93,18 +132,10 @@ public class frmLicencia extends javax.swing.JFrame {
         this.dispose();
     }//GEN-LAST:event_btnRegresarActionPerformed
 
-    private void btnCancelarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnCancelarActionPerformed
-        // TODO add your handling code here:
-        txtPersona.setText("");
-        txtVigencia.setText("");
-    }//GEN-LAST:event_btnCancelarActionPerformed
-
     private void btnAceptarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnAceptarActionPerformed
-        // TODO add your handling code here:
-        JOptionPane.showMessageDialog(this, "Licencia registradas correctamentes");
-        frmMenuPrincipal principal= new frmMenuPrincipal();
-        principal.setVisible(true);
-        this.dispose();
+        
+       this.agregar();
+        
     }//GEN-LAST:event_btnAceptarActionPerformed
 
     /**
@@ -138,21 +169,18 @@ public class frmLicencia extends javax.swing.JFrame {
         /* Create and display the form */
         java.awt.EventQueue.invokeLater(new Runnable() {
             public void run() {
-                new frmLicencia().setVisible(true);
+                //new frmLicencia().setVisible(true);
             }
         });
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton btnAceptar;
-    private javax.swing.JButton btnCancelar;
     private javax.swing.JButton btnRegresar;
+    private javax.swing.JComboBox<String> cbAño;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel3;
     private javax.swing.JLabel jLabel4;
-    private javax.swing.JLabel jLabel5;
-    private com.toedter.calendar.JDateChooser txtFechaR;
     private javax.swing.JTextField txtPersona;
-    private javax.swing.JTextField txtVigencia;
     // End of variables declaration//GEN-END:variables
 }
