@@ -4,7 +4,6 @@
  */
 package GUI;
 
-
 import DAO.IVehiculoDAO;
 import Entidades.Persona;
 import Entidades.Vehiculo;
@@ -15,33 +14,34 @@ import javax.swing.JOptionPane;
  * @author dany
  */
 public class frmVehiculo extends javax.swing.JFrame {
-   
-   private final IVehiculoDAO vehiculoDAO;
-   private Persona persona;
-    
-   /**
-    * Método constructor que inicializa los atributos
-    * @param vehiculoDAO vehiculoDAO
-    */
+
+    private final IVehiculoDAO vehiculoDAO;
+    private Persona persona;
+
+    /**
+     * Método constructor que inicializa los atributos
+     *
+     * @param vehiculoDAO vehiculoDAO
+     */
     public frmVehiculo(IVehiculoDAO vehiculoDAO) {
         initComponents();
         this.vehiculoDAO = vehiculoDAO;
     }
-    
+
     /**
-     * Constructor utilizado para devolver el rfc de la persona a la cual se 
-     * le esta registrando el vehículo
+     * Constructor utilizado para devolver el rfc de la persona a la cual se le
+     * esta registrando el vehículo
+     *
      * @param vehiculoDAO vehículoDAO
      * @param persona persona
      */
     public frmVehiculo(IVehiculoDAO vehiculoDAO, Persona persona) {
         initComponents();
         this.vehiculoDAO = vehiculoDAO;
-        this.persona=persona;
+        this.persona = persona;
         txtDueño.setText(persona.getRfc());
     }
-    
-    
+
     /**
      * Método que agrega la licencia a la bd
      */
@@ -59,20 +59,21 @@ public class frmVehiculo extends javax.swing.JFrame {
         }
 
     }
-    
+
     /**
      * Método que valida de manera que solo permite letras y espacio
+     *
      * @param evento evt
      */
-    public void validarMarca(java.awt.event.KeyEvent evento){
-        if(evento.getKeyChar()>=33 && evento.getKeyChar() <=64
-                ||evento.getKeyChar()>=91 && evento.getKeyChar() <=96
-                || evento.getKeyChar()>=123 && evento.getKeyChar() <=127){
-            
+    public void validarMarca(java.awt.event.KeyEvent evento) {
+        if (evento.getKeyChar() >= 33 && evento.getKeyChar() <= 64
+                || evento.getKeyChar() >= 91 && evento.getKeyChar() <= 96
+                || evento.getKeyChar() >= 123 && evento.getKeyChar() <= 127) {
+
             evento.consume();
         }
     }
-  
+
     /**
      * This method is called from within the constructor to initialize the form.
      * WARNING: Do NOT modify this code. The content of this method is always
@@ -152,6 +153,11 @@ public class frmVehiculo extends javax.swing.JFrame {
         jLabel5.setText("Linea:");
         getContentPane().add(jLabel5, new org.netbeans.lib.awtextra.AbsoluteConstraints(110, 180, -1, -1));
 
+        txtLinea.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                txtLineaActionPerformed(evt);
+            }
+        });
         txtLinea.addKeyListener(new java.awt.event.KeyAdapter() {
             public void keyTyped(java.awt.event.KeyEvent evt) {
                 txtLineaKeyTyped(evt);
@@ -221,8 +227,8 @@ public class frmVehiculo extends javax.swing.JFrame {
     }// </editor-fold>//GEN-END:initComponents
 
     private void btnRegresarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnRegresarActionPerformed
-        
-        frmMenuPrincipal principal= new frmMenuPrincipal(persona);
+
+        frmMenuPrincipal principal = new frmMenuPrincipal(persona);
         principal.setVisible(true);
         this.dispose();
     }//GEN-LAST:event_btnRegresarActionPerformed
@@ -235,11 +241,13 @@ public class frmVehiculo extends javax.swing.JFrame {
         txtLinea.setText("");
         txtNumero.setText("");
         txtModelo.setText("");
-        
+        txtMarca1.setText("");
+
     }//GEN-LAST:event_btnCancelarActionPerformed
     /**
      * Método que al dar click en el boton hace la acción de agregar el vehículo
      * a la bd
+     *
      * @param evt evt
      */
     private void btnAceptarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnAceptarActionPerformed
@@ -252,14 +260,17 @@ public class frmVehiculo extends javax.swing.JFrame {
     }//GEN-LAST:event_cbTipoActionPerformed
     /**
      * Método que valida el campo de numero de serie
+     *
      * @param evt evt
      */
     private void txtNumeroKeyTyped(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_txtNumeroKeyTyped
         char c = evt.getKeyChar();
-        
-        if((c<'0' || c>'9') && (c<'A' )| c>'Z')evt.consume();
-        
-        if(txtNumero.getText().length()==17){
+
+        if ((c < '0' || c > '9') && (c < 'A') | c > 'Z') {
+            evt.consume();
+        }
+
+        if (txtNumero.getText().length() == 17) {
             evt.consume();
         }
     }//GEN-LAST:event_txtNumeroKeyTyped
@@ -269,22 +280,29 @@ public class frmVehiculo extends javax.swing.JFrame {
     }//GEN-LAST:event_txtMarca1KeyTyped
 
     private void txtModeloKeyTyped(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_txtModeloKeyTyped
-        validarMarca(evt);
+        char c = evt.getKeyChar();
+
+        if ((c < '0' || c > '9') && (c < 'A') | c > 'Z') {
+            evt.consume();
+        }
+
+        if (txtNumero.getText().length() == 17) {
+            evt.consume();
+        }
     }//GEN-LAST:event_txtModeloKeyTyped
 
     private void txtLineaKeyTyped(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_txtLineaKeyTyped
-        char c = evt.getKeyChar();
-        
-        if((c<'0' || c>'9'))evt.consume();
-        
-        if(txtNumero.getText().length()==4){
-            evt.consume();
-        }
+
+        validarMarca(evt);
     }//GEN-LAST:event_txtLineaKeyTyped
 
     private void txtColorKeyTyped(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_txtColorKeyTyped
         validarMarca(evt);
     }//GEN-LAST:event_txtColorKeyTyped
+
+    private void txtLineaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txtLineaActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_txtLineaActionPerformed
 
     /**
      * @param args the command line arguments

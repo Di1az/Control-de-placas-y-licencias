@@ -26,7 +26,7 @@ public class frmPersona extends javax.swing.JFrame {
         long fecha = this.txtFechaN.getDate().getTime();
         java.sql.Date inicio = new java.sql.Date(fecha);
         boolean discapacidad = false;
-        if (txtDiscapacidad.getText().equalsIgnoreCase("Si")) {
+        if (txtDiscapacidad.getText().equalsIgnoreCase("Y")) {
             discapacidad = true;
         }
 
@@ -65,6 +65,37 @@ public class frmPersona extends javax.swing.JFrame {
             evento.consume();
             
         }
+    }
+    
+    /**
+     * Método que nos ayuda para que no existan vacíos dentro del cuadro de
+     * texto.
+     *
+     * @return regreso
+     * @return regreso
+     */
+    private boolean validarVacios() {
+        boolean error = true;
+
+        if (txtApellidoM.getText().equals("")
+                || txtApellidoP.getText().equals("")
+                || txtNombre.getText().equals("")
+                || txtRFC.getText().equals("")
+                || txtTelefono.getText().equals("")
+                || txtDiscapacidad.getText().equals("")
+                || txtFechaN.getDate() == null) {
+            JOptionPane.showMessageDialog(this, "Favor de llenar los campos faltantes", "Informacion", JOptionPane.INFORMATION_MESSAGE);
+            
+            return false;
+        }
+        if (txtRFC.getText().length()!=12) {
+            JOptionPane.showMessageDialog(this, "El RFC debe de contener un total de 12 caracteres", "Informacion", JOptionPane.INFORMATION_MESSAGE);
+            
+            return false;
+        }
+        
+
+        return error;
     }
 
     /**
@@ -202,8 +233,10 @@ public class frmPersona extends javax.swing.JFrame {
     }//GEN-LAST:event_btnVolverActionPerformed
 
     private void btnAceptarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnAceptarActionPerformed
-      
-        this.agregar();
+        if(validarVacios()){
+            this.agregar();
+        }
+        
 
     }//GEN-LAST:event_btnAceptarActionPerformed
 

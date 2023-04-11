@@ -15,6 +15,8 @@ import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.Inheritance;
 import javax.persistence.InheritanceType;
+import javax.persistence.JoinColumn;
+import javax.persistence.ManyToOne;
 import javax.persistence.Table;
 import javax.persistence.Temporal;
 import javax.persistence.TemporalType;
@@ -24,14 +26,14 @@ import javax.persistence.TemporalType;
  * @author Dany
  */
 @Entity
-@Table(name = "Trámites")
+@Table(name = "Tramite")
 @Inheritance(strategy = InheritanceType.TABLE_PER_CLASS)
 public abstract class Tramite implements Serializable {
 
-    private static final long serialVersionUID = 1L;
+    
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    @Column(name = "Id_trámite")
+    @Column(name = "Id_Tramite")
     private Integer id;
 
     @Temporal(TemporalType.DATE)
@@ -42,19 +44,27 @@ public abstract class Tramite implements Serializable {
     @Column(name = "Fecha_emisión")
     private Date fechaEmision;
 
+    @ManyToOne
+    @JoinColumn(name = "Id_Persona")
+    private Persona persona;
+    
     public Tramite() {
     }
 
-    public Tramite(Integer id, Date fechaRecepcion, Date fechaEmision) {
+    public Tramite(Integer id, Date fechaRecepcion, Date fechaEmision, Persona persona) {
         this.id = id;
         this.fechaRecepcion = fechaRecepcion;
         this.fechaEmision = fechaEmision;
+        this.persona = persona;
     }
 
-    public Tramite(Date fechaRecepcion, Date fechaEmision) {
+    public Tramite(Date fechaRecepcion, Date fechaEmision, Persona persona) {
         this.fechaRecepcion = fechaRecepcion;
         this.fechaEmision = fechaEmision;
+        this.persona = persona;
     }
+
+    
 
     public Integer getId() {
         return id;
@@ -103,6 +113,14 @@ public abstract class Tramite implements Serializable {
     @Override
     public String toString() {
         return "Entidades.Tramite[ id=" + id + " ]";
+    }
+
+    public Persona getPersona() {
+        return persona;
+    }
+
+    public void setPersona(Persona persona) {
+        this.persona = persona;
     }
 
 }

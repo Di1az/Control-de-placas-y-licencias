@@ -92,7 +92,7 @@ public class frmMenuPrincipal extends javax.swing.JFrame {
                 btnVehiculoActionPerformed(evt);
             }
         });
-        getContentPane().add(btnVehiculo, new org.netbeans.lib.awtextra.AbsoluteConstraints(100, 160, -1, -1));
+        getContentPane().add(btnVehiculo, new org.netbeans.lib.awtextra.AbsoluteConstraints(130, 180, -1, -1));
 
         btnPlacas.setText("Solicitar placas");
         btnPlacas.addActionListener(new java.awt.event.ActionListener() {
@@ -100,7 +100,7 @@ public class frmMenuPrincipal extends javax.swing.JFrame {
                 btnPlacasActionPerformed(evt);
             }
         });
-        getContentPane().add(btnPlacas, new org.netbeans.lib.awtextra.AbsoluteConstraints(100, 190, 124, -1));
+        getContentPane().add(btnPlacas, new org.netbeans.lib.awtextra.AbsoluteConstraints(130, 210, 124, -1));
 
         btnLicencia.setText("Solicitar licencia");
         btnLicencia.addActionListener(new java.awt.event.ActionListener() {
@@ -108,7 +108,7 @@ public class frmMenuPrincipal extends javax.swing.JFrame {
                 btnLicenciaActionPerformed(evt);
             }
         });
-        getContentPane().add(btnLicencia, new org.netbeans.lib.awtextra.AbsoluteConstraints(100, 220, 124, -1));
+        getContentPane().add(btnLicencia, new org.netbeans.lib.awtextra.AbsoluteConstraints(130, 240, 124, -1));
 
         btnSalir.setText("Salir");
         getContentPane().add(btnSalir, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 340, -1, -1));
@@ -119,7 +119,7 @@ public class frmMenuPrincipal extends javax.swing.JFrame {
                 btnReporteActionPerformed(evt);
             }
         });
-        getContentPane().add(btnReporte, new org.netbeans.lib.awtextra.AbsoluteConstraints(100, 250, 124, -1));
+        getContentPane().add(btnReporte, new org.netbeans.lib.awtextra.AbsoluteConstraints(130, 270, 124, -1));
 
         btnPersona.setText("Registrar cliente");
         btnPersona.addActionListener(new java.awt.event.ActionListener() {
@@ -127,7 +127,7 @@ public class frmMenuPrincipal extends javax.swing.JFrame {
                 btnPersonaActionPerformed(evt);
             }
         });
-        getContentPane().add(btnPersona, new org.netbeans.lib.awtextra.AbsoluteConstraints(100, 120, 140, -1));
+        getContentPane().add(btnPersona, new org.netbeans.lib.awtextra.AbsoluteConstraints(130, 150, 140, -1));
 
         jLabel2.setText("Persona interesada (RFC)");
         getContentPane().add(jLabel2, new org.netbeans.lib.awtextra.AbsoluteConstraints(30, 70, -1, -1));
@@ -138,14 +138,14 @@ public class frmMenuPrincipal extends javax.swing.JFrame {
                 btnHistorialActionPerformed(evt);
             }
         });
-        getContentPane().add(btnHistorial, new org.netbeans.lib.awtextra.AbsoluteConstraints(100, 280, 130, -1));
+        getContentPane().add(btnHistorial, new org.netbeans.lib.awtextra.AbsoluteConstraints(130, 300, 130, -1));
 
         txtRFC.addKeyListener(new java.awt.event.KeyAdapter() {
             public void keyTyped(java.awt.event.KeyEvent evt) {
                 txtRFCKeyTyped(evt);
             }
         });
-        getContentPane().add(txtRFC, new org.netbeans.lib.awtextra.AbsoluteConstraints(180, 70, 110, -1));
+        getContentPane().add(txtRFC, new org.netbeans.lib.awtextra.AbsoluteConstraints(170, 70, 110, -1));
 
         pack();
         setLocationRelativeTo(null);
@@ -188,7 +188,7 @@ public class frmMenuPrincipal extends javax.swing.JFrame {
         if (encontrarPersona()) {
         IConexionBD conexion = new ConexionBD();
         ILicenciaDAO lcd = new LicenciaDAO(conexion);
-        frmLicencia licencia= new frmLicencia(lcd);
+        frmLicencia licencia= new frmLicencia(persona,lcd);
         licencia.setVisible(true);
         this.dispose();
         }

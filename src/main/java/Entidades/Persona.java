@@ -54,10 +54,13 @@ public class Persona implements Serializable {
     @OneToMany (mappedBy="Persona")
     private List<Vehiculo> vehiculos;
     
+    @OneToMany (mappedBy="Persona")
+    private List<Tramite> tramite;
+    
     public Persona() {
     }
 
-    public Persona(Integer id, String rfc, String nombre, String apellidoP, String apellidoM, String telefono, Date fechaN, boolean discapacidad, List<Vehiculo> vehiculos) {
+    public Persona(Integer id, String rfc, String nombre, String apellidoP, String apellidoM, String telefono, Date fechaN, boolean discapacidad, List<Vehiculo> vehiculos,  List<Tramite> tramite) {
         this.id = id;
         this.rfc = rfc;
         this.nombre = nombre;
@@ -67,9 +70,10 @@ public class Persona implements Serializable {
         this.fechaN = fechaN;
         this.discapacidad = discapacidad;
         this.vehiculos = vehiculos;
+        this.tramite= tramite;
     }
 
-    public Persona(String rfc, String nombre, String apellidoP, String apellidoM, String telefono, Date fechaN, boolean discapacidad, List<Vehiculo> vehiculos) {
+    public Persona(String rfc, String nombre, String apellidoP, String apellidoM, String telefono, Date fechaN, boolean discapacidad, List<Vehiculo> vehiculos,  List<Tramite> tramite) {
         this.rfc = rfc;
         this.nombre = nombre;
         this.apellidoP = apellidoP;
@@ -78,6 +82,7 @@ public class Persona implements Serializable {
         this.fechaN = fechaN;
         this.discapacidad = discapacidad;
         this.vehiculos = vehiculos;
+        this.tramite= tramite;
     }
     public Persona(String rfc, String nombre, String apellidoP, String apellidoM, String telefono, Date fechaN, boolean discapacidad) {
         this.rfc = rfc;
@@ -88,6 +93,7 @@ public class Persona implements Serializable {
         this.fechaN = fechaN;
         this.discapacidad = discapacidad;
         this.vehiculos= new ArrayList<>();
+        this.tramite= new ArrayList<>();
     }
 
     
@@ -99,6 +105,7 @@ public class Persona implements Serializable {
     public void setId(Integer id) {
         this.id = id;
     }
+    
     
     
 
@@ -190,6 +197,14 @@ public class Persona implements Serializable {
 
     public void setVehiculos(List<Vehiculo> vehiculos) {
         this.vehiculos = vehiculos;
+    }
+
+    public List<Tramite> getTramite() {
+        return tramite;
+    }
+
+    public void setTramite(List<Tramite> tramite) {
+        this.tramite = tramite;
     }
 
 }

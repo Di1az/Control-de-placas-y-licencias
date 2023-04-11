@@ -5,7 +5,6 @@
 package GUI;
 
 import DAO.ILicenciaDAO;
-import DAO.LicenciaDAO;
 import Entidades.Licencia;
 import Entidades.Persona;
 import java.util.Date;
@@ -27,11 +26,11 @@ public class frmLicencia extends javax.swing.JFrame {
         
     }
     
-    public frmLicencia(Persona persona, LicenciaDAO licenciaDAO) {
+    public frmLicencia(Persona persona, ILicenciaDAO licenciaDAO) {
         initComponents();
         this.persona = persona;
         this.licenciaDAO = licenciaDAO;
-        txtPersona.setText(persona.getRfc());  
+        
     }
     
     /**
@@ -55,7 +54,7 @@ public class frmLicencia extends javax.swing.JFrame {
         fechaRecepcion.setYear((fechaRecepcion.getYear()+año));
         
         
-        Licencia lic = new Licencia(año, costo,fechaRecepcion,fechaEmision );
+        Licencia lic = new Licencia(año, costo,fechaRecepcion,fechaEmision, persona );
         if (licenciaDAO.agregarLicencia(lic) == null) {
             JOptionPane.showMessageDialog(this, "No se pudo registrar la licencia");
         } else {
@@ -79,9 +78,7 @@ public class frmLicencia extends javax.swing.JFrame {
     private void initComponents() {
 
         jLabel1 = new javax.swing.JLabel();
-        jLabel3 = new javax.swing.JLabel();
         jLabel4 = new javax.swing.JLabel();
-        txtPersona = new javax.swing.JTextField();
         btnRegresar = new javax.swing.JButton();
         btnAceptar = new javax.swing.JButton();
         cbAño = new javax.swing.JComboBox<>();
@@ -93,14 +90,8 @@ public class frmLicencia extends javax.swing.JFrame {
         jLabel1.setText("Registrar licencia");
         getContentPane().add(jLabel1, new org.netbeans.lib.awtextra.AbsoluteConstraints(140, 20, -1, -1));
 
-        jLabel3.setText("RFC");
-        getContentPane().add(jLabel3, new org.netbeans.lib.awtextra.AbsoluteConstraints(75, 66, -1, -1));
-
         jLabel4.setText("Vigencia");
-        getContentPane().add(jLabel4, new org.netbeans.lib.awtextra.AbsoluteConstraints(70, 110, -1, -1));
-
-        txtPersona.setEditable(false);
-        getContentPane().add(txtPersona, new org.netbeans.lib.awtextra.AbsoluteConstraints(135, 63, 130, -1));
+        getContentPane().add(jLabel4, new org.netbeans.lib.awtextra.AbsoluteConstraints(100, 100, -1, -1));
 
         btnRegresar.setText("Regresar");
         btnRegresar.addActionListener(new java.awt.event.ActionListener() {
@@ -119,7 +110,7 @@ public class frmLicencia extends javax.swing.JFrame {
         getContentPane().add(btnAceptar, new org.netbeans.lib.awtextra.AbsoluteConstraints(210, 180, -1, -1));
 
         cbAño.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "1", "2", "3" }));
-        getContentPane().add(cbAño, new org.netbeans.lib.awtextra.AbsoluteConstraints(140, 110, 80, -1));
+        getContentPane().add(cbAño, new org.netbeans.lib.awtextra.AbsoluteConstraints(200, 100, 80, -1));
 
         pack();
         setLocationRelativeTo(null);
@@ -179,8 +170,6 @@ public class frmLicencia extends javax.swing.JFrame {
     private javax.swing.JButton btnRegresar;
     private javax.swing.JComboBox<String> cbAño;
     private javax.swing.JLabel jLabel1;
-    private javax.swing.JLabel jLabel3;
     private javax.swing.JLabel jLabel4;
-    private javax.swing.JTextField txtPersona;
     // End of variables declaration//GEN-END:variables
 }

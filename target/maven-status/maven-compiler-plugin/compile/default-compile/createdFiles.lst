@@ -1,4 +1,3 @@
-GUI\frmLicencia$4.class
 DAO\VehiculoDAO.class
 GUI\frmPlacas$2.class
 DAO\ConexionBD.class
@@ -6,6 +5,7 @@ GUI\frmPersona$2.class
 Entidades\Persona.class
 GUI\frmReporte$3.class
 GUI\frmVehiculo$4.class
+Entidades\Tramites_Personas_.class
 Entidades\Tramites_Personas.class
 DAO\IVehiculoDAO.class
 GUI\frmLicencia$1.class
@@ -17,6 +17,7 @@ GUI\frmPersona$9.class
 Entidades\Vehiculo.class
 GUI\frmVehiculo$5.class
 GUI\frmVehiculo$10.class
+Entidades\Placa_.class
 GUI\frmPlacas$1.class
 GUI\frmVehiculo.class
 GUI\frmPersona$3.class
