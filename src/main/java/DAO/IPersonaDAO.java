@@ -5,6 +5,7 @@
 package DAO;
 
 import Entidades.Persona;
+import java.util.Date;
 import java.util.List;
 
 /**
@@ -26,5 +27,31 @@ public interface IPersonaDAO {
      * @return persona encontrada, null de lo contrario
      */
     public Persona buscarPersona(String RFC);
+    
+    /**
+     * Metodo que se encarga de buscar tramites mediante el RFC de la persona
+     *
+     * @param rfc
+     * @return
+     */
+    public List<Persona> listaPersonasRFC (String rfc);
+
+    /**
+     * Metodo que se encarga de buscar tramites mediante el nombre de la persona
+     *
+     * @param nombre
+     * @return
+     */
+//    public List<Persona> listaPersonasNombre (String nombre);
+
+    /**
+     * Metodo que se encarga de buscar tramites mediante la fecha de nacimiento
+     * de la persona
+     *
+     * @param fechaN
+     * @return
+     */
+    public List<Persona> listaPersonasFechaN (Date fechaN);
+
     }
      

@@ -10,7 +10,6 @@ import DAO.IVehiculoDAO;
 
 import Entidades.Persona;
 import Entidades.Placa;
-import static Entidades.Placa_.vehiculo;
 import java.util.Iterator;
 import java.util.List;
 import Entidades.Vehiculo;

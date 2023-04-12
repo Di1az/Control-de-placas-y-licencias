@@ -1,3 +1,4 @@
+
 /*
  * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
  * Click nbfs://nbhost/SystemFileSystem/Templates/Classes/Class.java to edit this template
@@ -6,6 +7,7 @@ package DAO;
 
 import Encriptacion.Encriptar;
 import Entidades.Persona;
+import java.util.Date;
 import java.util.List;
 import javax.persistence.EntityManager;
 import javax.persistence.TypedQuery;
@@ -59,6 +61,12 @@ public class PersonaDAO implements IPersonaDAO {
             TypedQuery<Persona> query = em.createQuery(jpql, Persona.class);
             List<Persona> listaPersonas = query.getResultList();
             em.getTransaction().commit();
+            
+            for(Persona persona : listaPersonas){
+               
+                desencriptarPersona(persona);
+                
+            }
             return listaPersonas;
         } catch (Exception e) {
             return null;
@@ -87,5 +95,76 @@ public class PersonaDAO implements IPersonaDAO {
             return null;
         }
 
+    }
+
+    @Override
+    public List<Persona> listaPersonasRFC(String rfc) {
+        EntityManager em = conexionBD.Conexion();
+        try{
+            List<Persona> personaRFC= em.createQuery("SELECT p FROM Persona p WHERE p.rfc LIKE :rfc")
+                    .setParameter("rfc" ,"%" + rfc + "%")
+                    .getResultList();
+            em.close();
+            for(Persona persona : personaRFC){
+                desencriptarPersona(persona);
+            }
+            return personaRFC;
+        } catch (Exception e){
+            if(em!=null){
+                em.close();
+            }
+            return null;
+        }
+    }
+
+//    @Override
+//    public List<Persona> listaPersonasNombre(String nombre) {
+//        EntityManager em = conexionBD.Conexion();
+//        try{
+//            List<Persona> personaNombre= em.createQuery("SELECT p FROM Persona p WHERE p.nombre LIKE :nombre")
+//                    .setParameter("nombre" ,"%" + nombre + "%")
+//                    .getResultList();
+//            em.close();
+//            for(Persona persona : personaNombre){
+//                desencriptarPersona(persona);
+//            }
+//            return personaNombre;
+//        } catch (Exception e){
+//            if(em!=null){
+//                em.close();
+//            }
+//            return null;
+//        }
+//    }
+
+    @Override
+    public List<Persona> listaPersonasFechaN(Date fechaN) {
+        EntityManager em = conexionBD.Conexion();
+        try{
+            List<Persona> personaFechaN= em.createQuery("SELECT p FROM Persona p WHERE p.fechaN = :fechaN")
+                    .setParameter("fechaN" , fechaN )
+                    .getResultList();
+            em.close();
+            for(Persona persona : personaFechaN){
+                desencriptarPersona(persona);
+            }
+            return personaFechaN;
+        } catch (Exception e){
+            
+            if(em!=null){
+                em.close();
+            }
+            return null;
+        }
+    }
+    
+    public void desencriptarPersona(Persona persona){
+        Encriptar en= new Encriptar();
+        String nombre=en.desencriptar(persona.getNombre());
+        String apellidoP= en.desencriptar(persona.getApellidoP());
+        String apellidoM= en.desencriptar(persona.getApellidoM());
+        persona.setNombre(nombre);
+        persona.setApellidoP(apellidoP);
+        persona.setApellidoM(apellidoM);
     }
 }

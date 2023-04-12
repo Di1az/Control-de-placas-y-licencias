@@ -4,14 +4,14 @@
  */
 package DAO;
 
-
+import Entidades.Tramite;
+import java.util.Date;
+import java.util.List;
 
 /**
  *
  * @author oscar
  */
 public interface ITramiteDAO {
-    
-    
-    
+
 }
