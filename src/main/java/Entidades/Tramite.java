@@ -64,8 +64,11 @@ public abstract class Tramite implements Serializable {
         this.persona = persona;
     }
 
+    public Tramite(Date fechaRecepcion, Date fechaEmision) {
+        this.fechaRecepcion = fechaRecepcion;
+        this.fechaEmision = fechaEmision;
+    }
     
-
     public Integer getId() {
         return id;
     }

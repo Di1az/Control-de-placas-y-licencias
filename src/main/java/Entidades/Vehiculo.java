@@ -5,7 +5,9 @@
 package Entidades;
 
 import java.io.Serializable;
+import java.util.List;
 import javax.persistence.Basic;
+import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
@@ -13,6 +15,7 @@ import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
+import javax.persistence.OneToMany;
 import javax.persistence.Table;
 
 /**
@@ -52,6 +55,9 @@ public class Vehiculo implements Serializable {
     @ManyToOne
     @JoinColumn(name = "Id_Persona")
     private Persona persona;
+    
+    @OneToMany (mappedBy="Vehiculo", cascade = {CascadeType.PERSIST, CascadeType.REMOVE})
+    private List<Placa> placas;
 
     public Vehiculo() {
     }
@@ -78,9 +84,19 @@ public class Vehiculo implements Serializable {
         this.estado = estado;
         this.persona = persona;
     }
-    
-    
-    
+
+    public Vehiculo(String numero, String marca, String modelo, String linea, String color, String tipo, String estado, Persona persona, List<Placa> placas) {
+        this.numero = numero;
+        this.marca = marca;
+        this.modelo = modelo;
+        this.linea = linea;
+        this.color = color;
+        this.tipo = tipo;
+        this.estado = estado;
+        this.persona = persona;
+        this.placas = placas;
+    }
+   
     public Integer getId() {
         return id;
     }

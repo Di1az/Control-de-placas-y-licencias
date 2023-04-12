@@ -15,8 +15,10 @@ import DAO.PersonaDAO;
 import DAO.PlacaDAO;
 import DAO.VehiculoDAO;
 import Entidades.Persona;
+import Entidades.Vehiculo;
 import java.util.List;
 import javax.swing.JOptionPane;
+
 
 /**
  *
@@ -147,7 +149,7 @@ public class frmMenuPrincipal extends javax.swing.JFrame {
                 txtRFCKeyTyped(evt);
             }
         });
-        getContentPane().add(txtRFC, new org.netbeans.lib.awtextra.AbsoluteConstraints(170, 70, 110, -1));
+        getContentPane().add(txtRFC, new org.netbeans.lib.awtextra.AbsoluteConstraints(180, 70, 110, -1));
 
         pack();
         setLocationRelativeTo(null);
@@ -178,7 +180,11 @@ public class frmMenuPrincipal extends javax.swing.JFrame {
         }
 
     }//GEN-LAST:event_btnVehiculoActionPerformed
-
+    
+    /**
+     * Método que si se encuntra a la persona la manda a la pantalla de Placas
+     * @param evt evt
+     */
     private void btnPlacasActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnPlacasActionPerformed
         if (encontrarPersona()) {
         IConexionBD conexion = new ConexionBD();

@@ -40,12 +40,18 @@ public class frmLicencia extends javax.swing.JFrame {
         int año = Integer.parseInt((String) cbAño.getSelectedItem());
         float costo = 0;
         
-        if(año==1){
+        if(año==1 && persona.getDiscapacidad()==false){
             costo=600;
-        }else if(año==2){
+        }else if(año==2 && persona.getDiscapacidad()==false){
             costo=900;
-        }else if(año==3){
+        }else if(año==3 && persona.getDiscapacidad()==false){
             costo=1100;
+        }else if(año==1 && persona.getDiscapacidad()==true){
+            costo=200;
+        }else if(año==2 && persona.getDiscapacidad()==true){
+            costo=500;
+        }else if(año==3 && persona.getDiscapacidad()==true){
+            costo=700;
         }
         
         Date fechaEmision = new Date();

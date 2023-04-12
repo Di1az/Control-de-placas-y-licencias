@@ -68,9 +68,9 @@ public class VehiculoDAO implements IVehiculoDAO {
         EntityManager em = conexionBD.Conexion();
         try {
             em.getTransaction().begin();
-            String jpql = "SELECT v FROM Vehiculo v WHERE v.Persona.id = :id";
+            String jpql = "SELECT v FROM Vehiculo v WHERE v.persona.id = :id";
             TypedQuery<Vehiculo> query = em.createQuery(jpql, Vehiculo.class);
-            query.setParameter("id", persona);
+            query.setParameter("id", persona.getId());
             List<Vehiculo> listaVehiculos = query.getResultList();
             em.getTransaction().commit();
             return listaVehiculos;

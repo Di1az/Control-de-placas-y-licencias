@@ -8,11 +8,15 @@ package Entidades;
 import java.io.Serializable;
 import java.util.Date;
 import javax.persistence.Basic;
+import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.JoinColumn;
+import javax.persistence.ManyToOne;
+import javax.persistence.OneToOne;
 import javax.persistence.Table;
 
 /**
@@ -37,6 +41,9 @@ public class Placa extends Tramite implements Serializable {
     @Column(name="Estado")
     private String estado;
    
+    @ManyToOne
+    @JoinColumn(name="Id_vehiculo")
+    private Vehiculo vehiculo;
 
     public Placa() {
     }
@@ -47,25 +54,26 @@ public class Placa extends Tramite implements Serializable {
         this.numeroPlaca = numeroPlaca;
         this.estado = estado;
     }
-
+    
+    
+    
+    /*
     public Placa(float costo, String numeroPlaca, String estado, Date fechaRecepcion, Date fechaEmision) {
         this.costo = costo;
         this.numeroPlaca = numeroPlaca;
         this.estado = estado;
       
     }
+    */
 
-    public Placa(float costo, String numeroPlaca, String estado, Date fechaRecepcion, Date fechaEmision, Persona persona) {
-        super(fechaRecepcion, fechaEmision, persona);
+    public Placa(float costo, String numeroPlaca, String estado, Vehiculo vehiculo, Date fechaRecepcion, Date fechaEmision) {
+        super(fechaRecepcion, fechaEmision);
         this.costo = costo;
         this.numeroPlaca = numeroPlaca;
         this.estado = estado;
+        this.vehiculo = vehiculo;
     }
-    
-    
-    
-    
-    
+
     public float getCosto() {
         return costo;
     }

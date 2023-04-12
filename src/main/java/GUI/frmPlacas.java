@@ -10,11 +10,13 @@ import DAO.IVehiculoDAO;
 
 import Entidades.Persona;
 import Entidades.Placa;
+import static Entidades.Placa_.vehiculo;
 import java.util.Iterator;
 import java.util.List;
 import Entidades.Vehiculo;
 import java.util.Date;
 import java.util.Random;
+import javax.persistence.metamodel.SingularAttribute;
 import javax.swing.JOptionPane;
 
 /**
@@ -26,14 +28,14 @@ public class frmPlacas extends javax.swing.JFrame {
     private final IPlacaDAO placaDAO;
     private final IVehiculoDAO vehiculoDAO;
     private Persona persona; 
+    private Vehiculo vehiculo;
     
-    
-   
+
    /**
     * Método constructor que inicializa los atributos
     * @param placaDAO placaDAO
     * @param vehiculoDAO vehiculoDAO
-     * @param persona persona
+    * @param persona persona
     */
     public frmPlacas(IPlacaDAO placaDAO, IVehiculoDAO vehiculoDAO, Persona persona) {
         initComponents();
@@ -42,14 +44,14 @@ public class frmPlacas extends javax.swing.JFrame {
         this.persona=persona;
         llenarCombo();
     }
-    
-    
+
     /**
      * Metodo para llenar el comboBox con los vehiculos activos del cliente
      */
     public void llenarCombo(){
         cbVehiculo.removeAllItems();
         List<Vehiculo> llenaCb=vehiculoDAO.listaVehiculosCliente(persona);
+        System.out.println(llenaCb.size());
         if(llenaCb==null){
            
             
@@ -62,7 +64,12 @@ public class frmPlacas extends javax.swing.JFrame {
         }
     }
     
-    public static String generarPlacaAleatoria(int longitud) {
+    /**
+     * Método que genera una cadena de 10 digitos aleatoria
+     * @param longitud tamaño de la cadena
+     * @return regresa la cadena
+     */
+    public String generarPlacaAleatoria(int longitud) {
         // Lista de caracteres válidos para la placa
         char[] caracteresValidos = "ABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789".toCharArray();
 
@@ -77,6 +84,16 @@ public class frmPlacas extends javax.swing.JFrame {
 
         return placa.toString();
     }
+    
+    public float calcularPrecio(Vehiculo vehiculo) {
+        float precio = 0;
+        if (vehiculo.getEstado() != null && vehiculo.getEstado().equals("Nuevo")) {
+            precio = 1500;
+        } else if (vehiculo.getEstado() != null && vehiculo.getEstado().equals("Usado")) {
+            precio = 1000;
+        }
+        return precio;
+    }
 
     
     /**
@@ -84,28 +101,26 @@ public class frmPlacas extends javax.swing.JFrame {
      */
     public void agregar() {
         
-        
         Date fechaEmision = new Date();
         Date fechaRecepcion = new Date();
         
-        fechaRecepcion.setYear((fechaRecepcion.getYear()));
-        
-        float costo = 0;
+        fechaRecepcion.setYear((fechaRecepcion.getYear()+6));
+       
         String estado = "Vigentes";
         
         String p = generarPlacaAleatoria(10);
         
-        Placa placa = new Placa(costo, p, estado, fechaRecepcion, fechaEmision, persona );
+        Placa placa = new Placa(calcularPrecio(vehiculo), p, estado, vehiculo, fechaRecepcion, fechaEmision);
         if (placaDAO.agregarPlaca(placa) == null) {
             JOptionPane.showMessageDialog(this, "No se pudo registrar la placa");
         } else {
-
+            
             JOptionPane.showMessageDialog(this, "Registro exitoso");
             frmMenuPrincipal principal = new frmMenuPrincipal(persona);
             principal.setVisible(true);
             this.dispose();
         }
-
+       
     }
 
     /**
@@ -184,10 +199,11 @@ public class frmPlacas extends javax.swing.JFrame {
 
     private void btnAceptarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnAceptarActionPerformed
         // TODO add your handling code here:
-        JOptionPane.showMessageDialog(this, "Placas registradas correctamentes");
+        /*JOptionPane.showMessageDialog(this, "Placas registradas correctamentes");
         frmMenuPrincipal principal= new frmMenuPrincipal();
         principal.setVisible(true);
-        this.dispose();
+        this.dispose();*/
+        this.agregar();
     }//GEN-LAST:event_btnAceptarActionPerformed
 
     private void cbVehiculoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_cbVehiculoActionPerformed

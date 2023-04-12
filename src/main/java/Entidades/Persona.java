@@ -183,7 +183,7 @@ public class Persona implements Serializable {
         this.fechaN = fechaN;
     }
 
-    public boolean isDiscapacidad() {
+    public boolean getDiscapacidad() {
         return discapacidad;
     }
 
