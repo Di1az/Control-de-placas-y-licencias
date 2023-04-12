@@ -7,6 +7,7 @@ package DAO;
 
 import Entidades.Vehiculo;
 import java.util.List;
+import Entidades.Persona;
 
 /**
  * Interfaz VehiculoDAO
@@ -26,4 +27,11 @@ public interface IVehiculoDAO {
      * @return lista de vehículos
      */
     public List <Vehiculo> listaVehiculo();
+    
+     /**
+      * Lista de cuentas utilizada para el comboBox
+      * @param persona cliente
+      * @return regresa la lista con las cuentas agregadas
+      */
+     public List<Vehiculo> listaVehiculosCliente(Persona persona);
 }

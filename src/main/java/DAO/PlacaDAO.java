@@ -5,37 +5,37 @@
  */
 package DAO;
 
-import Entidades.Licencia;
+import Entidades.Placa;
 import java.util.List;
 import javax.persistence.EntityManager;
 
 /**
- * Clase que implementa la interfaz ILicenciaDAO
- * @author Dany
+ * Clase que implementa la interfaz IPlacaDAO
+ * @author dany
  */
-public class LicenciaDAO implements ILicenciaDAO{
+public class PlacaDAO implements IPlacaDAO {
     
-     /**
+    /**
      * Objeto para la conexion a la BD
      */
     private IConexionBD conexionBD;
-    
+
     /**
      * Método constructor que crea la conexion con la base de datos
      * @param conexionBD objeto para la conexión
      */
-    public LicenciaDAO(IConexionBD conexionBD) {
+    public PlacaDAO(IConexionBD conexionBD) {
         this.conexionBD = conexionBD;
     }
-
+ 
     @Override
-    public Licencia agregarLicencia(Licencia licencia) {
-       EntityManager em = conexionBD.Conexion();
+    public Placa agregarPlaca(Placa placa) {
+        EntityManager em = conexionBD.Conexion();
         try {
             em.getTransaction().begin();
-            em.persist(licencia); //Agrega la nueva licencia en la base de datos
+            em.persist(placa); //Agrega la nueva placa en la base de datos
             em.getTransaction().commit();
-            return licencia;
+            return placa;
         } catch (Exception e) {
             e.printStackTrace();
             return null;
@@ -43,9 +43,8 @@ public class LicenciaDAO implements ILicenciaDAO{
     }
 
     @Override
-    public List<Licencia> listaLicencia() {
+    public List<Placa> listaPlaca() {
         throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
     }
-    
     
 }

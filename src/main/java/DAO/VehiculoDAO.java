@@ -5,9 +5,11 @@
  */
 package DAO;
 
+import Entidades.Persona;
 import Entidades.Vehiculo;
 import java.util.List;
 import javax.persistence.EntityManager;
+import javax.persistence.TypedQuery;
 
 /**
  * Clase que implementa la interfaz IVehiculoDAO
@@ -56,4 +58,26 @@ public class VehiculoDAO implements IVehiculoDAO {
         throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
     }
     
+    /**
+     * Método que imprime una lista de los vehiculos de una persona en especifico
+     * @param persona persona en especifico 
+     * @return la lista de vehiculos 
+     */
+    @Override
+    public List<Vehiculo> listaVehiculosCliente(Persona persona) {
+        EntityManager em = conexionBD.Conexion();
+        try {
+            em.getTransaction().begin();
+            String jpql = "SELECT v FROM Vehiculo v WHERE v.Persona.id = :id";
+            TypedQuery<Vehiculo> query = em.createQuery(jpql, Vehiculo.class);
+            query.setParameter("id", persona);
+            List<Vehiculo> listaVehiculos = query.getResultList();
+            em.getTransaction().commit();
+            return listaVehiculos;
+        } catch (Exception e) {
+            return null;
+        }
+    }
 }
+    
+

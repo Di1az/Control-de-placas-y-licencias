@@ -4,10 +4,14 @@
  */
 package DAO;
 
+
+
 /**
  *
  * @author oscar
  */
 public interface ITramiteDAO {
+    
+    
     
 }

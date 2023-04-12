@@ -111,12 +111,19 @@ public class Vehiculo implements Serializable {
         }
         return true;
     }
-
+    
+    /*
     @Override
     public String toString() {
         return "Entidades.Vehiculo[ id=" + id + " ]";
     }
-
+    */  
+    
+    @Override
+    public String toString() {
+        return marca + " " + linea + " " + modelo;
+    }
+    
     public Persona getPersona() {
         return persona;
     }

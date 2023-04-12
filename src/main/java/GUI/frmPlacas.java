@@ -4,19 +4,108 @@
  */
 package GUI;
 
+
+import DAO.IPlacaDAO;
+import DAO.IVehiculoDAO;
+
+import Entidades.Persona;
+import Entidades.Placa;
+import java.util.Iterator;
+import java.util.List;
+import Entidades.Vehiculo;
+import java.util.Date;
+import java.util.Random;
 import javax.swing.JOptionPane;
 
 /**
  *
- * @author oscar
+ * @author dany
  */
 public class frmPlacas extends javax.swing.JFrame {
-
-    /**
-     * Creates new form Placas
-     */
-    public frmPlacas() {
+    
+    private final IPlacaDAO placaDAO;
+    private final IVehiculoDAO vehiculoDAO;
+    private Persona persona; 
+    
+    
+   
+   /**
+    * Método constructor que inicializa los atributos
+    * @param placaDAO placaDAO
+    * @param vehiculoDAO vehiculoDAO
+     * @param persona persona
+    */
+    public frmPlacas(IPlacaDAO placaDAO, IVehiculoDAO vehiculoDAO, Persona persona) {
         initComponents();
+        this.placaDAO = placaDAO;
+        this.vehiculoDAO = vehiculoDAO;
+        this.persona=persona;
+        llenarCombo();
+    }
+    
+    
+    /**
+     * Metodo para llenar el comboBox con los vehiculos activos del cliente
+     */
+    public void llenarCombo(){
+        cbVehiculo.removeAllItems();
+        List<Vehiculo> llenaCb=vehiculoDAO.listaVehiculosCliente(persona);
+        if(llenaCb==null){
+           
+            
+        }else{
+            Iterator bonchan= llenaCb.iterator();
+            while(bonchan.hasNext()){
+                Vehiculo vehiculo=(Vehiculo)bonchan.next();
+                this.cbVehiculo.addItem(vehiculo.toString());
+            }
+        }
+    }
+    
+    public static String generarPlacaAleatoria(int longitud) {
+        // Lista de caracteres válidos para la placa
+        char[] caracteresValidos = "ABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789".toCharArray();
+
+        // Crear un objeto Random
+        Random rnd = new Random();
+
+        // Generar una placa de la longitud especificada
+        StringBuilder placa = new StringBuilder();
+        for (int i = 0; i < longitud; i++) {
+            placa.append(caracteresValidos[rnd.nextInt(caracteresValidos.length)]);
+        }
+
+        return placa.toString();
+    }
+
+    
+    /**
+     * Método que agrega la placa a la bd
+     */
+    public void agregar() {
+        
+        
+        Date fechaEmision = new Date();
+        Date fechaRecepcion = new Date();
+        
+        fechaRecepcion.setYear((fechaRecepcion.getYear()));
+        
+        float costo = 0;
+        String estado = "Vigentes";
+        
+        String p = generarPlacaAleatoria(10);
+        
+        Placa placa = new Placa(costo, p, estado, fechaRecepcion, fechaEmision, persona );
+        if (placaDAO.agregarPlaca(placa) == null) {
+            JOptionPane.showMessageDialog(this, "No se pudo registrar la placa");
+        } else {
+
+            JOptionPane.showMessageDialog(this, "Registro exitoso");
+            frmMenuPrincipal principal = new frmMenuPrincipal(persona);
+            principal.setVisible(true);
+            this.dispose();
+        }
+
     }
 
     /**
@@ -39,14 +128,19 @@ public class frmPlacas extends javax.swing.JFrame {
         getContentPane().setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
         cbVehiculo.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Seleccionar", " " }));
-        getContentPane().add(cbVehiculo, new org.netbeans.lib.awtextra.AbsoluteConstraints(139, 121, -1, -1));
+        cbVehiculo.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                cbVehiculoActionPerformed(evt);
+            }
+        });
+        getContentPane().add(cbVehiculo, new org.netbeans.lib.awtextra.AbsoluteConstraints(100, 100, 200, -1));
 
         jLabel1.setText("Vehiculo");
-        getContentPane().add(jLabel1, new org.netbeans.lib.awtextra.AbsoluteConstraints(81, 124, -1, -1));
+        getContentPane().add(jLabel1, new org.netbeans.lib.awtextra.AbsoluteConstraints(40, 100, -1, -1));
 
         jLabel2.setFont(new java.awt.Font("Segoe UI", 0, 18)); // NOI18N
         jLabel2.setText("Solicitar placas");
-        getContentPane().add(jLabel2, new org.netbeans.lib.awtextra.AbsoluteConstraints(130, 10, -1, -1));
+        getContentPane().add(jLabel2, new org.netbeans.lib.awtextra.AbsoluteConstraints(130, 30, -1, -1));
 
         btnRegresar.setText("Regresar");
         btnRegresar.addActionListener(new java.awt.event.ActionListener() {
@@ -54,7 +148,7 @@ public class frmPlacas extends javax.swing.JFrame {
                 btnRegresarActionPerformed(evt);
             }
         });
-        getContentPane().add(btnRegresar, new org.netbeans.lib.awtextra.AbsoluteConstraints(40, 236, -1, -1));
+        getContentPane().add(btnRegresar, new org.netbeans.lib.awtextra.AbsoluteConstraints(50, 180, -1, -1));
 
         btnCancelar.setText("Cancelar");
         btnCancelar.addActionListener(new java.awt.event.ActionListener() {
@@ -62,7 +156,7 @@ public class frmPlacas extends javax.swing.JFrame {
                 btnCancelarActionPerformed(evt);
             }
         });
-        getContentPane().add(btnCancelar, new org.netbeans.lib.awtextra.AbsoluteConstraints(156, 236, -1, -1));
+        getContentPane().add(btnCancelar, new org.netbeans.lib.awtextra.AbsoluteConstraints(160, 180, -1, -1));
 
         btnAceptar.setText("Aceptar");
         btnAceptar.addActionListener(new java.awt.event.ActionListener() {
@@ -70,7 +164,7 @@ public class frmPlacas extends javax.swing.JFrame {
                 btnAceptarActionPerformed(evt);
             }
         });
-        getContentPane().add(btnAceptar, new org.netbeans.lib.awtextra.AbsoluteConstraints(272, 236, -1, -1));
+        getContentPane().add(btnAceptar, new org.netbeans.lib.awtextra.AbsoluteConstraints(260, 180, -1, -1));
 
         pack();
         setLocationRelativeTo(null);
@@ -95,6 +189,10 @@ public class frmPlacas extends javax.swing.JFrame {
         principal.setVisible(true);
         this.dispose();
     }//GEN-LAST:event_btnAceptarActionPerformed
+
+    private void cbVehiculoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_cbVehiculoActionPerformed
+        
+    }//GEN-LAST:event_cbVehiculoActionPerformed
 
     /**
      * @param args the command line arguments
@@ -127,7 +225,7 @@ public class frmPlacas extends javax.swing.JFrame {
         /* Create and display the form */
         java.awt.EventQueue.invokeLater(new Runnable() {
             public void run() {
-                new frmPlacas().setVisible(true);
+                //new frmPlacas().setVisible(true);
             }
         });
     }

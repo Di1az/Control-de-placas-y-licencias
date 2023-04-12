@@ -282,11 +282,7 @@ public class frmVehiculo extends javax.swing.JFrame {
     private void txtModeloKeyTyped(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_txtModeloKeyTyped
         char c = evt.getKeyChar();
 
-        if ((c < '0' || c > '9') && (c < 'A') | c > 'Z') {
-            evt.consume();
-        }
-
-        if (txtNumero.getText().length() == 17) {
+        if (c < '0' || c > '9'){
             evt.consume();
         }
     }//GEN-LAST:event_txtModeloKeyTyped

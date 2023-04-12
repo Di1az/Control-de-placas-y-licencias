@@ -11,7 +11,7 @@ import javax.swing.JOptionPane;
 
 /**
  *
- * @author Usuario
+ * @author oscar
  */
 public class frmPersona extends javax.swing.JFrame {
 
@@ -258,7 +258,7 @@ public class frmPersona extends javax.swing.JFrame {
         
         if((c<'0' || c>'9') && (c<'A' )| c>'Z')evt.consume();
         
-        if(txtRFC.getText().length()==13){
+        if(txtRFC.getText().length()==12){
             evt.consume();
         }
     }//GEN-LAST:event_txtRFCKeyTyped

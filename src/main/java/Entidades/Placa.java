@@ -54,6 +54,15 @@ public class Placa extends Tramite implements Serializable {
         this.estado = estado;
       
     }
+
+    public Placa(float costo, String numeroPlaca, String estado, Date fechaRecepcion, Date fechaEmision, Persona persona) {
+        super(fechaRecepcion, fechaEmision, persona);
+        this.costo = costo;
+        this.numeroPlaca = numeroPlaca;
+        this.estado = estado;
+    }
+    
+    
     
     
     

@@ -8,9 +8,11 @@ import DAO.ConexionBD;
 import DAO.IConexionBD;
 import DAO.ILicenciaDAO;
 import DAO.IPersonaDAO;
+import DAO.IPlacaDAO;
 import DAO.IVehiculoDAO;
 import DAO.LicenciaDAO;
 import DAO.PersonaDAO;
+import DAO.PlacaDAO;
 import DAO.VehiculoDAO;
 import Entidades.Persona;
 import java.util.List;
@@ -178,10 +180,14 @@ public class frmMenuPrincipal extends javax.swing.JFrame {
     }//GEN-LAST:event_btnVehiculoActionPerformed
 
     private void btnPlacasActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnPlacasActionPerformed
-        // TODO add your handling code here:
-        frmPlacas placas= new frmPlacas();
+        if (encontrarPersona()) {
+        IConexionBD conexion = new ConexionBD();
+        IPlacaDAO placaDAO = new PlacaDAO(conexion);
+        IVehiculoDAO vehiculoDAO = new VehiculoDAO(conexion);
+        frmPlacas placas= new frmPlacas(placaDAO, vehiculoDAO, persona);
         placas.setVisible(true);
         this.dispose();
+        }
     }//GEN-LAST:event_btnPlacasActionPerformed
 
     private void btnLicenciaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnLicenciaActionPerformed
