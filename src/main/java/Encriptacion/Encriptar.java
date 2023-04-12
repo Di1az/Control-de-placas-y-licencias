@@ -36,4 +36,22 @@ public class Encriptar {
         }
         return null;
     }
+    
+    /**
+     * Metodo para desencriptar el nombre
+     * @param textoEncriptado textoEncript
+     * @return null o el nombre desencriptada dependiendo del caso
+     */
+    public String desencriptar(String textoEncriptado) {
+        try {
+            SecretKeySpec clave = new SecretKeySpec(CLAVE_SECRETA.getBytes(StandardCharsets.UTF_8), ALGORITMO);
+            Cipher cipher = Cipher.getInstance(ALGORITMO + "/" + MODO + "/" + PADDING);
+            cipher.init(Cipher.DECRYPT_MODE, clave);
+            byte[] textoDesencriptado = cipher.doFinal(Base64.getDecoder().decode(textoEncriptado));
+            return new String(textoDesencriptado, StandardCharsets.UTF_8);
+        } catch (Exception ex) {
+            ex.printStackTrace();
+        }
+        return null;
+    }
 }

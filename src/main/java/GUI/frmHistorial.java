@@ -4,17 +4,111 @@
  */
 package GUI;
 
+import DAO.IConexionBD;
+import DAO.IPersonaDAO;
+import DAO.PersonaDAO;
+import Entidades.Persona;
+import java.util.ArrayList;
+import java.util.List;
+import javax.swing.table.DefaultTableModel;
+
 /**
  *
  * @author oscar
  */
 public class frmHistorial extends javax.swing.JFrame {
 
+    private final IPersonaDAO personaDao;
+
     /**
      * Creates new form frmHistorial
      */
-    public frmHistorial() {
+    public frmHistorial(IPersonaDAO personaDao) {
         initComponents();
+        this.personaDao = personaDao;
+        llenarTabla();
+    }
+
+    public void llenarTabla() {
+        boolean nombreB = !(txtNombre.getText().isEmpty());
+        boolean rfcB = !(txtRFC.getText().isEmpty());
+        boolean fechaNB = txtFechaN.getDate() != null;
+        List<Persona> personasSimilares = new ArrayList<Persona>();
+        List<Persona> ListafechaN = new ArrayList<Persona>();
+        List<Persona> Listarfc = personaDao.listaPersonasRFC(this.txtRFC.getText());
+        List<Persona> ListaAuxiliarNombre = personaDao.listaPersona();
+        List<Persona> Listanombre = new ArrayList<Persona>();
+        for (int i = 0; i < ListaAuxiliarNombre.size(); i++) {
+            if (nombreB) {
+                String nombreCompleto=ListaAuxiliarNombre.get(i).getNombre()+" "+ListaAuxiliarNombre.get(i).getApellidoP()+" "+ListaAuxiliarNombre.get(i).getApellidoM();
+//                if (ListaAuxiliarNombre.get(i).getNombre().toLowerCase().contains(txtNombre.getText().toLowerCase())
+//                        || ListaAuxiliarNombre.get(i).getApellidoP().toLowerCase().contains(txtNombre.getText().toLowerCase())
+//                        || ListaAuxiliarNombre.get(i).getApellidoM().toLowerCase().contains(txtNombre.getText().toLowerCase())) {
+//                    Listanombre.add(ListaAuxiliarNombre.get(i));
+//                }
+            if(nombreCompleto.toLowerCase().contains(txtNombre.getText().toLowerCase())){
+                Listanombre.add(ListaAuxiliarNombre.get(i));
+            }
+
+            }
+        }
+
+        if (txtFechaN.getDate() != null) {
+            ListafechaN = personaDao.listaPersonasFechaN(txtFechaN.getDate());
+
+        }
+
+        if (nombreB && rfcB && fechaNB) {
+            for (Persona persona : Listanombre) {
+                if (Listarfc.contains(persona) && ListafechaN.contains(persona)) {
+                    personasSimilares.add(persona);
+                }
+
+            }
+        } else if (nombreB && rfcB && !fechaNB) {
+            for (Persona persona : Listanombre) {
+                if (Listarfc.contains(persona)) {
+                    personasSimilares.add(persona);
+                }
+
+            }
+        } else if (nombreB && !rfcB && fechaNB) {
+            for (Persona persona : Listanombre) {
+                if (ListafechaN.contains(persona)) {
+                    personasSimilares.add(persona);
+                }
+            }
+        } else if (nombreB && !rfcB && !fechaNB) {
+
+            personasSimilares = Listanombre;
+
+        } else if (!nombreB && rfcB && fechaNB) {
+            for (Persona persona : ListafechaN) {
+                if (Listarfc.contains(persona)) {
+                    personasSimilares.add(persona);
+                }
+
+            }
+        } else if (!nombreB && rfcB && !fechaNB) {
+
+            personasSimilares = Listarfc;
+        } else if (!nombreB && !rfcB && fechaNB) {
+
+            personasSimilares = ListafechaN;
+        } else {
+            personasSimilares = personaDao.listaPersona();
+        }
+
+        DefaultTableModel modelo = (DefaultTableModel) tblHistorial.getModel();
+        modelo.setRowCount(0);
+        for (int i = 0; i < personasSimilares.size(); i++) {
+            Object[] datos = new Object[modelo.getColumnCount()];
+            datos[0] = personasSimilares.get(i).getNombre() + " " + personasSimilares.get(i).getApellidoP() + " " + personasSimilares.get(i).getApellidoM();
+            datos[1] = personasSimilares.get(i).getRfc();
+            datos[2] = personasSimilares.get(i).getFechaN();
+            modelo.addRow(datos);
+        }
+
     }
 
     /**
@@ -33,28 +127,28 @@ public class frmHistorial extends javax.swing.JFrame {
         btnRegresar = new javax.swing.JButton();
         btnAceptar = new javax.swing.JButton();
         jLabel2 = new javax.swing.JLabel();
-        jTextField1 = new javax.swing.JTextField();
+        txtNombre = new javax.swing.JTextField();
         jLabel3 = new javax.swing.JLabel();
-        jTextField2 = new javax.swing.JTextField();
+        txtRFC = new javax.swing.JTextField();
         jLabel4 = new javax.swing.JLabel();
-        jDateChooser1 = new com.toedter.calendar.JDateChooser();
+        txtFechaN = new com.toedter.calendar.JDateChooser();
 
         jToggleButton1.setText("jToggleButton1");
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
-        jLabel1.setText("Consultas");
         jLabel1.setFont(new java.awt.Font("Segoe UI", 0, 18)); // NOI18N
+        jLabel1.setText("Consultas");
 
         tblHistorial.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
-                {null, null, null, null},
-                {null, null, null, null},
-                {null, null, null, null},
-                {null, null, null, null}
+                {null, null, null},
+                {null, null, null},
+                {null, null, null},
+                {null, null, null}
             },
             new String [] {
-                "Title 1", "Title 2", "Title 3", "Title 4"
+                "Nombre", "RFC", "Fecha de nacimiento"
             }
         ));
         jScrollPane1.setViewportView(tblHistorial);
@@ -75,7 +169,19 @@ public class frmHistorial extends javax.swing.JFrame {
 
         jLabel2.setText("Nombre");
 
+        txtNombre.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyTyped(java.awt.event.KeyEvent evt) {
+                txtNombreKeyTyped(evt);
+            }
+        });
+
         jLabel3.setText("RFC");
+
+        txtRFC.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyTyped(java.awt.event.KeyEvent evt) {
+                txtRFCKeyTyped(evt);
+            }
+        });
 
         jLabel4.setText("Fecha nacimiento");
 
@@ -98,19 +204,19 @@ public class frmHistorial extends javax.swing.JFrame {
                         .addGap(18, 18, 18)
                         .addComponent(jLabel2)
                         .addGap(18, 18, 18)
-                        .addComponent(jTextField1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addComponent(txtNombre, javax.swing.GroupLayout.PREFERRED_SIZE, 76, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addGap(18, 18, 18)
                         .addComponent(jLabel3)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(jTextField2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGap(18, 18, 18)
+                        .addComponent(txtRFC, javax.swing.GroupLayout.PREFERRED_SIZE, 70, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                         .addComponent(jLabel4)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(jDateChooser1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                        .addComponent(txtFechaN, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                     .addGroup(layout.createSequentialGroup()
                         .addGap(53, 53, 53)
                         .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 375, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                .addGap(0, 25, Short.MAX_VALUE))
+                .addGap(0, 33, Short.MAX_VALUE))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -121,11 +227,11 @@ public class frmHistorial extends javax.swing.JFrame {
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                         .addComponent(jLabel2)
-                        .addComponent(jTextField1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addComponent(txtNombre, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addComponent(jLabel3)
-                        .addComponent(jTextField2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addComponent(txtRFC, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addComponent(jLabel4))
-                    .addComponent(jDateChooser1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(txtFechaN, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addGap(18, 18, 18)
                 .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 275, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(18, 18, 18)
@@ -141,17 +247,28 @@ public class frmHistorial extends javax.swing.JFrame {
 
     private void btnRegresarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnRegresarActionPerformed
         // TODO add your handling code here:
-        frmMenuPrincipal principal= new frmMenuPrincipal();
+        frmMenuPrincipal principal = new frmMenuPrincipal();
         principal.setVisible(true);
         this.dispose();
     }//GEN-LAST:event_btnRegresarActionPerformed
 
     private void btnAceptarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnAceptarActionPerformed
         // TODO add your handling code here:
-        frmMenuPrincipal principal= new frmMenuPrincipal();
-        principal.setVisible(true);
-        this.dispose();
+//        frmMenuPrincipal principal= new frmMenuPrincipal();
+//        principal.setVisible(true);
+//        this.dispose();
+        llenarTabla();
     }//GEN-LAST:event_btnAceptarActionPerformed
+
+    private void txtNombreKeyTyped(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_txtNombreKeyTyped
+        // TODO add your handling code here:
+        llenarTabla();
+    }//GEN-LAST:event_txtNombreKeyTyped
+
+    private void txtRFCKeyTyped(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_txtRFCKeyTyped
+        // TODO add your handling code here:
+        llenarTabla();
+    }//GEN-LAST:event_txtRFCKeyTyped
 
     /**
      * @param args the command line arguments
@@ -183,7 +300,7 @@ public class frmHistorial extends javax.swing.JFrame {
         /* Create and display the form */
         java.awt.EventQueue.invokeLater(new Runnable() {
             public void run() {
-                new frmHistorial().setVisible(true);
+                //new frmHistorial().setVisible(true);
             }
         });
     }
@@ -191,15 +308,15 @@ public class frmHistorial extends javax.swing.JFrame {
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton btnAceptar;
     private javax.swing.JButton btnRegresar;
-    private com.toedter.calendar.JDateChooser jDateChooser1;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel3;
     private javax.swing.JLabel jLabel4;
     private javax.swing.JScrollPane jScrollPane1;
-    private javax.swing.JTextField jTextField1;
-    private javax.swing.JTextField jTextField2;
     private javax.swing.JToggleButton jToggleButton1;
     private javax.swing.JTable tblHistorial;
+    private com.toedter.calendar.JDateChooser txtFechaN;
+    private javax.swing.JTextField txtNombre;
+    private javax.swing.JTextField txtRFC;
     // End of variables declaration//GEN-END:variables
 }

@@ -16,6 +16,8 @@ import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.OneToMany;
 import javax.persistence.Table;
+import javax.persistence.Temporal;
+import javax.persistence.TemporalType;
 
 /**
  *
@@ -45,22 +47,23 @@ public class Persona implements Serializable {
     @Column(name = "Telefono")
     private String telefono;
 
+    @Temporal(TemporalType.DATE)
     @Column(name = "Fecha_Nacimiento")
     private Date fechaN;
-    
+
     @Column(name = "Discapacidad")
     private boolean discapacidad;
 
-    @OneToMany (mappedBy="Persona")
+    @OneToMany(mappedBy = "Persona")
     private List<Vehiculo> vehiculos;
-    
-    @OneToMany (mappedBy="Persona")
+
+    @OneToMany(mappedBy = "Persona")
     private List<Tramite> tramite;
-    
+
     public Persona() {
     }
 
-    public Persona(Integer id, String rfc, String nombre, String apellidoP, String apellidoM, String telefono, Date fechaN, boolean discapacidad, List<Vehiculo> vehiculos,  List<Tramite> tramite) {
+    public Persona(Integer id, String rfc, String nombre, String apellidoP, String apellidoM, String telefono, Date fechaN, boolean discapacidad, List<Vehiculo> vehiculos, List<Tramite> tramite) {
         this.id = id;
         this.rfc = rfc;
         this.nombre = nombre;
@@ -70,10 +73,10 @@ public class Persona implements Serializable {
         this.fechaN = fechaN;
         this.discapacidad = discapacidad;
         this.vehiculos = vehiculos;
-        this.tramite= tramite;
+        this.tramite = tramite;
     }
 
-    public Persona(String rfc, String nombre, String apellidoP, String apellidoM, String telefono, Date fechaN, boolean discapacidad, List<Vehiculo> vehiculos,  List<Tramite> tramite) {
+    public Persona(String rfc, String nombre, String apellidoP, String apellidoM, String telefono, Date fechaN, boolean discapacidad, List<Vehiculo> vehiculos, List<Tramite> tramite) {
         this.rfc = rfc;
         this.nombre = nombre;
         this.apellidoP = apellidoP;
@@ -82,8 +85,9 @@ public class Persona implements Serializable {
         this.fechaN = fechaN;
         this.discapacidad = discapacidad;
         this.vehiculos = vehiculos;
-        this.tramite= tramite;
+        this.tramite = tramite;
     }
+
     public Persona(String rfc, String nombre, String apellidoP, String apellidoM, String telefono, Date fechaN, boolean discapacidad) {
         this.rfc = rfc;
         this.nombre = nombre;
@@ -92,12 +96,10 @@ public class Persona implements Serializable {
         this.telefono = telefono;
         this.fechaN = fechaN;
         this.discapacidad = discapacidad;
-        this.vehiculos= new ArrayList<>();
-        this.tramite= new ArrayList<>();
+        this.vehiculos = new ArrayList<>();
+        this.tramite = new ArrayList<>();
     }
 
-    
-   
     public Integer getId() {
         return id;
     }
@@ -105,11 +107,7 @@ public class Persona implements Serializable {
     public void setId(Integer id) {
         this.id = id;
     }
-    
-    
-    
 
-    
     @Override
     public int hashCode() {
         int hash = 0;

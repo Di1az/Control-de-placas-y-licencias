@@ -209,7 +209,9 @@ public class frmMenuPrincipal extends javax.swing.JFrame {
 
     private void btnHistorialActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnHistorialActionPerformed
         // TODO add your handling code here:
-        frmHistorial historial= new frmHistorial();
+        IConexionBD conexion=new ConexionBD();
+        IPersonaDAO personaDAO= new PersonaDAO(conexion);
+        frmHistorial historial= new frmHistorial(personaDAO);
         historial.setVisible(true);
         this.dispose();
     }//GEN-LAST:event_btnHistorialActionPerformed
