@@ -170,16 +170,16 @@ public class frmHistorial extends javax.swing.JFrame {
         jLabel2.setText("Nombre");
 
         txtNombre.addKeyListener(new java.awt.event.KeyAdapter() {
-            public void keyTyped(java.awt.event.KeyEvent evt) {
-                txtNombreKeyTyped(evt);
+            public void keyReleased(java.awt.event.KeyEvent evt) {
+                txtNombreKeyReleased(evt);
             }
         });
 
         jLabel3.setText("RFC");
 
         txtRFC.addKeyListener(new java.awt.event.KeyAdapter() {
-            public void keyTyped(java.awt.event.KeyEvent evt) {
-                txtRFCKeyTyped(evt);
+            public void keyReleased(java.awt.event.KeyEvent evt) {
+                txtRFCKeyReleased(evt);
             }
         });
 
@@ -260,15 +260,13 @@ public class frmHistorial extends javax.swing.JFrame {
         llenarTabla();
     }//GEN-LAST:event_btnAceptarActionPerformed
 
-    private void txtNombreKeyTyped(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_txtNombreKeyTyped
-        // TODO add your handling code here:
-        llenarTabla();
-    }//GEN-LAST:event_txtNombreKeyTyped
+    private void txtNombreKeyReleased(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_txtNombreKeyReleased
+         llenarTabla();
+    }//GEN-LAST:event_txtNombreKeyReleased
 
-    private void txtRFCKeyTyped(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_txtRFCKeyTyped
-        // TODO add your handling code here:
-        llenarTabla();
-    }//GEN-LAST:event_txtRFCKeyTyped
+    private void txtRFCKeyReleased(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_txtRFCKeyReleased
+         llenarTabla();
+    }//GEN-LAST:event_txtRFCKeyReleased
 
     /**
      * @param args the command line arguments

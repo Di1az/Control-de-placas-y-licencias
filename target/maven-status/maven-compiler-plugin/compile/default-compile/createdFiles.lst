@@ -3,6 +3,7 @@ DAO\VehiculoDAO.class
 GUI\frmMenuPrincipal.class
 GUI\frmPlacas$2.class
 DAO\ConexionBD.class
+GUI\frmHistorial$5.class
 GUI\frmPersona$2.class
 Entidades\Persona.class
 GUI\frmReporte$3.class
@@ -66,6 +67,7 @@ GUI\frmMenuPrincipal$4.class
 GUI\frmPlacas$3.class
 GUI\frmHistorial$1.class
 GUI\frmVehiculo$7.class
+GUI\frmHistorial$4.class
 GUI\frmPersona$10.class
 GUI\frmPlacas.class
 DAO\IPlacaDAO.class
