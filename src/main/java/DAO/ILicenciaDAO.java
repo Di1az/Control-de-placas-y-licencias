@@ -26,4 +26,11 @@ public interface ILicenciaDAO {
      * @return lista de licencias
      */
     public List <Licencia> listaLicencia();
+    
+    /**
+     * 
+     * @param rfc
+     * @return 
+     */
+    public List<Licencia> listarLicenciaVigentesPersona(String rfc);
 }

@@ -58,7 +58,7 @@ public class frmPlacas extends javax.swing.JFrame {
             Iterator bonchan= llenaCb.iterator();
             while(bonchan.hasNext()){
                 Vehiculo vehiculo=(Vehiculo)bonchan.next();
-                this.cbVehiculo.addItem(vehiculo.toString());
+                this.cbVehiculo.addItem(vehiculo);
             }
         }
     }
@@ -109,7 +109,14 @@ public class frmPlacas extends javax.swing.JFrame {
         
         String p = generarPlacaAleatoria(10);
         
-        Placa placa = new Placa(calcularPrecio(vehiculo), p, estado, vehiculo, fechaRecepcion, fechaEmision);
+        if(cbVehiculo.getSelectedItem()==null){
+            JOptionPane.showMessageDialog(this, "No tiene vehiculos");
+            return;
+        }else{
+            vehiculo=(Vehiculo) cbVehiculo.getSelectedItem();
+        }
+        
+        Placa placa = new Placa(calcularPrecio(vehiculo), p, estado, vehiculo, fechaRecepcion, fechaEmision, persona);
         if (placaDAO.agregarPlaca(placa) == null) {
             JOptionPane.showMessageDialog(this, "No se pudo registrar la placa");
         } else {
@@ -131,23 +138,15 @@ public class frmPlacas extends javax.swing.JFrame {
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
 
-        cbVehiculo = new javax.swing.JComboBox<>();
         jLabel1 = new javax.swing.JLabel();
         jLabel2 = new javax.swing.JLabel();
         btnRegresar = new javax.swing.JButton();
         btnCancelar = new javax.swing.JButton();
         btnAceptar = new javax.swing.JButton();
+        cbVehiculo = new javax.swing.JComboBox<>();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         getContentPane().setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
-
-        cbVehiculo.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Seleccionar", " " }));
-        cbVehiculo.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                cbVehiculoActionPerformed(evt);
-            }
-        });
-        getContentPane().add(cbVehiculo, new org.netbeans.lib.awtextra.AbsoluteConstraints(100, 100, 200, -1));
 
         jLabel1.setText("Vehiculo");
         getContentPane().add(jLabel1, new org.netbeans.lib.awtextra.AbsoluteConstraints(40, 100, -1, -1));
@@ -180,6 +179,8 @@ public class frmPlacas extends javax.swing.JFrame {
         });
         getContentPane().add(btnAceptar, new org.netbeans.lib.awtextra.AbsoluteConstraints(260, 180, -1, -1));
 
+        getContentPane().add(cbVehiculo, new org.netbeans.lib.awtextra.AbsoluteConstraints(110, 100, 180, -1));
+
         pack();
         setLocationRelativeTo(null);
     }// </editor-fold>//GEN-END:initComponents
@@ -204,10 +205,6 @@ public class frmPlacas extends javax.swing.JFrame {
         this.dispose();*/
         this.agregar();
     }//GEN-LAST:event_btnAceptarActionPerformed
-
-    private void cbVehiculoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_cbVehiculoActionPerformed
-        
-    }//GEN-LAST:event_cbVehiculoActionPerformed
 
     /**
      * @param args the command line arguments
@@ -249,7 +246,7 @@ public class frmPlacas extends javax.swing.JFrame {
     private javax.swing.JButton btnAceptar;
     private javax.swing.JButton btnCancelar;
     private javax.swing.JButton btnRegresar;
-    private javax.swing.JComboBox<String> cbVehiculo;
+    private javax.swing.JComboBox<Vehiculo> cbVehiculo;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;
     // End of variables declaration//GEN-END:variables

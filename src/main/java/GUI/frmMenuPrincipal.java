@@ -14,6 +14,7 @@ import DAO.LicenciaDAO;
 import DAO.PersonaDAO;
 import DAO.PlacaDAO;
 import DAO.VehiculoDAO;
+import Entidades.Licencia;
 import Entidades.Persona;
 import Entidades.Vehiculo;
 import java.util.List;
@@ -60,6 +61,20 @@ public class frmMenuPrincipal extends javax.swing.JFrame {
         else{
             return true;
         }
+        
+    }
+    
+    public boolean verificarLista(){
+        IConexionBD conexion=new ConexionBD();
+        ILicenciaDAO lic = new LicenciaDAO(conexion);
+        List<Licencia> licencia = lic.listarLicenciaVigentesPersona(persona.getRfc());
+        
+        if(licencia.isEmpty()){
+            JOptionPane.showMessageDialog(this, "La persona no cuenta con una licencia vigente");
+            return false;
+        
+        }
+        return true;
         
     }
     
@@ -187,6 +202,9 @@ public class frmMenuPrincipal extends javax.swing.JFrame {
      */
     private void btnPlacasActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnPlacasActionPerformed
         if (encontrarPersona()) {
+            if(!verificarLista()){
+                return;
+            }
         IConexionBD conexion = new ConexionBD();
         IPlacaDAO placaDAO = new PlacaDAO(conexion);
         IVehiculoDAO vehiculoDAO = new VehiculoDAO(conexion);
@@ -194,6 +212,7 @@ public class frmMenuPrincipal extends javax.swing.JFrame {
         placas.setVisible(true);
         this.dispose();
         }
+        
     }//GEN-LAST:event_btnPlacasActionPerformed
 
     private void btnLicenciaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnLicenciaActionPerformed

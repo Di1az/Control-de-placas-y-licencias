@@ -8,6 +8,7 @@ package DAO;
 import Entidades.Licencia;
 import java.util.List;
 import javax.persistence.EntityManager;
+import javax.persistence.TypedQuery;
 
 /**
  * Clase que implementa la interfaz ILicenciaDAO
@@ -45,6 +46,22 @@ public class LicenciaDAO implements ILicenciaDAO{
     @Override
     public List<Licencia> listaLicencia() {
         throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+    }
+
+    @Override
+    public List<Licencia> listarLicenciaVigentesPersona(String rfc) {
+        EntityManager em = conexionBD.Conexion();
+        try {
+            em.getTransaction().begin();
+            String jpql = "SELECT l FROM Licencia l WHERE l.persona.rfc = :rfc AND l.fechaRecepcion > CURRENT_DATE";
+            TypedQuery<Licencia> query = em.createQuery(jpql, Licencia.class);
+            query.setParameter("rfc", rfc);
+            List<Licencia> licencia = query.getResultList();
+            em.getTransaction().commit();
+            return licencia;
+        } catch (Exception e) {
+            return null;
+        }
     }
     
     
