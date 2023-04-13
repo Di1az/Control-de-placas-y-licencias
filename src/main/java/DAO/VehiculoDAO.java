@@ -78,6 +78,22 @@ public class VehiculoDAO implements IVehiculoDAO {
             return null;
         }
     }
+
+    @Override
+    public Vehiculo buscarVehiculo(int id) {
+        EntityManager em = conexionBD.Conexion();
+        try {
+            em.getTransaction().begin();
+            String jpql = "SELECT v FROM Vehiculo v WHERE v.id = :id ";
+            TypedQuery<Vehiculo> query = em.createQuery(jpql, Vehiculo.class);
+            query.setParameter("id", id);
+            Vehiculo vehiculo = query.getSingleResult();
+            em.getTransaction().commit();
+            return vehiculo;
+        } catch (Exception e) {
+            return null;
+        }
+    }
 }
     
 

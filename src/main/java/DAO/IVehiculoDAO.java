@@ -34,4 +34,11 @@ public interface IVehiculoDAO {
       * @return regresa la lista con las cuentas agregadas
       */
      public List<Vehiculo> listaVehiculosCliente(Persona persona);
+     
+     /**
+      * Metodo que se encarga de buscar un vehiculo
+      * @param vehiculo
+      * @return 
+      */
+     public Vehiculo buscarVehiculo(int id);
 }
