@@ -33,6 +33,10 @@ public class frmReporte extends javax.swing.JFrame {
         llenarTramites();
     }
 
+    /**
+     * Metodo que se encarga de llenar la tabla de tramite 
+     * dependiendo del filtro que el usuario utilice
+     */
     public void llenarTramites() {
         System.out.println(cbLicencia.isSelected());
         System.out.println(cbPlaca.isSelected());
@@ -76,6 +80,14 @@ public class frmReporte extends javax.swing.JFrame {
         }
     }
 
+    /**
+     * Metodo que se encaega de regresar una lista
+     * de tramite con el nombre de la persona
+     * desencriptado
+     * @param lista
+     * @return Lista de tramite con el nombre de la persona
+     * desencriptado
+     */
     public List<Tramite> desencriptarListaTramite(List<Tramite> lista) {
         Encriptar encriptacion = new Encriptar();
         List<Persona> personasDesencriptadas = new ArrayList<>();
@@ -205,6 +217,10 @@ public class frmReporte extends javax.swing.JFrame {
         setLocationRelativeTo(null);
     }// </editor-fold>//GEN-END:initComponents
 
+    /**
+     * Metodo que se encarga de regresar al menu principal
+     * @param evt 
+     */
     private void btnRegresarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnRegresarActionPerformed
         // TODO add your handling code here:
         frmMenuPrincipal principal = new frmMenuPrincipal();
@@ -212,21 +228,41 @@ public class frmReporte extends javax.swing.JFrame {
         this.dispose();
     }//GEN-LAST:event_btnRegresarActionPerformed
 
+    /**
+     * Metodo que se encarga de aceptar los filtros
+     * que el usuario desea utilizar
+     * @param evt 
+     */
     private void btnAceptarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnAceptarActionPerformed
         // TODO add your handling code here:
         this.llenarTramites();
     }//GEN-LAST:event_btnAceptarActionPerformed
 
+    /**
+     * Metodo que se encarga de mostrar la tabla si el
+     * check button de placa se encuentra seleccionado
+     * @param evt 
+     */
     private void cbPlacaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_cbPlacaActionPerformed
         // TODO add your handling code here:
         llenarTramites();
     }//GEN-LAST:event_cbPlacaActionPerformed
 
+     /**
+     * Metodo que se encarga de mostrar la tabla si el
+     * check button de placa se encuentra seleccionado
+     * @param evt 
+     */
     private void cbLicenciaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_cbLicenciaActionPerformed
         // TODO add your handling code here:
         llenarTramites();
     }//GEN-LAST:event_cbLicenciaActionPerformed
 
+    /**
+     * Metodo para que mientras vayas escribiendo en un txt
+     * se vaya llenando la tabla
+     * @param evt 
+     */
     private void txtNombreKeyReleased(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_txtNombreKeyReleased
         // TODO add your handling code here:
         llenarTramites();

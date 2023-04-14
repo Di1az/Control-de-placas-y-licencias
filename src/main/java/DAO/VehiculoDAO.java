@@ -79,6 +79,12 @@ public class VehiculoDAO implements IVehiculoDAO {
         }
     }
 
+    /**
+     * Metodo que se encarga de devolver un vehiculo
+     * dependiendo del id ingresado en el parametro
+     * @param id
+     * @return vehiculo
+     */
     @Override
     public Vehiculo buscarVehiculo(int id) {
         EntityManager em = conexionBD.Conexion();

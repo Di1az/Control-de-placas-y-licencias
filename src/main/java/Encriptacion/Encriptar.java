@@ -14,6 +14,9 @@ import javax.crypto.spec.SecretKeySpec;
  * @author oscar
  */
 public class Encriptar {
+    /**
+     * Variables para la encriptacion
+     */
     private static final  String  ALGORITMO = "AES";
     private static final String MODO = "ECB";
     private static final String PADDING = "PKCS5Padding";

@@ -4,9 +4,7 @@
  */
 package GUI;
 
-import DAO.IConexionBD;
 import DAO.IPersonaDAO;
-import DAO.PersonaDAO;
 import Entidades.Persona;
 import java.util.ArrayList;
 import java.util.List;
@@ -17,7 +15,7 @@ import javax.swing.table.DefaultTableModel;
  * @author oscar
  */
 public class frmHistorial extends javax.swing.JFrame {
-
+    //Variable de tipo IPersonaDAO
     private final IPersonaDAO personaDao;
 
     /**
@@ -29,6 +27,10 @@ public class frmHistorial extends javax.swing.JFrame {
         llenarTabla();
     }
 
+    /**
+     * Metodo que se encarga de llenar la tabla
+     * dependiendo del filtro que el usuario utilice
+     */
     public void llenarTabla() {
         boolean nombreB = !(txtNombre.getText().isEmpty());
         boolean rfcB = !(txtRFC.getText().isEmpty());
@@ -241,6 +243,10 @@ public class frmHistorial extends javax.swing.JFrame {
         setLocationRelativeTo(null);
     }// </editor-fold>//GEN-END:initComponents
 
+    /**
+     * Metodo que se encarga de regresar al menu principal
+     * @param evt 
+     */
     private void btnRegresarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnRegresarActionPerformed
         // TODO add your handling code here:
         frmMenuPrincipal principal = new frmMenuPrincipal();
@@ -248,6 +254,11 @@ public class frmHistorial extends javax.swing.JFrame {
         this.dispose();
     }//GEN-LAST:event_btnRegresarActionPerformed
 
+     /**
+     * Metodo que se encarga de aceptar los filtros
+     * que el usuario desea utilizar
+     * @param evt 
+     */
     private void btnAceptarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnAceptarActionPerformed
         // TODO add your handling code here:
 //        frmMenuPrincipal principal= new frmMenuPrincipal();
@@ -256,10 +267,20 @@ public class frmHistorial extends javax.swing.JFrame {
         llenarTabla();
     }//GEN-LAST:event_btnAceptarActionPerformed
 
+    /**
+     * Metodo para que mientras vayas escribiendo en un txt
+     * se vaya llenando la tabla
+     * @param evt 
+     */
     private void txtNombreKeyReleased(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_txtNombreKeyReleased
          llenarTabla();
     }//GEN-LAST:event_txtNombreKeyReleased
 
+     /**
+     * Metodo para que mientras vayas escribiendo en un txt
+     * se vaya llenando la tabla
+     * @param evt 
+     */
     private void txtRFCKeyReleased(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_txtRFCKeyReleased
          llenarTabla();
     }//GEN-LAST:event_txtRFCKeyReleased

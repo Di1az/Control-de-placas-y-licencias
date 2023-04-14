@@ -29,6 +29,11 @@ public class LicenciaDAO implements ILicenciaDAO{
         this.conexionBD = conexionBD;
     }
 
+    /**
+     * Metodo que se encarga de insertar licencia
+     * @param licencia
+     * @return licencia
+     */
     @Override
     public Licencia agregarLicencia(Licencia licencia) {
        EntityManager em = conexionBD.Conexion();
@@ -43,11 +48,22 @@ public class LicenciaDAO implements ILicenciaDAO{
         }
     }
 
+    /**
+     * Metodo que regresa una lista con
+     * todas las licecias registradas
+     * @return 
+     */
     @Override
     public List<Licencia> listaLicencia() {
         throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
     }
 
+    /**
+     * Metodo que se encarga de regresar una lista de licencias
+     * dependiendo del rfc recibido en el parametro
+     * @param rfc
+     * @return 
+     */
     @Override
     public List<Licencia> listarLicenciaVigentesPersona(String rfc) {
         EntityManager em = conexionBD.Conexion();
