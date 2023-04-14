@@ -41,11 +41,7 @@ public class frmHistorial extends javax.swing.JFrame {
         for (int i = 0; i < ListaAuxiliarNombre.size(); i++) {
             if (nombreB) {
                 String nombreCompleto=ListaAuxiliarNombre.get(i).getNombre()+" "+ListaAuxiliarNombre.get(i).getApellidoP()+" "+ListaAuxiliarNombre.get(i).getApellidoM();
-//                if (ListaAuxiliarNombre.get(i).getNombre().toLowerCase().contains(txtNombre.getText().toLowerCase())
-//                        || ListaAuxiliarNombre.get(i).getApellidoP().toLowerCase().contains(txtNombre.getText().toLowerCase())
-//                        || ListaAuxiliarNombre.get(i).getApellidoM().toLowerCase().contains(txtNombre.getText().toLowerCase())) {
-//                    Listanombre.add(ListaAuxiliarNombre.get(i));
-//                }
+                
             if(nombreCompleto.toLowerCase().contains(txtNombre.getText().toLowerCase())){
                 Listanombre.add(ListaAuxiliarNombre.get(i));
             }

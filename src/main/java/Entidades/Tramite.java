@@ -9,6 +9,7 @@ import java.io.Serializable;
 import java.util.Date;
 import javax.persistence.Basic;
 import javax.persistence.Column;
+import javax.persistence.DiscriminatorColumn;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
@@ -27,8 +28,9 @@ import javax.persistence.TemporalType;
  */
 @Entity
 @Table(name = "Tramite")
-@Inheritance(strategy = InheritanceType.TABLE_PER_CLASS)
-public abstract class Tramite implements Serializable {
+@DiscriminatorColumn(name="Tipo_Tramite")
+@Inheritance(strategy = InheritanceType.JOINED)
+public class Tramite implements Serializable {
 
     
     @Id

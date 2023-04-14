@@ -10,6 +10,7 @@ import java.util.Date;
 import javax.persistence.Basic;
 import javax.persistence.CascadeType;
 import javax.persistence.Column;
+import javax.persistence.DiscriminatorValue;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
@@ -25,12 +26,10 @@ import javax.persistence.Table;
  */
 @Entity 
 @Table(name="Placas")
+@DiscriminatorValue(value="Placa")
 public class Placa extends Tramite implements Serializable {
 
-    @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
-    @Column(name="Id_placa")
-    private Integer id;
+    
     
     @Column(name="Costo")
     private float costo;
@@ -48,8 +47,8 @@ public class Placa extends Tramite implements Serializable {
     public Placa() {
     }
 
-    public Placa(Integer id, float costo, String numeroPlaca, String estado) {
-        this.id = id;
+    public Placa(float costo, String numeroPlaca, String estado) {
+        
         this.costo = costo;
         this.numeroPlaca = numeroPlaca;
         this.estado = estado;
@@ -108,37 +107,9 @@ public class Placa extends Tramite implements Serializable {
     }
     
     
-    public Integer getId() {
-        return id;
-    }
+   
+    
 
-    public void setId(Integer id) {
-        this.id = id;
-    }
-
-    @Override
-    public int hashCode() {
-        int hash = 0;
-        hash += (id != null ? id.hashCode() : 0);
-        return hash;
-    }
-
-    @Override
-    public boolean equals(Object object) {
-        // TODO: Warning - this method won't work in the case the id fields are not set
-        if (!(object instanceof Placa)) {
-            return false;
-        }
-        Placa other = (Placa) object;
-        if ((this.id == null && other.id != null) || (this.id != null && !this.id.equals(other.id))) {
-            return false;
-        }
-        return true;
-    }
-
-    @Override
-    public String toString() {
-        return "Entidades.Placa[ id=" + id + " ]";
-    }
+   
     
 }

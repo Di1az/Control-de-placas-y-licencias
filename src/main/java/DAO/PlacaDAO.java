@@ -8,6 +8,7 @@ package DAO;
 import Entidades.Placa;
 import java.util.List;
 import javax.persistence.EntityManager;
+import javax.persistence.TypedQuery;
 
 /**
  * Clase que implementa la interfaz IPlacaDAO
@@ -28,6 +29,11 @@ public class PlacaDAO implements IPlacaDAO {
         this.conexionBD = conexionBD;
     }
  
+    /**
+     * 
+     * @param placa
+     * @return 
+     */
     @Override
     public Placa agregarPlaca(Placa placa) {
         EntityManager em = conexionBD.Conexion();
@@ -44,7 +50,19 @@ public class PlacaDAO implements IPlacaDAO {
 
     @Override
     public List<Placa> listaPlaca() {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+        EntityManager em = conexionBD.Conexion();
+        try {
+            em.getTransaction().begin();
+            String jpql = "SELECT p FROM Persona p ";
+            TypedQuery<Placa> query = em.createQuery(jpql, Placa.class);
+            List<Placa> listaPlacas = query.getResultList();
+            em.getTransaction().commit();
+            
+            
+            return listaPlacas;
+        } catch (Exception e) {
+            return null;
+        }
     }
     
 }
