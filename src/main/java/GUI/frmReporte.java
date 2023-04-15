@@ -6,15 +6,29 @@ package GUI;
 
 import DAO.ConexionBD;
 import DAO.IConexionBD;
+import DAO.Reporte;
 import DAO.TramiteDAO;
 import Encriptacion.Encriptar;
 import Entidades.Licencia;
 import Entidades.Persona;
 import Entidades.Placa;
 import Entidades.Tramite;
+import java.io.InputStream;
+import java.time.LocalDateTime;
+import java.time.format.DateTimeFormatter;
 import java.util.ArrayList;
+import java.util.Date;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
+import javax.swing.JOptionPane;
 import javax.swing.table.DefaultTableModel;
+import net.sf.jasperreports.engine.JasperCompileManager;
+import net.sf.jasperreports.engine.JasperExportManager;
+import net.sf.jasperreports.engine.JasperFillManager;
+import net.sf.jasperreports.engine.JasperPrint;
+import net.sf.jasperreports.engine.JasperReport;
+import net.sf.jasperreports.engine.data.JRBeanCollectionDataSource;
 
 /**
  *
@@ -26,67 +40,72 @@ public class frmReporte extends javax.swing.JFrame {
     TramiteDAO tramiteDAO = new TramiteDAO(conexionBD);
 
     /**
+     * Atributo para mantener siempre la lista
+     */
+    private List<Tramite> listaTabla;
+
+    /**
      * Creates new form Reporte
      */
     public frmReporte() {
         initComponents();
+        this.listaTabla = new ArrayList<Tramite>();
         llenarTramites();
     }
 
     /**
-     * Metodo que se encarga de llenar la tabla de tramite 
-     * dependiendo del filtro que el usuario utilice
+     * Metodo que se encarga de llenar la tabla de tramite dependiendo del
+     * filtro que el usuario utilice
      */
     public void llenarTramites() {
         System.out.println(cbLicencia.isSelected());
         System.out.println(cbPlaca.isSelected());
-        List<Tramite> tramite = tramiteDAO.ListaTramite(cbLicencia.isSelected(), cbPlaca.isSelected(), this.txtFecha_inicio.getDate(), this.txtFecha_fin.getDate());
-        tramite = desencriptarListaTramite(tramite);
+        listaTabla = tramiteDAO.ListaTramite(cbLicencia.isSelected(), cbPlaca.isSelected(), this.txtFecha_inicio.getDate(), this.txtFecha_fin.getDate());
+        listaTabla = desencriptarListaTramite(listaTabla);
         if (txtNombre.getText() != null) {
             List<Tramite> Listanombre = new ArrayList<Tramite>();
-            for (int i = 0; i < tramite.size(); i++) {
-                Persona persona = tramite.get(i).getPersona();
+            for (int i = 0; i < listaTabla.size(); i++) {
+                Persona persona = listaTabla.get(i).getPersona();
                 String nombreCompleto = persona.getNombre() + " " + persona.getApellidoP() + " " + persona.getApellidoM();
 
                 if (nombreCompleto.toLowerCase().contains(txtNombre.getText().toLowerCase())) {
-                    Listanombre.add(tramite.get(i));
+                    Listanombre.add(listaTabla.get(i));
                 }
 
             }
-            tramite = Listanombre;
+            listaTabla = Listanombre;
 
         }
         DefaultTableModel modelo = (DefaultTableModel) tblReporte.getModel();
         modelo.setRowCount(0);
-        for (int i = 0; i < tramite.size(); i++) {
+        for (int i = 0; i < listaTabla.size(); i++) {
             Object[] datos = new Object[modelo.getColumnCount()];
-            if (tramite.get(i) instanceof Placa) {
+            if (listaTabla.get(i) instanceof Placa) {
                 datos[0] = "Placas";
-                Placa placa = (Placa) tramite.get(i);
+                Placa placa = (Placa) listaTabla.get(i);
                 datos[2] = placa.getCosto();
             }
-            if (tramite.get(i) instanceof Licencia) {
+            if (listaTabla.get(i) instanceof Licencia) {
                 datos[0] = "Licencias";
-                Licencia licencia = (Licencia) tramite.get(i);
+                Licencia licencia = (Licencia) listaTabla.get(i);
                 datos[2] = licencia.getCosto();
             }
-            Persona persona = tramite.get(i).getPersona();
+            Persona persona = listaTabla.get(i).getPersona();
             String nombreCompleto = persona.getNombre() + " " + persona.getApellidoP() + " " + persona.getApellidoM();
 
             datos[1] = nombreCompleto;
 
-            datos[3] = tramite.get(i).getFechaEmision();
+            datos[3] = listaTabla.get(i).getFechaEmision();
             modelo.addRow(datos);
         }
     }
 
     /**
-     * Metodo que se encaega de regresar una lista
-     * de tramite con el nombre de la persona
-     * desencriptado
+     * Metodo que se encaega de regresar una lista de tramite con el nombre de
+     * la persona desencriptado
+     *
      * @param lista
-     * @return Lista de tramite con el nombre de la persona
-     * desencriptado
+     * @return Lista de tramite con el nombre de la persona desencriptado
      */
     public List<Tramite> desencriptarListaTramite(List<Tramite> lista) {
         Encriptar encriptacion = new Encriptar();
@@ -143,7 +162,7 @@ public class frmReporte extends javax.swing.JFrame {
         getContentPane().add(jLabel1, new org.netbeans.lib.awtextra.AbsoluteConstraints(153, 6, -1, -1));
 
         jLabel2.setText("Fecha_Inicio:");
-        getContentPane().add(jLabel2, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 60, 70, -1));
+        getContentPane().add(jLabel2, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 60, 80, -1));
 
         btnRegresar.setText("Regresar");
         btnRegresar.addActionListener(new java.awt.event.ActionListener() {
@@ -154,6 +173,11 @@ public class frmReporte extends javax.swing.JFrame {
         getContentPane().add(btnRegresar, new org.netbeans.lib.awtextra.AbsoluteConstraints(100, 330, -1, -1));
 
         btnPDF.setText("Generar PDF");
+        btnPDF.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnPDFActionPerformed(evt);
+            }
+        });
         getContentPane().add(btnPDF, new org.netbeans.lib.awtextra.AbsoluteConstraints(240, 330, -1, -1));
 
         btnAceptar.setText("Aceptar");
@@ -179,18 +203,23 @@ public class frmReporte extends javax.swing.JFrame {
 
         getContentPane().add(jScrollPane1, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 100, 330, 203));
 
+        txtNombre.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                txtNombreActionPerformed(evt);
+            }
+        });
         txtNombre.addKeyListener(new java.awt.event.KeyAdapter() {
             public void keyReleased(java.awt.event.KeyEvent evt) {
                 txtNombreKeyReleased(evt);
             }
         });
-        getContentPane().add(txtNombre, new org.netbeans.lib.awtextra.AbsoluteConstraints(410, 230, 100, -1));
+        getContentPane().add(txtNombre, new org.netbeans.lib.awtextra.AbsoluteConstraints(420, 230, 100, -1));
 
         jLabel3.setText("Nombre:");
         getContentPane().add(jLabel3, new org.netbeans.lib.awtextra.AbsoluteConstraints(360, 230, -1, -1));
 
         jLabel4.setText("Fecha_Fin:");
-        getContentPane().add(jLabel4, new org.netbeans.lib.awtextra.AbsoluteConstraints(280, 60, 60, -1));
+        getContentPane().add(jLabel4, new org.netbeans.lib.awtextra.AbsoluteConstraints(280, 60, 70, -1));
 
         jLabel7.setText("Tipo de tramite");
         getContentPane().add(jLabel7, new org.netbeans.lib.awtextra.AbsoluteConstraints(360, 130, -1, -1));
@@ -219,7 +248,8 @@ public class frmReporte extends javax.swing.JFrame {
 
     /**
      * Metodo que se encarga de regresar al menu principal
-     * @param evt 
+     *
+     * @param evt
      */
     private void btnRegresarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnRegresarActionPerformed
         // TODO add your handling code here:
@@ -229,9 +259,10 @@ public class frmReporte extends javax.swing.JFrame {
     }//GEN-LAST:event_btnRegresarActionPerformed
 
     /**
-     * Metodo que se encarga de aceptar los filtros
-     * que el usuario desea utilizar
-     * @param evt 
+     * Metodo que se encarga de aceptar los filtros que el usuario desea
+     * utilizar
+     *
+     * @param evt
      */
     private void btnAceptarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnAceptarActionPerformed
         // TODO add your handling code here:
@@ -239,19 +270,21 @@ public class frmReporte extends javax.swing.JFrame {
     }//GEN-LAST:event_btnAceptarActionPerformed
 
     /**
-     * Metodo que se encarga de mostrar la tabla si el
-     * check button de placa se encuentra seleccionado
-     * @param evt 
+     * Metodo que se encarga de mostrar la tabla si el check button de placa se
+     * encuentra seleccionado
+     *
+     * @param evt
      */
     private void cbPlacaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_cbPlacaActionPerformed
         // TODO add your handling code here:
         llenarTramites();
     }//GEN-LAST:event_cbPlacaActionPerformed
 
-     /**
-     * Metodo que se encarga de mostrar la tabla si el
-     * check button de placa se encuentra seleccionado
-     * @param evt 
+    /**
+     * Metodo que se encarga de mostrar la tabla si el check button de placa se
+     * encuentra seleccionado
+     *
+     * @param evt
      */
     private void cbLicenciaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_cbLicenciaActionPerformed
         // TODO add your handling code here:
@@ -259,14 +292,80 @@ public class frmReporte extends javax.swing.JFrame {
     }//GEN-LAST:event_cbLicenciaActionPerformed
 
     /**
-     * Metodo para que mientras vayas escribiendo en un txt
-     * se vaya llenando la tabla
-     * @param evt 
+     * Metodo para que mientras vayas escribiendo en un txt se vaya llenando la
+     * tabla
+     *
+     * @param evt
      */
     private void txtNombreKeyReleased(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_txtNombreKeyReleased
         // TODO add your handling code here:
         llenarTramites();
     }//GEN-LAST:event_txtNombreKeyReleased
+
+    private void txtNombreActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txtNombreActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_txtNombreActionPerformed
+    /**
+     * Método para agregar la información al pdf al generarse
+     * @param evt evt
+     */
+    private void btnPDFActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnPDFActionPerformed
+        int opcion = JOptionPane.showConfirmDialog(null, "¿Está seguro de ejecutar este comando?", "Confirmar", JOptionPane.YES_NO_OPTION);
+
+        if (opcion == JOptionPane.YES_OPTION) {
+            List<Reporte> listaReporte = new ArrayList<Reporte>();
+
+            if (listaTabla.isEmpty()) {
+                JOptionPane.showMessageDialog(this, "No se tiene almacenado ningún trámite");
+                return;
+            }
+
+            for (Tramite tramite : listaTabla) {
+                Reporte reporte = new Reporte();
+                Persona persona = tramite.getPersona();
+                String nombreCompleto = persona.getNombre() + " "
+                        + persona.getApellidoP() + " " + persona.getApellidoM();
+                reporte.setNombre(nombreCompleto);
+                reporte.setFecha(tramite.getFechaEmision().toString());
+
+                if (tramite instanceof Placa) {
+                    reporte.setTipoTramite("Expedición de Placa");
+                    Placa placa = (Placa) tramite;
+                    reporte.setCosto(String.valueOf(placa.getCosto()));
+                }
+
+                if (tramite instanceof Licencia) {
+                    reporte.setTipoTramite("Expedición de Licencia");
+                    Licencia licencia = (Licencia) tramite;
+                    reporte.setCosto(String.valueOf(licencia.getCosto()));
+                }
+                listaReporte.add(reporte);
+            }
+            try{
+                Map parametro = new HashMap();
+                
+                LocalDateTime fechaHoraActual = LocalDateTime.now();
+                DateTimeFormatter formatEscrito = DateTimeFormatter.ofPattern("dd 'de' MMMM 'de' yyyy, hh:mm a");
+                String fechaHoraEscrita = fechaHoraActual.format(formatEscrito);
+                
+                parametro.put("fechaReporte", fechaHoraEscrita);
+                JRBeanCollectionDataSource beanColDataSource = new JRBeanCollectionDataSource(listaReporte);
+
+                // Cargar el archivo JRXML del reporte
+                InputStream reportFile = getClass().getResourceAsStream("/reporteTramites_1_1_1.jrxml");
+                JasperReport jasperReport = JasperCompileManager.compileReport(reportFile);
+
+                // Llenar el reporte con los datos
+                JasperPrint jasperPrint = JasperFillManager.fillReport(jasperReport, parametro, beanColDataSource);
+
+                // Visualizar el reporte
+                JasperExportManager.exportReportToPdfFile(jasperPrint, "./Reporte_Tramites.pdf");
+                
+            }catch(Exception e){
+                System.out.println(e);
+            }
+        }
+    }//GEN-LAST:event_btnPDFActionPerformed
 
     /**
      * @param args the command line arguments
