@@ -17,6 +17,7 @@ import DAO.VehiculoDAO;
 import Entidades.Licencia;
 import Entidades.Persona;
 import Entidades.Vehiculo;
+import java.awt.Color;
 import java.util.List;
 import javax.swing.JOptionPane;
 
@@ -87,84 +88,195 @@ public class frmMenuPrincipal extends javax.swing.JFrame {
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
 
+        bg = new javax.swing.JPanel();
         jLabel1 = new javax.swing.JLabel();
         btnVehiculo = new javax.swing.JButton();
         btnPlacas = new javax.swing.JButton();
         btnLicencia = new javax.swing.JButton();
-        btnSalir = new javax.swing.JButton();
         btnReporte = new javax.swing.JButton();
-        btnPersona = new javax.swing.JButton();
         jLabel2 = new javax.swing.JLabel();
+        btnPersona = new javax.swing.JButton();
         btnHistorial = new javax.swing.JButton();
         txtRFC = new javax.swing.JTextField();
+        jLabel5 = new javax.swing.JLabel();
+        jLabel4 = new javax.swing.JLabel();
+        jLabel3 = new javax.swing.JLabel();
+        jSeparator1 = new javax.swing.JSeparator();
+        jLabel6 = new javax.swing.JLabel();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         getContentPane().setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
-        jLabel1.setFont(new java.awt.Font("Segoe UI", 0, 18)); // NOI18N
-        jLabel1.setText("Menu principal");
-        getContentPane().add(jLabel1, new org.netbeans.lib.awtextra.AbsoluteConstraints(110, 10, -1, -1));
+        bg.setBackground(new java.awt.Color(255, 255, 255));
+        bg.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
+        jLabel1.setFont(new java.awt.Font("Roboto Medium", 1, 36)); // NOI18N
+        jLabel1.setText("MENU PRINCIPAL");
+        bg.add(jLabel1, new org.netbeans.lib.awtextra.AbsoluteConstraints(80, 40, -1, -1));
+
+        btnVehiculo.setBackground(new java.awt.Color(0, 153, 204));
+        btnVehiculo.setFont(new java.awt.Font("Roboto Light", 1, 14)); // NOI18N
+        btnVehiculo.setForeground(new java.awt.Color(255, 255, 255));
         btnVehiculo.setText("Registrar vehiculo");
+        btnVehiculo.setContentAreaFilled(false);
+        btnVehiculo.setOpaque(true);
+        btnVehiculo.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseEntered(java.awt.event.MouseEvent evt) {
+                btnVehiculoMouseEntered(evt);
+            }
+            public void mouseExited(java.awt.event.MouseEvent evt) {
+                btnVehiculoMouseExited(evt);
+            }
+        });
         btnVehiculo.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 btnVehiculoActionPerformed(evt);
             }
         });
-        getContentPane().add(btnVehiculo, new org.netbeans.lib.awtextra.AbsoluteConstraints(130, 180, -1, -1));
+        bg.add(btnVehiculo, new org.netbeans.lib.awtextra.AbsoluteConstraints(30, 230, -1, -1));
 
+        btnPlacas.setBackground(new java.awt.Color(0, 153, 204));
+        btnPlacas.setFont(new java.awt.Font("Roboto Light", 1, 14)); // NOI18N
+        btnPlacas.setForeground(new java.awt.Color(255, 255, 255));
         btnPlacas.setText("Solicitar placas");
+        btnPlacas.setContentAreaFilled(false);
+        btnPlacas.setOpaque(true);
+        btnPlacas.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseEntered(java.awt.event.MouseEvent evt) {
+                btnPlacasMouseEntered(evt);
+            }
+            public void mouseExited(java.awt.event.MouseEvent evt) {
+                btnPlacasMouseExited(evt);
+            }
+        });
         btnPlacas.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 btnPlacasActionPerformed(evt);
             }
         });
-        getContentPane().add(btnPlacas, new org.netbeans.lib.awtextra.AbsoluteConstraints(130, 210, 124, -1));
+        bg.add(btnPlacas, new org.netbeans.lib.awtextra.AbsoluteConstraints(30, 270, 160, -1));
 
+        btnLicencia.setBackground(new java.awt.Color(0, 153, 204));
+        btnLicencia.setFont(new java.awt.Font("Roboto Light", 1, 14)); // NOI18N
+        btnLicencia.setForeground(new java.awt.Color(255, 255, 255));
         btnLicencia.setText("Solicitar licencia");
+        btnLicencia.setContentAreaFilled(false);
+        btnLicencia.setOpaque(true);
+        btnLicencia.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseEntered(java.awt.event.MouseEvent evt) {
+                btnLicenciaMouseEntered(evt);
+            }
+            public void mouseExited(java.awt.event.MouseEvent evt) {
+                btnLicenciaMouseExited(evt);
+            }
+        });
         btnLicencia.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 btnLicenciaActionPerformed(evt);
             }
         });
-        getContentPane().add(btnLicencia, new org.netbeans.lib.awtextra.AbsoluteConstraints(130, 240, 124, -1));
+        bg.add(btnLicencia, new org.netbeans.lib.awtextra.AbsoluteConstraints(30, 310, 160, -1));
 
-        btnSalir.setText("Salir");
-        getContentPane().add(btnSalir, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 340, -1, -1));
-
+        btnReporte.setBackground(new java.awt.Color(0, 153, 204));
+        btnReporte.setFont(new java.awt.Font("Roboto Light", 1, 14)); // NOI18N
+        btnReporte.setForeground(new java.awt.Color(255, 255, 255));
         btnReporte.setText("Mostrar reporte");
+        btnReporte.setContentAreaFilled(false);
+        btnReporte.setOpaque(true);
+        btnReporte.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseEntered(java.awt.event.MouseEvent evt) {
+                btnReporteMouseEntered(evt);
+            }
+            public void mouseExited(java.awt.event.MouseEvent evt) {
+                btnReporteMouseExited(evt);
+            }
+        });
         btnReporte.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 btnReporteActionPerformed(evt);
             }
         });
-        getContentPane().add(btnReporte, new org.netbeans.lib.awtextra.AbsoluteConstraints(130, 270, 124, -1));
+        bg.add(btnReporte, new org.netbeans.lib.awtextra.AbsoluteConstraints(30, 350, 160, -1));
 
+        jLabel2.setFont(new java.awt.Font("Roboto Light", 1, 14)); // NOI18N
+        jLabel2.setText("Persona interesada (RFC)");
+        bg.add(jLabel2, new org.netbeans.lib.awtextra.AbsoluteConstraints(30, 110, -1, -1));
+
+        btnPersona.setBackground(new java.awt.Color(0, 153, 204));
+        btnPersona.setFont(new java.awt.Font("Roboto Light", 1, 14)); // NOI18N
+        btnPersona.setForeground(new java.awt.Color(255, 255, 255));
         btnPersona.setText("Registrar cliente");
+        btnPersona.setContentAreaFilled(false);
+        btnPersona.setOpaque(true);
+        btnPersona.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseEntered(java.awt.event.MouseEvent evt) {
+                btnPersonaMouseEntered(evt);
+            }
+            public void mouseExited(java.awt.event.MouseEvent evt) {
+                btnPersonaMouseExited(evt);
+            }
+        });
         btnPersona.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 btnPersonaActionPerformed(evt);
             }
         });
-        getContentPane().add(btnPersona, new org.netbeans.lib.awtextra.AbsoluteConstraints(130, 150, 140, -1));
+        bg.add(btnPersona, new org.netbeans.lib.awtextra.AbsoluteConstraints(30, 190, 160, -1));
 
-        jLabel2.setText("Persona interesada (RFC)");
-        getContentPane().add(jLabel2, new org.netbeans.lib.awtextra.AbsoluteConstraints(30, 70, -1, -1));
-
+        btnHistorial.setBackground(new java.awt.Color(0, 153, 204));
+        btnHistorial.setFont(new java.awt.Font("Roboto Light", 1, 14)); // NOI18N
+        btnHistorial.setForeground(new java.awt.Color(255, 255, 255));
         btnHistorial.setText("Mostrar historial");
+        btnHistorial.setContentAreaFilled(false);
+        btnHistorial.setOpaque(true);
+        btnHistorial.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseEntered(java.awt.event.MouseEvent evt) {
+                btnHistorialMouseEntered(evt);
+            }
+            public void mouseExited(java.awt.event.MouseEvent evt) {
+                btnHistorialMouseExited(evt);
+            }
+        });
         btnHistorial.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 btnHistorialActionPerformed(evt);
             }
         });
-        getContentPane().add(btnHistorial, new org.netbeans.lib.awtextra.AbsoluteConstraints(130, 300, 130, -1));
+        bg.add(btnHistorial, new org.netbeans.lib.awtextra.AbsoluteConstraints(30, 390, 160, -1));
 
+        txtRFC.setForeground(new java.awt.Color(204, 204, 204));
+        txtRFC.setText("Ingrese su RFC");
+        txtRFC.setBorder(null);
+        txtRFC.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mousePressed(java.awt.event.MouseEvent evt) {
+                txtRFCMousePressed(evt);
+            }
+        });
         txtRFC.addKeyListener(new java.awt.event.KeyAdapter() {
             public void keyTyped(java.awt.event.KeyEvent evt) {
                 txtRFCKeyTyped(evt);
             }
         });
-        getContentPane().add(txtRFC, new org.netbeans.lib.awtextra.AbsoluteConstraints(180, 70, 110, -1));
+        bg.add(txtRFC, new org.netbeans.lib.awtextra.AbsoluteConstraints(30, 130, 350, 30));
+
+        jLabel5.setFont(new java.awt.Font("Roboto Medium", 1, 18)); // NOI18N
+        jLabel5.setForeground(new java.awt.Color(255, 255, 255));
+        jLabel5.setText("Control de placas y Licencias");
+        bg.add(jLabel5, new org.netbeans.lib.awtextra.AbsoluteConstraints(520, 280, -1, -1));
+
+        jLabel4.setIcon(new javax.swing.ImageIcon(getClass().getResource("/IMG/logo.png"))); // NOI18N
+        bg.add(jLabel4, new org.netbeans.lib.awtextra.AbsoluteConstraints(580, 130, 150, 150));
+
+        jLabel3.setIcon(new javax.swing.ImageIcon(getClass().getResource("/IMG/city.png"))); // NOI18N
+        bg.add(jLabel3, new org.netbeans.lib.awtextra.AbsoluteConstraints(510, 0, 290, 500));
+
+        jSeparator1.setForeground(new java.awt.Color(0, 0, 0));
+        bg.add(jSeparator1, new org.netbeans.lib.awtextra.AbsoluteConstraints(30, 160, 350, 20));
+
+        jLabel6.setIcon(new javax.swing.ImageIcon(getClass().getResource("/IMG/favicon.png"))); // NOI18N
+        bg.add(jLabel6, new org.netbeans.lib.awtextra.AbsoluteConstraints(30, 40, 50, 50));
+
+        getContentPane().add(bg, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, 800, 500));
 
         pack();
         setLocationRelativeTo(null);
@@ -255,6 +367,59 @@ public class frmMenuPrincipal extends javax.swing.JFrame {
         
         
     }//GEN-LAST:event_txtRFCKeyTyped
+    
+    private void txtRFCMousePressed(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_txtRFCMousePressed
+        txtRFC.setText("");
+        txtRFC.setForeground(Color.black);
+    }//GEN-LAST:event_txtRFCMousePressed
+
+    private void btnPersonaMouseEntered(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btnPersonaMouseEntered
+        btnPersona.setBackground(new Color(0, 156, 223));
+    }//GEN-LAST:event_btnPersonaMouseEntered
+
+    private void btnPersonaMouseExited(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btnPersonaMouseExited
+       btnPersona.setBackground(new Color(0, 134, 190));
+    }//GEN-LAST:event_btnPersonaMouseExited
+
+    private void btnVehiculoMouseEntered(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btnVehiculoMouseEntered
+        btnVehiculo.setBackground(new Color(0, 156, 223));
+    }//GEN-LAST:event_btnVehiculoMouseEntered
+
+    private void btnVehiculoMouseExited(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btnVehiculoMouseExited
+        btnVehiculo.setBackground(new Color(0, 134, 190));
+    }//GEN-LAST:event_btnVehiculoMouseExited
+
+    private void btnPlacasMouseEntered(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btnPlacasMouseEntered
+       btnPlacas.setBackground(new Color(0, 156, 223));
+    }//GEN-LAST:event_btnPlacasMouseEntered
+
+    private void btnPlacasMouseExited(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btnPlacasMouseExited
+        btnPlacas.setBackground(new Color(0, 134, 190));
+    }//GEN-LAST:event_btnPlacasMouseExited
+
+    private void btnLicenciaMouseEntered(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btnLicenciaMouseEntered
+        btnLicencia.setBackground(new Color(0, 156, 223));
+    }//GEN-LAST:event_btnLicenciaMouseEntered
+
+    private void btnLicenciaMouseExited(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btnLicenciaMouseExited
+        btnLicencia.setBackground(new Color(0, 134, 190));
+    }//GEN-LAST:event_btnLicenciaMouseExited
+
+    private void btnReporteMouseEntered(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btnReporteMouseEntered
+        btnReporte.setBackground(new Color(0, 156, 223));
+    }//GEN-LAST:event_btnReporteMouseEntered
+
+    private void btnReporteMouseExited(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btnReporteMouseExited
+         btnReporte.setBackground(new Color(0, 134, 190));
+    }//GEN-LAST:event_btnReporteMouseExited
+
+    private void btnHistorialMouseEntered(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btnHistorialMouseEntered
+        btnHistorial.setBackground(new Color(0, 156, 223));
+    }//GEN-LAST:event_btnHistorialMouseEntered
+
+    private void btnHistorialMouseExited(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btnHistorialMouseExited
+        btnHistorial.setBackground(new Color(0, 134, 190));
+    }//GEN-LAST:event_btnHistorialMouseExited
 
     /**
      * @param args the command line arguments
@@ -293,15 +458,20 @@ public class frmMenuPrincipal extends javax.swing.JFrame {
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
+    private javax.swing.JPanel bg;
     private javax.swing.JButton btnHistorial;
     private javax.swing.JButton btnLicencia;
     private javax.swing.JButton btnPersona;
     private javax.swing.JButton btnPlacas;
     private javax.swing.JButton btnReporte;
-    private javax.swing.JButton btnSalir;
     private javax.swing.JButton btnVehiculo;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;
+    private javax.swing.JLabel jLabel3;
+    private javax.swing.JLabel jLabel4;
+    private javax.swing.JLabel jLabel5;
+    private javax.swing.JLabel jLabel6;
+    private javax.swing.JSeparator jSeparator1;
     private javax.swing.JTextField txtRFC;
     // End of variables declaration//GEN-END:variables
 }

@@ -11,6 +11,7 @@ GUI\frmVehiculo$4.class
 DAO\IVehiculoDAO.class
 Entidades\Vehiculo_.class
 GUI\frmMenuPrincipal$3.class
+GUI\frmReporte$6.class
 GUI\frmLicencia$1.class
 GUI\frmVehiculo$8.class
 GUI\frmHistorial$2.class
@@ -35,6 +36,7 @@ GUI\frmReporte.class
 GUI\frmVehiculo$9.class
 GUI\frmLicencia$2.class
 GUI\frmPersona.class
+GUI\frmReporte$4.class
 DAO\LicenciaDAO.class
 GUI\frmVehiculo$6.class
 GUI\frmVehiculo$11.class
@@ -50,6 +52,7 @@ Entidades\Licencia_.class
 GUI\frmPersona$4.class
 DAO\IPersonaDAO.class
 DAO\PlacaDAO.class
+GUI\frmReporte$5.class
 DAO\ILicenciaDAO.class
 GUI\frmMenuPrincipal$5.class
 DAO\ITramiteDAO.class
