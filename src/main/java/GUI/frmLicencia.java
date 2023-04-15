@@ -10,7 +10,6 @@ import Entidades.Persona;
 import java.util.Date;
 import javax.swing.JOptionPane;
 
-
 /**
  *
  * @author oscar
@@ -19,48 +18,66 @@ public class frmLicencia extends javax.swing.JFrame {
 
     Persona persona;
     private ILicenciaDAO licenciaDAO;
-    
+    private boolean desactivarLic ;
+
+    /**
+     * Metodo constructor
+     * @param licenciaDAO 
+     */
     public frmLicencia(ILicenciaDAO licenciaDAO) {
         initComponents();
         this.licenciaDAO = licenciaDAO;
-        
+
     }
-    
-    public frmLicencia(Persona persona, ILicenciaDAO licenciaDAO) {
+
+    /**
+     * Metodo constructor
+     * @param persona
+     * @param licenciaDAO
+     * @param desactivarLic 
+     */
+    public frmLicencia(Persona persona, ILicenciaDAO licenciaDAO, boolean desactivarLic) {
         initComponents();
         this.persona = persona;
+        this.desactivarLic = desactivarLic;
         this.licenciaDAO = licenciaDAO;
-        
+
     }
-    
+
     /**
      * Método que agrega el vehículo a la bd
      */
     public void agregar() {
         int año = Integer.parseInt((String) cbAño.getSelectedItem());
         float costo = 0;
-        
-        if(año==1 && persona.getDiscapacidad()==false){
-            costo=600;
-        }else if(año==2 && persona.getDiscapacidad()==false){
-            costo=900;
-        }else if(año==3 && persona.getDiscapacidad()==false){
-            costo=1100;
-        }else if(año==1 && persona.getDiscapacidad()==true){
-            costo=200;
-        }else if(año==2 && persona.getDiscapacidad()==true){
-            costo=500;
-        }else if(año==3 && persona.getDiscapacidad()==true){
-            costo=700;
+
+        if (año == 1 && persona.getDiscapacidad() == false) {
+            costo = 600;
+        } else if (año == 2 && persona.getDiscapacidad() == false) {
+            costo = 900;
+        } else if (año == 3 && persona.getDiscapacidad() == false) {
+            costo = 1100;
+        } else if (año == 1 && persona.getDiscapacidad() == true) {
+            costo = 200;
+        } else if (año == 2 && persona.getDiscapacidad() == true) {
+            costo = 500;
+        } else if (año == 3 && persona.getDiscapacidad() == true) {
+            costo = 700;
         }
-        
+
         Date fechaEmision = new Date();
         Date fechaRecepcion = new Date();
-        
-        fechaRecepcion.setYear((fechaRecepcion.getYear()+año));
-        
-        
-        Licencia lic = new Licencia(año, costo,fechaRecepcion,fechaEmision, persona );
+
+        fechaRecepcion.setYear((fechaRecepcion.getYear() + año));
+
+        String estado = "Activa";
+        Licencia lic = new Licencia(año, estado, costo, fechaRecepcion, fechaEmision, persona);
+       
+        if (desactivarLic) {
+           
+            licenciaDAO.DesactivarActual(persona.getId());
+
+        }
         if (licenciaDAO.agregarLicencia(lic) == null) {
             JOptionPane.showMessageDialog(this, "No se pudo registrar la licencia");
         } else {
@@ -72,7 +89,6 @@ public class frmLicencia extends javax.swing.JFrame {
         }
 
     }
-    
 
     /**
      * This method is called from within the constructor to initialize the form.
@@ -124,15 +140,19 @@ public class frmLicencia extends javax.swing.JFrame {
 
     private void btnRegresarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnRegresarActionPerformed
         // TODO add your handling code here:
-        frmMenuPrincipal principal= new frmMenuPrincipal();
+        frmMenuPrincipal principal = new frmMenuPrincipal();
         principal.setVisible(true);
         this.dispose();
     }//GEN-LAST:event_btnRegresarActionPerformed
 
+    /**
+     * Boton aceptar
+     * @param evt 
+     */
     private void btnAceptarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnAceptarActionPerformed
-        
-       this.agregar();
-        
+
+        this.agregar();
+
     }//GEN-LAST:event_btnAceptarActionPerformed
 
     /**

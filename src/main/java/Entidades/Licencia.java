@@ -30,6 +30,13 @@ public class Licencia extends Tramite implements Serializable {
     @Column(name="Vigencia")
     private int vigencia;
     
+    /**
+     *
+     * Estado de la placa.
+     */
+    @Column(name = "Estado")
+    private String estado;
+    
     @Column(name="Costo")
     private float costo;
 
@@ -38,14 +45,16 @@ public class Licencia extends Tramite implements Serializable {
 
    
 
-    public Licencia(int Vigencia, float costo) {
+    public Licencia(int Vigencia, String estado, float costo) {
         this.vigencia = Vigencia;
+        this.estado=estado;
         this.costo = costo;
     }
 
-    public Licencia(int vigencia, float costo, Date fechaRecepcion, Date fechaEmision, Persona persona) {
+    public Licencia(int vigencia,String estado, float costo, Date fechaRecepcion, Date fechaEmision, Persona persona) {
         super(fechaRecepcion, fechaEmision, persona);
         this.vigencia = vigencia;
+        this.estado=estado;
         this.costo = costo;
     }
    
@@ -65,6 +74,15 @@ public class Licencia extends Tramite implements Serializable {
     public void setCosto(float costo) {
         this.costo = costo;
     }
+
+    public String getEstado() {
+        return estado;
+    }
+
+    public void setEstado(String estado) {
+        this.estado = estado;
+    }
+    
     
 
    

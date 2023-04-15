@@ -21,64 +21,70 @@ import java.awt.Color;
 import java.util.List;
 import javax.swing.JOptionPane;
 
-
 /**
  *
  * @author oscar
  */
 public class frmMenuPrincipal extends javax.swing.JFrame {
-    
-   /**
-    * Objeto de tipo persona
-    */
-   Persona persona; 
-   
+
+    /**
+     * Objeto de tipo persona
+     */
+    Persona persona;
+
     public frmMenuPrincipal() {
         initComponents();
     }
-    
+
     /**
-     * Método constructor utilizado para devolver la rfc de la persona registrada
+     * Método constructor utilizado para devolver la rfc de la persona
+     * registrada
+     *
      * @param persona Persona a la cual se registro
      */
     public frmMenuPrincipal(Persona persona) {
         initComponents();
         txtRFC.setText(persona.getRfc());
     }
-    
+
     /**
-     * Método utilizado para encontrar si una persona encuentra almacenada en la bd 
-     * mediante el rfc
+     * Método utilizado para encontrar si una persona encuentra almacenada en la
+     * bd mediante el rfc
+     *
      * @return falso si no lo encuentra, true de lo contrario
      */
-    public boolean encontrarPersona(){
-        IConexionBD conexion=new ConexionBD();
-        IPersonaDAO personaDAO= new PersonaDAO(conexion);
-        persona=personaDAO.buscarPersona(txtRFC.getText());
-        if(persona==null){
-             JOptionPane.showMessageDialog(this, "No se pudo encontro la persona");
-             return false;
-        }
-        else{
+    public boolean encontrarPersona() {
+        IConexionBD conexion = new ConexionBD();
+        IPersonaDAO personaDAO = new PersonaDAO(conexion);
+        persona = personaDAO.buscarPersona(txtRFC.getText());
+        if (persona == null) {
+            JOptionPane.showMessageDialog(this, "No se pudo encontro la persona");
+            return false;
+        } else {
             return true;
         }
-        
+
     }
-    
-    public boolean verificarLista(){
-        IConexionBD conexion=new ConexionBD();
+
+
+    /**
+     * 
+     * @return 
+     */
+    public boolean verificarLista() {
+        IConexionBD conexion = new ConexionBD();
         ILicenciaDAO lic = new LicenciaDAO(conexion);
         List<Licencia> licencia = lic.listarLicenciaVigentesPersona(persona.getRfc());
-        
-        if(licencia.isEmpty()){
+
+        if (licencia.isEmpty()) {
             JOptionPane.showMessageDialog(this, "La persona no cuenta con una licencia vigente");
             return false;
-        
+
         }
         return true;
-        
+
     }
-    
+
     /**
      * This method is called from within the constructor to initialize the form.
      * WARNING: Do NOT modify this code. The content of this method is always
@@ -282,22 +288,26 @@ public class frmMenuPrincipal extends javax.swing.JFrame {
         setLocationRelativeTo(null);
     }// </editor-fold>//GEN-END:initComponents
 
+    /**
+     * Boton que accede al registro persona
+     * @param evt 
+     */
     private void btnPersonaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnPersonaActionPerformed
         // TODO add your handling code here:
-        IConexionBD conexion=new ConexionBD();
-        IPersonaDAO personaDAO= new PersonaDAO(conexion);
-        frmPersona persona= new frmPersona(personaDAO);
+        IConexionBD conexion = new ConexionBD();
+        IPersonaDAO personaDAO = new PersonaDAO(conexion);
+        frmPersona persona = new frmPersona(personaDAO);
         persona.setVisible(true);
         this.dispose();
     }//GEN-LAST:event_btnPersonaActionPerformed
     /**
      * Método que al dar click en el boton si se encuentra a la persona nos
      * manda al frame de registro de vehículo
+     *
      * @param evt evt
      */
     private void btnVehiculoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnVehiculoActionPerformed
-        
-        
+
         if (encontrarPersona()) {
             IConexionBD conexion = new ConexionBD();
             IVehiculoDAO vehiculoDAO = new VehiculoDAO(conexion);
@@ -307,67 +317,90 @@ public class frmMenuPrincipal extends javax.swing.JFrame {
         }
 
     }//GEN-LAST:event_btnVehiculoActionPerformed
-    
+
     /**
      * Método que si se encuntra a la persona la manda a la pantalla de Placas
+     *
      * @param evt evt
      */
     private void btnPlacasActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnPlacasActionPerformed
         if (encontrarPersona()) {
-            if(!verificarLista()){
+            if (!verificarLista()) {
                 return;
             }
-        IConexionBD conexion = new ConexionBD();
-        IPlacaDAO placaDAO = new PlacaDAO(conexion);
-        IVehiculoDAO vehiculoDAO = new VehiculoDAO(conexion);
-        frmPlacas placas= new frmPlacas(placaDAO, vehiculoDAO, persona);
-        placas.setVisible(true);
-        this.dispose();
+            IConexionBD conexion = new ConexionBD();
+            IPlacaDAO placaDAO = new PlacaDAO(conexion);
+            IVehiculoDAO vehiculoDAO = new VehiculoDAO(conexion);
+            frmPlacas placas = new frmPlacas(placaDAO, vehiculoDAO, persona);
+            placas.setVisible(true);
+            this.dispose();
         }
-        
+
     }//GEN-LAST:event_btnPlacasActionPerformed
 
+    /**
+     * Boton que accede al menu licencia
+     * @param evt 
+     */
     private void btnLicenciaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnLicenciaActionPerformed
         if (encontrarPersona()) {
-        IConexionBD conexion = new ConexionBD();
-        ILicenciaDAO lcd = new LicenciaDAO(conexion);
-        frmLicencia licencia= new frmLicencia(persona,lcd);
-        licencia.setVisible(true);
-        this.dispose();
+            IConexionBD conexion = new ConexionBD();
+            ILicenciaDAO lcd = new LicenciaDAO(conexion);
+
+            if (lcd.LicenciaActiva(persona.getId()) != null) {
+                int opcion = JOptionPane.showConfirmDialog(null, "¿Está seguro de ejecutar este comando?", "Confirmar", JOptionPane.YES_NO_OPTION);
+
+                if (opcion == JOptionPane.YES_OPTION) {
+                    frmLicencia licencia = new frmLicencia(persona, lcd, true);
+                    licencia.setVisible(true);
+                    this.dispose();
+                } else {
+                    return;
+                }
+            }
+            else{
+               frmLicencia licencia = new frmLicencia(persona, lcd, false);
+            licencia.setVisible(true);
+            this.dispose(); 
+            }
+            
         }
     }//GEN-LAST:event_btnLicenciaActionPerformed
 
     private void btnReporteActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnReporteActionPerformed
         // TODO add your handling code here:
-        frmReporte reporte= new frmReporte();
+        frmReporte reporte = new frmReporte();
         reporte.setVisible(true);
         this.dispose();
     }//GEN-LAST:event_btnReporteActionPerformed
 
     private void btnHistorialActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnHistorialActionPerformed
         // TODO add your handling code here:
-        IConexionBD conexion=new ConexionBD();
-        IPersonaDAO personaDAO= new PersonaDAO(conexion);
-        frmHistorial historial= new frmHistorial(personaDAO);
+        IConexionBD conexion = new ConexionBD();
+        IPersonaDAO personaDAO = new PersonaDAO(conexion);
+        frmHistorial historial = new frmHistorial(personaDAO);
         historial.setVisible(true);
         this.dispose();
     }//GEN-LAST:event_btnHistorialActionPerformed
     /**
      * Método que valida el campo de rfc
+     *
      * @param evt evt
      */
     private void txtRFCKeyTyped(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_txtRFCKeyTyped
         char c = evt.getKeyChar();
-        
-        if((c<'0' || c>'9') && (c<'A' )| c>'Z')evt.consume();
-        
-        if(txtRFC.getText().length()==13){
+
+        if ((c < '0' || c > '9') && (c < 'A') | c > 'Z') {
             evt.consume();
         }
-        
-        
+
+        if (txtRFC.getText().length() == 13) {
+            evt.consume();
+        }
+
+
     }//GEN-LAST:event_txtRFCKeyTyped
-    
+
     private void txtRFCMousePressed(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_txtRFCMousePressed
         txtRFC.setText("");
         txtRFC.setForeground(Color.black);
@@ -378,7 +411,7 @@ public class frmMenuPrincipal extends javax.swing.JFrame {
     }//GEN-LAST:event_btnPersonaMouseEntered
 
     private void btnPersonaMouseExited(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btnPersonaMouseExited
-       btnPersona.setBackground(new Color(0, 134, 190));
+        btnPersona.setBackground(new Color(0, 134, 190));
     }//GEN-LAST:event_btnPersonaMouseExited
 
     private void btnVehiculoMouseEntered(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btnVehiculoMouseEntered
@@ -390,7 +423,7 @@ public class frmMenuPrincipal extends javax.swing.JFrame {
     }//GEN-LAST:event_btnVehiculoMouseExited
 
     private void btnPlacasMouseEntered(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btnPlacasMouseEntered
-       btnPlacas.setBackground(new Color(0, 156, 223));
+        btnPlacas.setBackground(new Color(0, 156, 223));
     }//GEN-LAST:event_btnPlacasMouseEntered
 
     private void btnPlacasMouseExited(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btnPlacasMouseExited
@@ -410,7 +443,7 @@ public class frmMenuPrincipal extends javax.swing.JFrame {
     }//GEN-LAST:event_btnReporteMouseEntered
 
     private void btnReporteMouseExited(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btnReporteMouseExited
-         btnReporte.setBackground(new Color(0, 134, 190));
+        btnReporte.setBackground(new Color(0, 134, 190));
     }//GEN-LAST:event_btnReporteMouseExited
 
     private void btnHistorialMouseEntered(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btnHistorialMouseEntered
