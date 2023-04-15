@@ -348,7 +348,8 @@ public class frmMenuPrincipal extends javax.swing.JFrame {
             ILicenciaDAO lcd = new LicenciaDAO(conexion);
 
             if (lcd.LicenciaActiva(persona.getId()) != null) {
-                int opcion = JOptionPane.showConfirmDialog(null, "¿Está seguro de ejecutar este comando?", "Confirmar", JOptionPane.YES_NO_OPTION);
+                int opcion = JOptionPane.showConfirmDialog(null, "Ya cuentas con una licencia, ¿Deseas una nueva(Toma en cuenta"
+                        + "que se cancelara la anterior))?", "Confirmar", JOptionPane.YES_NO_OPTION);
 
                 if (opcion == JOptionPane.YES_OPTION) {
                     frmLicencia licencia = new frmLicencia(persona, lcd, true);
