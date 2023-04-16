@@ -331,7 +331,7 @@ public class frmMenuPrincipal extends javax.swing.JFrame {
             IConexionBD conexion = new ConexionBD();
             IPlacaDAO placaDAO = new PlacaDAO(conexion);
             IVehiculoDAO vehiculoDAO = new VehiculoDAO(conexion);
-            frmPlacas placas = new frmPlacas(placaDAO, vehiculoDAO, persona);
+            frmPlacas placas = new frmPlacas(placaDAO, vehiculoDAO, persona,true);
             placas.setVisible(true);
             this.dispose();
         }

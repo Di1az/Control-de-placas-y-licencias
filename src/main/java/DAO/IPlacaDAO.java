@@ -29,4 +29,19 @@ public interface IPlacaDAO {
      */
     public List <Placa> listaPlaca();
     
+    /**
+     * Metodo que se encarga de comprobar
+     * que el vehiculo cuenta con una placa activa
+     * @param id_vehiculo
+     * @return placa que se encuentre activa
+     */
+    public Placa placaActiva(int id_vehiculo);
+    
+    /**
+     * Metodo que se encarga de desactivar placa
+     * del vehiculo
+     * @param id_vehiculo
+     * @return placa que se encuentre activa
+     */
+    public Placa DesactivarPlaca(int id_vehiculo);
 }

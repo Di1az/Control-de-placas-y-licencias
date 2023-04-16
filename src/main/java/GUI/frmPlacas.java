@@ -4,9 +4,12 @@
  */
 package GUI;
 
-
+import DAO.ConexionBD;
+import DAO.IConexionBD;
 import DAO.IPlacaDAO;
 import DAO.IVehiculoDAO;
+import DAO.PlacaDAO;
+import DAO.VehiculoDAO;
 
 import Entidades.Persona;
 import Entidades.Placa;
@@ -23,67 +26,102 @@ import javax.swing.JOptionPane;
  * @author dany
  */
 public class frmPlacas extends javax.swing.JFrame {
-    
+
     private final IPlacaDAO placaDAO;
     private final IVehiculoDAO vehiculoDAO;
-    private Persona persona; 
+    private Persona persona;
     private Vehiculo vehiculo;
-    
+    private boolean desactivarPlaca;
 
-   /**
-    * Método constructor que inicializa los atributos
-    * @param placaDAO placaDAO
-    * @param vehiculoDAO vehiculoDAO
-    * @param persona persona
-    */
-    public frmPlacas(IPlacaDAO placaDAO, IVehiculoDAO vehiculoDAO, Persona persona) {
+    /**
+     * Método constructor que inicializa los atributos
+     *
+     * @param placaDAO placaDAO
+     * @param vehiculoDAO vehiculoDAO
+     * @param persona persona param desactivarPlaca
+     * @param desactivarPlaca 
+     */
+    public frmPlacas(IPlacaDAO placaDAO, IVehiculoDAO vehiculoDAO, Persona persona, boolean desactivarPlaca) {
         initComponents();
         this.placaDAO = placaDAO;
         this.vehiculoDAO = vehiculoDAO;
-        this.persona=persona;
+        this.persona = persona;
+        this.desactivarPlaca = desactivarPlaca;
         llenarCombo();
     }
 
     /**
      * Metodo para llenar el comboBox con los vehiculos activos del cliente
      */
-    public void llenarCombo(){
+    public void llenarCombo() {
         cbVehiculo.removeAllItems();
-        List<Vehiculo> llenaCb=vehiculoDAO.listaVehiculosCliente(persona);
+        List<Vehiculo> llenaCb = vehiculoDAO.listaVehiculosCliente(persona);
         System.out.println(llenaCb.size());
-        if(llenaCb==null){
-           
-            
-        }else{
-            Iterator bonchan= llenaCb.iterator();
-            while(bonchan.hasNext()){
-                Vehiculo vehiculo=(Vehiculo)bonchan.next();
+        if (llenaCb == null) {
+
+        } else {
+            Iterator bonchan = llenaCb.iterator();
+            while (bonchan.hasNext()) {
+                Vehiculo vehiculo = (Vehiculo) bonchan.next();
                 this.cbVehiculo.addItem(vehiculo);
             }
         }
     }
-    
+
     /**
      * Método que genera una cadena de 10 digitos aleatoria
-     * @param longitud tamaño de la cadena
+     *
      * @return regresa la cadena
      */
-    public String generarPlacaAleatoria(int longitud) {
-        // Lista de caracteres válidos para la placa
-        char[] caracteresValidos = "ABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789".toCharArray();
+//    public String generarPlacaAleatoria(int longitud) {
+//        // Lista de caracteres válidos para la placa
+//        char[] caracteresValidos = "ABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789".toCharArray();
+//
+//        // Crear un objeto Random
+//        Random rnd = new Random();
+//
+//        // Generar una placa de la longitud especificada
+//        StringBuilder placa = new StringBuilder();
+//        for (int i = 0; i < longitud; i++) {
+//            placa.append(caracteresValidos[rnd.nextInt(caracteresValidos.length)]);
+//        }
+//
+//        return placa.toString();
+//    }
+    public String generarPlacaAleatoria() {
+        // Lista de caracteres válidos para las letras de la placa
+        char[] letrasValidas = "ABCDEFGHIJKLMNOPQRSTUVWXYZ".toCharArray();
 
         // Crear un objeto Random
         Random rnd = new Random();
 
-        // Generar una placa de la longitud especificada
-        StringBuilder placa = new StringBuilder();
-        for (int i = 0; i < longitud; i++) {
-            placa.append(caracteresValidos[rnd.nextInt(caracteresValidos.length)]);
+        // Generar las tres letras de la placa
+        StringBuilder letras = new StringBuilder();
+        for (int i = 0; i < 3; i++) {
+            letras.append(letrasValidas[rnd.nextInt(letrasValidas.length)]);
         }
+
+        // Generar los dos dígitos para la primera parte de la placa
+        int num1 = rnd.nextInt(10);
+        int num2 = rnd.nextInt(10);
+
+        // Generar los dos dígitos para la segunda parte de la placa
+        int num3 = rnd.nextInt(10);
+        int num4 = rnd.nextInt(10);
+
+        // Construir la placa completa
+        StringBuilder placa = new StringBuilder();
+        placa.append(letras);
+        placa.append("-");
+        placa.append(num1);
+        placa.append(num2);
+        placa.append("-");
+        placa.append(num3);
+        placa.append(num4);
 
         return placa.toString();
     }
-    
+
     public float calcularPrecio(Vehiculo vehiculo) {
         float precio = 0;
         if (vehiculo.getEstado() != null && vehiculo.getEstado().equals("Nuevo")) {
@@ -94,39 +132,43 @@ public class frmPlacas extends javax.swing.JFrame {
         return precio;
     }
 
-    
     /**
      * Método que agrega la placa a la bd
      */
     public void agregar() {
-        
+
         Date fechaEmision = new Date();
         Date fechaRecepcion = new Date();
-        
-        fechaRecepcion.setYear((fechaRecepcion.getYear()+6));
-       
+
+        fechaRecepcion.setYear((fechaRecepcion.getYear() + 6));
+
         String estado = "Vigentes";
-        
-        String p = generarPlacaAleatoria(10);
-        
-        if(cbVehiculo.getSelectedItem()==null){
+
+        String p = generarPlacaAleatoria();
+
+        if (cbVehiculo.getSelectedItem() == null) {
             JOptionPane.showMessageDialog(this, "No tiene vehiculos");
             return;
-        }else{
-            vehiculo=(Vehiculo) cbVehiculo.getSelectedItem();
+        } else {
+            vehiculo = (Vehiculo) cbVehiculo.getSelectedItem();
         }
-        
+
         Placa placa = new Placa(calcularPrecio(vehiculo), p, estado, vehiculo, fechaRecepcion, fechaEmision, persona);
+        if (desactivarPlaca) {
+           
+            placaDAO.DesactivarPlaca(vehiculo.getId());
+
+        }
         if (placaDAO.agregarPlaca(placa) == null) {
             JOptionPane.showMessageDialog(this, "No se pudo registrar la placa");
         } else {
-            
+
             JOptionPane.showMessageDialog(this, "Registro exitoso");
             frmMenuPrincipal principal = new frmMenuPrincipal(persona);
             principal.setVisible(true);
             this.dispose();
         }
-       
+
     }
 
     /**
@@ -187,14 +229,14 @@ public class frmPlacas extends javax.swing.JFrame {
 
     private void btnRegresarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnRegresarActionPerformed
         // TODO add your handling code here:
-        frmMenuPrincipal principal= new frmMenuPrincipal();
+        frmMenuPrincipal principal = new frmMenuPrincipal();
         principal.setVisible(true);
         this.dispose();
     }//GEN-LAST:event_btnRegresarActionPerformed
 
     private void btnCancelarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnCancelarActionPerformed
         // TODO add your handling code here:
-        
+
     }//GEN-LAST:event_btnCancelarActionPerformed
 
     private void btnAceptarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnAceptarActionPerformed
@@ -203,7 +245,26 @@ public class frmPlacas extends javax.swing.JFrame {
         frmMenuPrincipal principal= new frmMenuPrincipal();
         principal.setVisible(true);
         this.dispose();*/
-        this.agregar();
+        IConexionBD conexion = new ConexionBD();
+        IPlacaDAO pla = new PlacaDAO(conexion);
+        vehiculo = (Vehiculo) cbVehiculo.getSelectedItem();
+        if (pla.placaActiva(vehiculo.getId()) != null) {
+            int opcion = JOptionPane.showConfirmDialog(null, "El vehiculo ya tiene placas vigentes, ¿Deseas una nueva(Toma en cuenta"
+                    + " que se cancelara la anterior)?", "Confirmar", JOptionPane.YES_NO_OPTION);
+
+            if (opcion == JOptionPane.YES_OPTION) {
+
+                this.agregar();
+
+            } else {
+                return;
+            }
+        } else {
+
+            this.agregar();
+
+        }
+
     }//GEN-LAST:event_btnAceptarActionPerformed
 
     /**
