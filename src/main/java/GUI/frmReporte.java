@@ -13,6 +13,8 @@ import Entidades.Licencia;
 import Entidades.Persona;
 import Entidades.Placa;
 import Entidades.Tramite;
+import java.awt.Color;
+import java.awt.Font;
 import java.io.InputStream;
 import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
@@ -35,8 +37,15 @@ import net.sf.jasperreports.engine.data.JRBeanCollectionDataSource;
  * @author oscar
  */
 public class frmReporte extends javax.swing.JFrame {
-
+    
+    /**
+     * Objeto para establecer la conexion
+     */
     IConexionBD conexionBD = new ConexionBD();
+    
+    /**
+     * Objeto de tipo TramiteDAO
+     */
     TramiteDAO tramiteDAO = new TramiteDAO(conexionBD);
 
     /**
@@ -45,12 +54,12 @@ public class frmReporte extends javax.swing.JFrame {
     private List<Tramite> listaTabla;
 
     /**
-     * Creates new form Reporte
+     * Método constructor que inicializa los atributos
      */
     public frmReporte() {
         initComponents();
         this.listaTabla = new ArrayList<Tramite>();
-        llenarTramites();
+        this.llenarTramites();
     }
 
     /**
@@ -138,55 +147,72 @@ public class frmReporte extends javax.swing.JFrame {
 
         jDateChooser2 = new com.toedter.calendar.JDateChooser();
         jDateChooser3 = new com.toedter.calendar.JDateChooser();
-        jLabel1 = new javax.swing.JLabel();
-        jLabel2 = new javax.swing.JLabel();
+        jPanel1 = new javax.swing.JPanel();
         btnRegresar = new javax.swing.JButton();
         btnPDF = new javax.swing.JButton();
         btnAceptar = new javax.swing.JButton();
         jScrollPane1 = new javax.swing.JScrollPane();
         tblReporte = new javax.swing.JTable();
         txtNombre = new javax.swing.JTextField();
-        jLabel3 = new javax.swing.JLabel();
-        jLabel4 = new javax.swing.JLabel();
-        jLabel7 = new javax.swing.JLabel();
         cbPlaca = new javax.swing.JCheckBox();
         cbLicencia = new javax.swing.JCheckBox();
         txtFecha_inicio = new com.toedter.calendar.JDateChooser();
         txtFecha_fin = new com.toedter.calendar.JDateChooser();
+        jLabel6 = new javax.swing.JLabel();
+        jLabel11 = new javax.swing.JLabel();
+        jLabel5 = new javax.swing.JLabel();
+        jLabel19 = new javax.swing.JLabel();
+        jLabel20 = new javax.swing.JLabel();
+        jLabel21 = new javax.swing.JLabel();
+        jLabel22 = new javax.swing.JLabel();
+        jSeparator5 = new javax.swing.JSeparator();
+        jLabel23 = new javax.swing.JLabel();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         getContentPane().setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
-        jLabel1.setFont(new java.awt.Font("Segoe UI", 0, 18)); // NOI18N
-        jLabel1.setText("Reporte");
-        getContentPane().add(jLabel1, new org.netbeans.lib.awtextra.AbsoluteConstraints(153, 6, -1, -1));
+        jPanel1.setBackground(new java.awt.Color(255, 255, 255));
+        jPanel1.setForeground(new java.awt.Color(255, 255, 255));
+        jPanel1.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
-        jLabel2.setText("Fecha_Inicio:");
-        getContentPane().add(jLabel2, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 60, 80, -1));
-
+        btnRegresar.setBackground(new java.awt.Color(0, 153, 204));
+        btnRegresar.setFont(new java.awt.Font("Roboto Light", 1, 18)); // NOI18N
+        btnRegresar.setForeground(new java.awt.Color(255, 255, 255));
         btnRegresar.setText("Regresar");
+        btnRegresar.setContentAreaFilled(false);
+        btnRegresar.setOpaque(true);
         btnRegresar.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 btnRegresarActionPerformed(evt);
             }
         });
-        getContentPane().add(btnRegresar, new org.netbeans.lib.awtextra.AbsoluteConstraints(100, 330, -1, -1));
+        jPanel1.add(btnRegresar, new org.netbeans.lib.awtextra.AbsoluteConstraints(400, 440, -1, -1));
 
+        btnPDF.setBackground(new java.awt.Color(0, 153, 204));
+        btnPDF.setFont(new java.awt.Font("Roboto Light", 1, 18)); // NOI18N
+        btnPDF.setForeground(new java.awt.Color(255, 255, 255));
         btnPDF.setText("Generar PDF");
+        btnPDF.setContentAreaFilled(false);
+        btnPDF.setOpaque(true);
         btnPDF.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 btnPDFActionPerformed(evt);
             }
         });
-        getContentPane().add(btnPDF, new org.netbeans.lib.awtextra.AbsoluteConstraints(240, 330, -1, -1));
+        jPanel1.add(btnPDF, new org.netbeans.lib.awtextra.AbsoluteConstraints(220, 440, -1, -1));
 
+        btnAceptar.setBackground(new java.awt.Color(0, 153, 204));
+        btnAceptar.setFont(new java.awt.Font("Roboto Light", 1, 18)); // NOI18N
+        btnAceptar.setForeground(new java.awt.Color(255, 255, 255));
         btnAceptar.setText("Aceptar");
+        btnAceptar.setContentAreaFilled(false);
+        btnAceptar.setOpaque(true);
         btnAceptar.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 btnAceptarActionPerformed(evt);
             }
         });
-        getContentPane().add(btnAceptar, new org.netbeans.lib.awtextra.AbsoluteConstraints(392, 330, 80, -1));
+        jPanel1.add(btnAceptar, new org.netbeans.lib.awtextra.AbsoluteConstraints(70, 440, -1, -1));
 
         tblReporte.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
@@ -200,12 +226,18 @@ public class frmReporte extends javax.swing.JFrame {
             }
         ));
         jScrollPane1.setViewportView(tblReporte);
+        tblReporte.getTableHeader().setFont(new Font("Segoe UI", Font.BOLD, 12));
+        tblReporte.getTableHeader().setOpaque(false);
+        tblReporte.getTableHeader().setBackground(new Color(102,89,222));
+        tblReporte.getTableHeader().setForeground(new Color(255,255,255));
 
-        getContentPane().add(jScrollPane1, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 100, 330, 203));
+        jPanel1.add(jScrollPane1, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 250, 530, 110));
 
-        txtNombre.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                txtNombreActionPerformed(evt);
+        txtNombre.setForeground(new java.awt.Color(204, 204, 204));
+        txtNombre.setBorder(null);
+        txtNombre.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mousePressed(java.awt.event.MouseEvent evt) {
+                txtNombreMousePressed(evt);
             }
         });
         txtNombre.addKeyListener(new java.awt.event.KeyAdapter() {
@@ -213,34 +245,66 @@ public class frmReporte extends javax.swing.JFrame {
                 txtNombreKeyReleased(evt);
             }
         });
-        getContentPane().add(txtNombre, new org.netbeans.lib.awtextra.AbsoluteConstraints(420, 230, 100, -1));
+        jPanel1.add(txtNombre, new org.netbeans.lib.awtextra.AbsoluteConstraints(230, 200, 120, -1));
 
-        jLabel3.setText("Nombre:");
-        getContentPane().add(jLabel3, new org.netbeans.lib.awtextra.AbsoluteConstraints(360, 230, -1, -1));
-
-        jLabel4.setText("Fecha_Fin:");
-        getContentPane().add(jLabel4, new org.netbeans.lib.awtextra.AbsoluteConstraints(280, 60, 70, -1));
-
-        jLabel7.setText("Tipo de tramite");
-        getContentPane().add(jLabel7, new org.netbeans.lib.awtextra.AbsoluteConstraints(360, 130, -1, -1));
-
+        cbPlaca.setFont(new java.awt.Font("Roboto Light", 0, 14)); // NOI18N
         cbPlaca.setText("Placa");
         cbPlaca.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 cbPlacaActionPerformed(evt);
             }
         });
-        getContentPane().add(cbPlaca, new org.netbeans.lib.awtextra.AbsoluteConstraints(360, 150, -1, -1));
+        jPanel1.add(cbPlaca, new org.netbeans.lib.awtextra.AbsoluteConstraints(370, 380, -1, -1));
 
+        cbLicencia.setFont(new java.awt.Font("Roboto Light", 0, 14)); // NOI18N
         cbLicencia.setText("Licencia");
         cbLicencia.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 cbLicenciaActionPerformed(evt);
             }
         });
-        getContentPane().add(cbLicencia, new org.netbeans.lib.awtextra.AbsoluteConstraints(360, 180, -1, -1));
-        getContentPane().add(txtFecha_inicio, new org.netbeans.lib.awtextra.AbsoluteConstraints(100, 60, 140, -1));
-        getContentPane().add(txtFecha_fin, new org.netbeans.lib.awtextra.AbsoluteConstraints(350, 60, 130, -1));
+        jPanel1.add(cbLicencia, new org.netbeans.lib.awtextra.AbsoluteConstraints(260, 380, -1, -1));
+
+        txtFecha_inicio.setBorder(new javax.swing.border.SoftBevelBorder(javax.swing.border.BevelBorder.RAISED));
+        jPanel1.add(txtFecha_inicio, new org.netbeans.lib.awtextra.AbsoluteConstraints(120, 140, 160, -1));
+
+        txtFecha_fin.setBorder(new javax.swing.border.SoftBevelBorder(javax.swing.border.BevelBorder.RAISED));
+        jPanel1.add(txtFecha_fin, new org.netbeans.lib.awtextra.AbsoluteConstraints(330, 140, 160, -1));
+
+        jLabel6.setIcon(new javax.swing.ImageIcon(getClass().getResource("/IMG/favicon.png"))); // NOI18N
+        jPanel1.add(jLabel6, new org.netbeans.lib.awtextra.AbsoluteConstraints(30, 40, -1, -1));
+
+        jLabel11.setFont(new java.awt.Font("Roboto Medium", 1, 36)); // NOI18N
+        jLabel11.setText("REPORTES");
+        jPanel1.add(jLabel11, new org.netbeans.lib.awtextra.AbsoluteConstraints(80, 30, -1, -1));
+
+        jLabel5.setIcon(new javax.swing.ImageIcon(getClass().getResource("/IMG/city.png"))); // NOI18N
+        jPanel1.add(jLabel5, new org.netbeans.lib.awtextra.AbsoluteConstraints(556, 0, 250, -1));
+
+        jLabel19.setFont(new java.awt.Font("Roboto Light", 0, 14)); // NOI18N
+        jLabel19.setText("Y");
+        jPanel1.add(jLabel19, new org.netbeans.lib.awtextra.AbsoluteConstraints(300, 150, -1, -1));
+
+        jLabel20.setFont(new java.awt.Font("Roboto Light", 1, 24)); // NOI18N
+        jLabel20.setText("Tipo de trámite");
+        jPanel1.add(jLabel20, new org.netbeans.lib.awtextra.AbsoluteConstraints(70, 380, -1, -1));
+
+        jLabel21.setFont(new java.awt.Font("Roboto Light", 0, 14)); // NOI18N
+        jLabel21.setText("Fecha entre");
+        jPanel1.add(jLabel21, new org.netbeans.lib.awtextra.AbsoluteConstraints(40, 150, -1, -1));
+
+        jLabel22.setFont(new java.awt.Font("Roboto Light", 0, 14)); // NOI18N
+        jLabel22.setText("Nombre");
+        jPanel1.add(jLabel22, new org.netbeans.lib.awtextra.AbsoluteConstraints(170, 200, -1, -1));
+
+        jSeparator5.setForeground(new java.awt.Color(0, 0, 0));
+        jPanel1.add(jSeparator5, new org.netbeans.lib.awtextra.AbsoluteConstraints(230, 220, 190, 20));
+
+        jLabel23.setFont(new java.awt.Font("Roboto Light", 1, 24)); // NOI18N
+        jLabel23.setText("Buscar Por");
+        jPanel1.add(jLabel23, new org.netbeans.lib.awtextra.AbsoluteConstraints(40, 90, -1, -1));
+
+        getContentPane().add(jPanel1, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, 800, 500));
 
         pack();
         setLocationRelativeTo(null);
@@ -301,10 +365,6 @@ public class frmReporte extends javax.swing.JFrame {
         // TODO add your handling code here:
         llenarTramites();
     }//GEN-LAST:event_txtNombreKeyReleased
-
-    private void txtNombreActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txtNombreActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_txtNombreActionPerformed
     /**
      * Método para agregar la información al pdf al generarse
      * @param evt evt
@@ -366,42 +426,16 @@ public class frmReporte extends javax.swing.JFrame {
             }
         }
     }//GEN-LAST:event_btnPDFActionPerformed
-
     /**
-     * @param args the command line arguments
+     * Método para aparentar un placeholder
+     * @param evt evt
      */
-    public static void main(String args[]) {
-        /* Set the Nimbus look and feel */
-        //<editor-fold defaultstate="collapsed" desc=" Look and feel setting code (optional) ">
-        /* If Nimbus (introduced in Java SE 6) is not available, stay with the default look and feel.
-         * For details see http://download.oracle.com/javase/tutorial/uiswing/lookandfeel/plaf.html 
-         */
-        try {
-            for (javax.swing.UIManager.LookAndFeelInfo info : javax.swing.UIManager.getInstalledLookAndFeels()) {
-                if ("Nimbus".equals(info.getName())) {
-                    javax.swing.UIManager.setLookAndFeel(info.getClassName());
-                    break;
-                }
-            }
-        } catch (ClassNotFoundException ex) {
-            java.util.logging.Logger.getLogger(frmReporte.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
-        } catch (InstantiationException ex) {
-            java.util.logging.Logger.getLogger(frmReporte.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
-        } catch (IllegalAccessException ex) {
-            java.util.logging.Logger.getLogger(frmReporte.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
-        } catch (javax.swing.UnsupportedLookAndFeelException ex) {
-            java.util.logging.Logger.getLogger(frmReporte.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
-        }
-        //</editor-fold>
-        //</editor-fold>
+    private void txtNombreMousePressed(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_txtNombreMousePressed
+        txtNombre.setText("");
+        txtNombre.setForeground(Color.black);
+    }//GEN-LAST:event_txtNombreMousePressed
 
-        /* Create and display the form */
-        java.awt.EventQueue.invokeLater(new Runnable() {
-            public void run() {
-                new frmReporte().setVisible(true);
-            }
-        });
-    }
+    
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton btnAceptar;
@@ -411,12 +445,17 @@ public class frmReporte extends javax.swing.JFrame {
     private javax.swing.JCheckBox cbPlaca;
     private com.toedter.calendar.JDateChooser jDateChooser2;
     private com.toedter.calendar.JDateChooser jDateChooser3;
-    private javax.swing.JLabel jLabel1;
-    private javax.swing.JLabel jLabel2;
-    private javax.swing.JLabel jLabel3;
-    private javax.swing.JLabel jLabel4;
-    private javax.swing.JLabel jLabel7;
+    private javax.swing.JLabel jLabel11;
+    private javax.swing.JLabel jLabel19;
+    private javax.swing.JLabel jLabel20;
+    private javax.swing.JLabel jLabel21;
+    private javax.swing.JLabel jLabel22;
+    private javax.swing.JLabel jLabel23;
+    private javax.swing.JLabel jLabel5;
+    private javax.swing.JLabel jLabel6;
+    private javax.swing.JPanel jPanel1;
     private javax.swing.JScrollPane jScrollPane1;
+    private javax.swing.JSeparator jSeparator5;
     private javax.swing.JTable tblReporte;
     private com.toedter.calendar.JDateChooser txtFecha_fin;
     private com.toedter.calendar.JDateChooser txtFecha_inicio;

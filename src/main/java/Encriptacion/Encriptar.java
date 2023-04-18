@@ -10,7 +10,7 @@ import javax.crypto.Cipher;
 import javax.crypto.spec.SecretKeySpec;
 
 /**
- *
+ * Clase utilizada para encriptar y desencriptar un String
  * @author oscar
  */
 public class Encriptar {

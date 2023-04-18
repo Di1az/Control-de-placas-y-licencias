@@ -7,6 +7,7 @@ package GUI;
 import DAO.IVehiculoDAO;
 import Entidades.Persona;
 import Entidades.Vehiculo;
+import java.awt.Color;
 import javax.swing.JOptionPane;
 
 /**
@@ -14,8 +15,15 @@ import javax.swing.JOptionPane;
  * @author dany
  */
 public class frmVehiculo extends javax.swing.JFrame {
-
+    
+    /**
+     * Objeto de tipo IVehiculoDAO
+     */
     private final IVehiculoDAO vehiculoDAO;
+    
+    /**
+     * Objeto de tipo persona
+     */
     private Persona persona;
 
     /**
@@ -85,26 +93,36 @@ public class frmVehiculo extends javax.swing.JFrame {
 
         jScrollPane1 = new javax.swing.JScrollPane();
         jList1 = new javax.swing.JList<>();
-        jLabel1 = new javax.swing.JLabel();
+        jPanel1 = new javax.swing.JPanel();
         cbTipo = new javax.swing.JComboBox<>();
-        jLabel2 = new javax.swing.JLabel();
-        jLabel3 = new javax.swing.JLabel();
         txtNumero = new javax.swing.JTextField();
-        jLabel4 = new javax.swing.JLabel();
         txtModelo = new javax.swing.JTextField();
-        jLabel5 = new javax.swing.JLabel();
         txtLinea = new javax.swing.JTextField();
-        jLabel6 = new javax.swing.JLabel();
         txtColor = new javax.swing.JTextField();
         btnRegresar = new javax.swing.JButton();
         btnCancelar = new javax.swing.JButton();
         btnAceptar = new javax.swing.JButton();
-        jLabel8 = new javax.swing.JLabel();
-        jLabel9 = new javax.swing.JLabel();
         txtEstado = new javax.swing.JTextField();
         txtDueño = new javax.swing.JTextField();
-        jLabel7 = new javax.swing.JLabel();
         txtMarca1 = new javax.swing.JTextField();
+        jLabel10 = new javax.swing.JLabel();
+        jLabel11 = new javax.swing.JLabel();
+        jLabel12 = new javax.swing.JLabel();
+        jLabel13 = new javax.swing.JLabel();
+        jLabel14 = new javax.swing.JLabel();
+        jLabel15 = new javax.swing.JLabel();
+        jLabel16 = new javax.swing.JLabel();
+        jLabel17 = new javax.swing.JLabel();
+        jLabel18 = new javax.swing.JLabel();
+        jLabel19 = new javax.swing.JLabel();
+        jLabel20 = new javax.swing.JLabel();
+        jSeparator2 = new javax.swing.JSeparator();
+        jSeparator3 = new javax.swing.JSeparator();
+        jSeparator4 = new javax.swing.JSeparator();
+        jSeparator5 = new javax.swing.JSeparator();
+        jSeparator6 = new javax.swing.JSeparator();
+        jSeparator7 = new javax.swing.JSeparator();
+        jSeparator8 = new javax.swing.JSeparator();
 
         jList1.setModel(new javax.swing.AbstractListModel<String>() {
             String[] strings = { "Item 1", "Item 2", "Item 3", "Item 4", "Item 5" };
@@ -116,46 +134,49 @@ public class frmVehiculo extends javax.swing.JFrame {
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         getContentPane().setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
-        jLabel1.setText("Registrar vehiculo");
-        getContentPane().add(jLabel1, new org.netbeans.lib.awtextra.AbsoluteConstraints(140, 10, -1, -1));
+        jPanel1.setBackground(new java.awt.Color(255, 255, 255));
+        jPanel1.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
         cbTipo.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Seleccionar", "Automovil" }));
-        cbTipo.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                cbTipoActionPerformed(evt);
+        cbTipo.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(0, 153, 204), 2));
+        jPanel1.add(cbTipo, new org.netbeans.lib.awtextra.AbsoluteConstraints(200, 100, 210, -1));
+
+        txtNumero.setForeground(new java.awt.Color(204, 204, 204));
+        txtNumero.setText("Ingrese el número de serie");
+        txtNumero.setBorder(null);
+        txtNumero.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mousePressed(java.awt.event.MouseEvent evt) {
+                txtNumeroMousePressed(evt);
             }
         });
-        getContentPane().add(cbTipo, new org.netbeans.lib.awtextra.AbsoluteConstraints(170, 50, -1, -1));
-
-        jLabel2.setText("Tipo de vehiculo:");
-        getContentPane().add(jLabel2, new org.netbeans.lib.awtextra.AbsoluteConstraints(50, 50, -1, -1));
-
-        jLabel3.setText("Número de serie:");
-        getContentPane().add(jLabel3, new org.netbeans.lib.awtextra.AbsoluteConstraints(50, 90, -1, -1));
-
         txtNumero.addKeyListener(new java.awt.event.KeyAdapter() {
             public void keyTyped(java.awt.event.KeyEvent evt) {
                 txtNumeroKeyTyped(evt);
             }
         });
-        getContentPane().add(txtNumero, new org.netbeans.lib.awtextra.AbsoluteConstraints(170, 90, 90, -1));
+        jPanel1.add(txtNumero, new org.netbeans.lib.awtextra.AbsoluteConstraints(200, 140, 170, -1));
 
-        jLabel4.setText("Modelo:");
-        getContentPane().add(jLabel4, new org.netbeans.lib.awtextra.AbsoluteConstraints(100, 150, -1, -1));
-
+        txtModelo.setForeground(new java.awt.Color(204, 204, 204));
+        txtModelo.setText("Ingrese el modelo");
+        txtModelo.setBorder(null);
+        txtModelo.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mousePressed(java.awt.event.MouseEvent evt) {
+                txtModeloMousePressed(evt);
+            }
+        });
         txtModelo.addKeyListener(new java.awt.event.KeyAdapter() {
             public void keyTyped(java.awt.event.KeyEvent evt) {
                 txtModeloKeyTyped(evt);
             }
         });
-        getContentPane().add(txtModelo, new org.netbeans.lib.awtextra.AbsoluteConstraints(170, 150, 90, -1));
+        jPanel1.add(txtModelo, new org.netbeans.lib.awtextra.AbsoluteConstraints(140, 220, 140, -1));
 
-        jLabel5.setText("Linea:");
-        getContentPane().add(jLabel5, new org.netbeans.lib.awtextra.AbsoluteConstraints(110, 180, -1, -1));
-
-        txtLinea.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                txtLineaActionPerformed(evt);
+        txtLinea.setForeground(new java.awt.Color(204, 204, 204));
+        txtLinea.setText("Ingrese la línea");
+        txtLinea.setBorder(null);
+        txtLinea.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mousePressed(java.awt.event.MouseEvent evt) {
+                txtLineaMousePressed(evt);
             }
         });
         txtLinea.addKeyListener(new java.awt.event.KeyAdapter() {
@@ -163,76 +184,167 @@ public class frmVehiculo extends javax.swing.JFrame {
                 txtLineaKeyTyped(evt);
             }
         });
-        getContentPane().add(txtLinea, new org.netbeans.lib.awtextra.AbsoluteConstraints(170, 180, 90, -1));
+        jPanel1.add(txtLinea, new org.netbeans.lib.awtextra.AbsoluteConstraints(130, 260, 90, -1));
 
-        jLabel6.setText("Color:");
-        getContentPane().add(jLabel6, new org.netbeans.lib.awtextra.AbsoluteConstraints(110, 210, -1, -1));
-
+        txtColor.setForeground(new java.awt.Color(204, 204, 204));
+        txtColor.setText("Ingrese el color");
+        txtColor.setBorder(null);
+        txtColor.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mousePressed(java.awt.event.MouseEvent evt) {
+                txtColorMousePressed(evt);
+            }
+        });
         txtColor.addKeyListener(new java.awt.event.KeyAdapter() {
             public void keyTyped(java.awt.event.KeyEvent evt) {
                 txtColorKeyTyped(evt);
             }
         });
-        getContentPane().add(txtColor, new org.netbeans.lib.awtextra.AbsoluteConstraints(170, 210, 90, -1));
+        jPanel1.add(txtColor, new org.netbeans.lib.awtextra.AbsoluteConstraints(130, 300, 150, -1));
 
+        btnRegresar.setBackground(new java.awt.Color(0, 153, 204));
+        btnRegresar.setFont(new java.awt.Font("Roboto Light", 1, 14)); // NOI18N
+        btnRegresar.setForeground(new java.awt.Color(255, 255, 255));
         btnRegresar.setText("Regresar");
+        btnRegresar.setContentAreaFilled(false);
+        btnRegresar.setOpaque(true);
         btnRegresar.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 btnRegresarActionPerformed(evt);
             }
         });
-        getContentPane().add(btnRegresar, new org.netbeans.lib.awtextra.AbsoluteConstraints(40, 330, -1, -1));
+        jPanel1.add(btnRegresar, new org.netbeans.lib.awtextra.AbsoluteConstraints(200, 450, -1, -1));
 
+        btnCancelar.setBackground(new java.awt.Color(0, 153, 204));
+        btnCancelar.setFont(new java.awt.Font("Roboto Light", 1, 14)); // NOI18N
+        btnCancelar.setForeground(new java.awt.Color(255, 255, 255));
         btnCancelar.setText("Cancelar");
+        btnCancelar.setContentAreaFilled(false);
+        btnCancelar.setOpaque(true);
         btnCancelar.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 btnCancelarActionPerformed(evt);
             }
         });
-        getContentPane().add(btnCancelar, new org.netbeans.lib.awtextra.AbsoluteConstraints(150, 330, -1, -1));
+        jPanel1.add(btnCancelar, new org.netbeans.lib.awtextra.AbsoluteConstraints(340, 450, -1, -1));
 
+        btnAceptar.setBackground(new java.awt.Color(0, 153, 204));
+        btnAceptar.setFont(new java.awt.Font("Roboto Light", 1, 14)); // NOI18N
+        btnAceptar.setForeground(new java.awt.Color(255, 255, 255));
         btnAceptar.setText("Aceptar");
+        btnAceptar.setContentAreaFilled(false);
         btnAceptar.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 btnAceptarActionPerformed(evt);
             }
         });
-        getContentPane().add(btnAceptar, new org.netbeans.lib.awtextra.AbsoluteConstraints(270, 330, -1, -1));
-
-        jLabel8.setText("Dueño del vehiculo(RFC):");
-        getContentPane().add(jLabel8, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 270, -1, 20));
-
-        jLabel9.setText("Estado:");
-        getContentPane().add(jLabel9, new org.netbeans.lib.awtextra.AbsoluteConstraints(100, 240, -1, -1));
+        jPanel1.add(btnAceptar, new org.netbeans.lib.awtextra.AbsoluteConstraints(60, 450, -1, -1));
 
         txtEstado.setEditable(false);
         txtEstado.setText("Nuevo");
-        getContentPane().add(txtEstado, new org.netbeans.lib.awtextra.AbsoluteConstraints(170, 240, 90, -1));
+        txtEstado.setBorder(null);
+        jPanel1.add(txtEstado, new org.netbeans.lib.awtextra.AbsoluteConstraints(130, 340, 230, -1));
 
         txtDueño.setEditable(false);
-        getContentPane().add(txtDueño, new org.netbeans.lib.awtextra.AbsoluteConstraints(170, 270, 90, -1));
+        txtDueño.setBorder(null);
+        jPanel1.add(txtDueño, new org.netbeans.lib.awtextra.AbsoluteConstraints(130, 390, 230, -1));
 
-        jLabel7.setText("Marca:");
-        getContentPane().add(jLabel7, new org.netbeans.lib.awtextra.AbsoluteConstraints(110, 120, -1, -1));
-
+        txtMarca1.setForeground(new java.awt.Color(204, 204, 204));
+        txtMarca1.setText("Ingrese la marca");
+        txtMarca1.setBorder(null);
+        txtMarca1.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mousePressed(java.awt.event.MouseEvent evt) {
+                txtMarca1MousePressed(evt);
+            }
+        });
         txtMarca1.addKeyListener(new java.awt.event.KeyAdapter() {
             public void keyTyped(java.awt.event.KeyEvent evt) {
                 txtMarca1KeyTyped(evt);
             }
         });
-        getContentPane().add(txtMarca1, new org.netbeans.lib.awtextra.AbsoluteConstraints(170, 120, 90, -1));
+        jPanel1.add(txtMarca1, new org.netbeans.lib.awtextra.AbsoluteConstraints(130, 180, 130, -1));
+
+        jLabel10.setIcon(new javax.swing.ImageIcon(getClass().getResource("/IMG/city.png"))); // NOI18N
+        jPanel1.add(jLabel10, new org.netbeans.lib.awtextra.AbsoluteConstraints(510, 0, -1, -1));
+
+        jLabel11.setFont(new java.awt.Font("Roboto Medium", 1, 36)); // NOI18N
+        jLabel11.setText("REGISTRO VEHÍCULOS");
+        jPanel1.add(jLabel11, new org.netbeans.lib.awtextra.AbsoluteConstraints(70, 30, -1, -1));
+
+        jLabel12.setIcon(new javax.swing.ImageIcon(getClass().getResource("/IMG/favicon.png"))); // NOI18N
+        jPanel1.add(jLabel12, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 40, -1, -1));
+
+        jLabel13.setFont(new java.awt.Font("Roboto Light", 0, 14)); // NOI18N
+        jLabel13.setText("Dueño");
+        jPanel1.add(jLabel13, new org.netbeans.lib.awtextra.AbsoluteConstraints(80, 390, -1, -1));
+
+        jLabel14.setFont(new java.awt.Font("Roboto Light", 0, 14)); // NOI18N
+        jLabel14.setText("Tipo de vehículo");
+        jPanel1.add(jLabel14, new org.netbeans.lib.awtextra.AbsoluteConstraints(80, 100, -1, -1));
+
+        jLabel15.setFont(new java.awt.Font("Roboto Light", 0, 14)); // NOI18N
+        jLabel15.setText("Número de serie");
+        jPanel1.add(jLabel15, new org.netbeans.lib.awtextra.AbsoluteConstraints(80, 140, -1, -1));
+
+        jLabel16.setFont(new java.awt.Font("Roboto Light", 0, 14)); // NOI18N
+        jLabel16.setText("Marca");
+        jPanel1.add(jLabel16, new org.netbeans.lib.awtextra.AbsoluteConstraints(80, 180, -1, -1));
+
+        jLabel17.setFont(new java.awt.Font("Roboto Light", 0, 14)); // NOI18N
+        jLabel17.setText("Modelo");
+        jPanel1.add(jLabel17, new org.netbeans.lib.awtextra.AbsoluteConstraints(80, 220, -1, -1));
+
+        jLabel18.setFont(new java.awt.Font("Roboto Light", 0, 14)); // NOI18N
+        jLabel18.setText("Línea");
+        jPanel1.add(jLabel18, new org.netbeans.lib.awtextra.AbsoluteConstraints(80, 260, -1, -1));
+
+        jLabel19.setFont(new java.awt.Font("Roboto Light", 0, 14)); // NOI18N
+        jLabel19.setText("Color");
+        jPanel1.add(jLabel19, new org.netbeans.lib.awtextra.AbsoluteConstraints(80, 300, -1, -1));
+
+        jLabel20.setFont(new java.awt.Font("Roboto Light", 0, 14)); // NOI18N
+        jLabel20.setText("Estado");
+        jPanel1.add(jLabel20, new org.netbeans.lib.awtextra.AbsoluteConstraints(80, 340, -1, -1));
+
+        jSeparator2.setForeground(new java.awt.Color(0, 0, 0));
+        jPanel1.add(jSeparator2, new org.netbeans.lib.awtextra.AbsoluteConstraints(130, 410, 230, 20));
+
+        jSeparator3.setForeground(new java.awt.Color(0, 0, 0));
+        jPanel1.add(jSeparator3, new org.netbeans.lib.awtextra.AbsoluteConstraints(200, 160, 210, 20));
+
+        jSeparator4.setForeground(new java.awt.Color(0, 0, 0));
+        jPanel1.add(jSeparator4, new org.netbeans.lib.awtextra.AbsoluteConstraints(130, 200, 240, 20));
+
+        jSeparator5.setForeground(new java.awt.Color(0, 0, 0));
+        jPanel1.add(jSeparator5, new org.netbeans.lib.awtextra.AbsoluteConstraints(140, 240, 230, 20));
+
+        jSeparator6.setForeground(new java.awt.Color(0, 0, 0));
+        jPanel1.add(jSeparator6, new org.netbeans.lib.awtextra.AbsoluteConstraints(130, 280, 230, 20));
+
+        jSeparator7.setForeground(new java.awt.Color(0, 0, 0));
+        jPanel1.add(jSeparator7, new org.netbeans.lib.awtextra.AbsoluteConstraints(130, 320, 230, 20));
+
+        jSeparator8.setForeground(new java.awt.Color(0, 0, 0));
+        jPanel1.add(jSeparator8, new org.netbeans.lib.awtextra.AbsoluteConstraints(130, 360, 230, 20));
+
+        getContentPane().add(jPanel1, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, 800, 500));
 
         pack();
         setLocationRelativeTo(null);
     }// </editor-fold>//GEN-END:initComponents
-
+    /**
+     * Método para regresar al menu principal al dar click en el boton 
+     * @param evt evt
+     */
     private void btnRegresarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnRegresarActionPerformed
 
         frmMenuPrincipal principal = new frmMenuPrincipal(persona);
         principal.setVisible(true);
         this.dispose();
     }//GEN-LAST:event_btnRegresarActionPerformed
-
+    /**
+     * Método para limpiar todos lod textfields
+     * @param evt evt
+     */
     private void btnCancelarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnCancelarActionPerformed
         // TODO add your handling code here:
         txtColor.setText("");
@@ -254,10 +366,6 @@ public class frmVehiculo extends javax.swing.JFrame {
         // TODO add your handling code here
         this.agregar();
     }//GEN-LAST:event_btnAceptarActionPerformed
-
-    private void cbTipoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_cbTipoActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_cbTipoActionPerformed
     /**
      * Método que valida el campo de numero de serie
      *
@@ -274,84 +382,112 @@ public class frmVehiculo extends javax.swing.JFrame {
             evt.consume();
         }
     }//GEN-LAST:event_txtNumeroKeyTyped
-
+    /**
+     * Método que llama al metodo validarMarca para realizar obvios trabajos 
+     * @param evt evt
+     */
     private void txtMarca1KeyTyped(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_txtMarca1KeyTyped
         validarMarca(evt);
     }//GEN-LAST:event_txtMarca1KeyTyped
-
+    /**
+     * Método utilizado para validar el txt de modelo (solo números) 
+     * @param evt evt
+     */
     private void txtModeloKeyTyped(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_txtModeloKeyTyped
         char c = evt.getKeyChar();
 
         if (c < '0' || c > '9'){
             evt.consume();
         }
+        
+        if (txtNumero.getText().length() == 4) {
+            evt.consume();
+        }
     }//GEN-LAST:event_txtModeloKeyTyped
-
+    /**
+     * Método utilizado para validar el txt de Linea 
+     * @param evt evt
+     */
     private void txtLineaKeyTyped(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_txtLineaKeyTyped
 
         validarMarca(evt);
     }//GEN-LAST:event_txtLineaKeyTyped
-
+    /**
+     * Método utilizado para validar el txt de color 
+     * @param evt evt
+     */
     private void txtColorKeyTyped(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_txtColorKeyTyped
         validarMarca(evt);
     }//GEN-LAST:event_txtColorKeyTyped
-
-    private void txtLineaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txtLineaActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_txtLineaActionPerformed
-
     /**
-     * @param args the command line arguments
+     * Método para aparentar un placeholder
+     * @param evt evt
      */
-    public static void main(String args[]) {
-        /* Set the Nimbus look and feel */
-        //<editor-fold defaultstate="collapsed" desc=" Look and feel setting code (optional) ">
-        /* If Nimbus (introduced in Java SE 6) is not available, stay with the default look and feel.
-         * For details see http://download.oracle.com/javase/tutorial/uiswing/lookandfeel/plaf.html 
-         */
-        try {
-            for (javax.swing.UIManager.LookAndFeelInfo info : javax.swing.UIManager.getInstalledLookAndFeels()) {
-                if ("Nimbus".equals(info.getName())) {
-                    javax.swing.UIManager.setLookAndFeel(info.getClassName());
-                    break;
-                }
-            }
-        } catch (ClassNotFoundException ex) {
-            java.util.logging.Logger.getLogger(frmVehiculo.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
-        } catch (InstantiationException ex) {
-            java.util.logging.Logger.getLogger(frmVehiculo.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
-        } catch (IllegalAccessException ex) {
-            java.util.logging.Logger.getLogger(frmVehiculo.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
-        } catch (javax.swing.UnsupportedLookAndFeelException ex) {
-            java.util.logging.Logger.getLogger(frmVehiculo.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
-        }
-        //</editor-fold>
-        //</editor-fold>
+    private void txtNumeroMousePressed(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_txtNumeroMousePressed
+        txtNumero.setText("");
+        txtNumero.setForeground(Color.black);
+    }//GEN-LAST:event_txtNumeroMousePressed
+    /**
+     * Método para aparentar un placeholder
+     * @param evt evt
+     */
+    private void txtMarca1MousePressed(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_txtMarca1MousePressed
+       txtMarca1.setText("");
+       txtMarca1.setForeground(Color.black);
+    }//GEN-LAST:event_txtMarca1MousePressed
+    /**
+     * Método para aparentar un placeholder
+     * @param evt evt
+     */
+    private void txtModeloMousePressed(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_txtModeloMousePressed
+       txtModelo.setText("");
+       txtModelo.setForeground(Color.black);
+    }//GEN-LAST:event_txtModeloMousePressed
+    /**
+     * Método para aparentar un placeholder
+     * @param evt evt
+     */
+    private void txtLineaMousePressed(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_txtLineaMousePressed
+       txtLinea.setText("");
+       txtLinea.setForeground(Color.black);
+    }//GEN-LAST:event_txtLineaMousePressed
+    /**
+     * Método para aparentar un placeholder
+     * @param evt evt
+     */
+    private void txtColorMousePressed(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_txtColorMousePressed
+       txtColor.setText("");
+       txtColor.setForeground(Color.black);
+    }//GEN-LAST:event_txtColorMousePressed
 
-        /* Create and display the form */
-        java.awt.EventQueue.invokeLater(new Runnable() {
-            public void run() {
-                //new frmVehiculo().setVisible(true);
-            }
-        });
-    }
+    
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton btnAceptar;
     private javax.swing.JButton btnCancelar;
     private javax.swing.JButton btnRegresar;
     private javax.swing.JComboBox<String> cbTipo;
-    private javax.swing.JLabel jLabel1;
-    private javax.swing.JLabel jLabel2;
-    private javax.swing.JLabel jLabel3;
-    private javax.swing.JLabel jLabel4;
-    private javax.swing.JLabel jLabel5;
-    private javax.swing.JLabel jLabel6;
-    private javax.swing.JLabel jLabel7;
-    private javax.swing.JLabel jLabel8;
-    private javax.swing.JLabel jLabel9;
+    private javax.swing.JLabel jLabel10;
+    private javax.swing.JLabel jLabel11;
+    private javax.swing.JLabel jLabel12;
+    private javax.swing.JLabel jLabel13;
+    private javax.swing.JLabel jLabel14;
+    private javax.swing.JLabel jLabel15;
+    private javax.swing.JLabel jLabel16;
+    private javax.swing.JLabel jLabel17;
+    private javax.swing.JLabel jLabel18;
+    private javax.swing.JLabel jLabel19;
+    private javax.swing.JLabel jLabel20;
     private javax.swing.JList<String> jList1;
+    private javax.swing.JPanel jPanel1;
     private javax.swing.JScrollPane jScrollPane1;
+    private javax.swing.JSeparator jSeparator2;
+    private javax.swing.JSeparator jSeparator3;
+    private javax.swing.JSeparator jSeparator4;
+    private javax.swing.JSeparator jSeparator5;
+    private javax.swing.JSeparator jSeparator6;
+    private javax.swing.JSeparator jSeparator7;
+    private javax.swing.JSeparator jSeparator8;
     private javax.swing.JTextField txtColor;
     private javax.swing.JTextField txtDueño;
     private javax.swing.JTextField txtEstado;

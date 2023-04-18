@@ -31,7 +31,10 @@ public class frmMenuPrincipal extends javax.swing.JFrame {
      * Objeto de tipo persona
      */
     Persona persona;
-
+    
+    /**
+     * Método constructor 
+     */
     public frmMenuPrincipal() {
         initComponents();
     }
@@ -68,8 +71,8 @@ public class frmMenuPrincipal extends javax.swing.JFrame {
 
 
     /**
-     * 
-     * @return 
+     * Método para verificar si una persona cuenta con una licencia vigente
+     * @return true si la persona cuenta con una licencia vigente, false de lo contrario 
      */
     public boolean verificarLista() {
         IConexionBD conexion = new ConexionBD();
@@ -101,7 +104,7 @@ public class frmMenuPrincipal extends javax.swing.JFrame {
         btnLicencia = new javax.swing.JButton();
         btnReporte = new javax.swing.JButton();
         jLabel2 = new javax.swing.JLabel();
-        btnPersona = new javax.swing.JButton();
+        btnInsert = new javax.swing.JButton();
         btnHistorial = new javax.swing.JButton();
         txtRFC = new javax.swing.JTextField();
         jLabel5 = new javax.swing.JLabel();
@@ -109,6 +112,7 @@ public class frmMenuPrincipal extends javax.swing.JFrame {
         jLabel3 = new javax.swing.JLabel();
         jSeparator1 = new javax.swing.JSeparator();
         jLabel6 = new javax.swing.JLabel();
+        btnPersona = new javax.swing.JButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         getContentPane().setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
@@ -208,26 +212,26 @@ public class frmMenuPrincipal extends javax.swing.JFrame {
         jLabel2.setText("Persona interesada (RFC)");
         bg.add(jLabel2, new org.netbeans.lib.awtextra.AbsoluteConstraints(30, 110, -1, -1));
 
-        btnPersona.setBackground(new java.awt.Color(0, 153, 204));
-        btnPersona.setFont(new java.awt.Font("Roboto Light", 1, 14)); // NOI18N
-        btnPersona.setForeground(new java.awt.Color(255, 255, 255));
-        btnPersona.setText("Registrar cliente");
-        btnPersona.setContentAreaFilled(false);
-        btnPersona.setOpaque(true);
-        btnPersona.addMouseListener(new java.awt.event.MouseAdapter() {
+        btnInsert.setBackground(new java.awt.Color(0, 153, 204));
+        btnInsert.setFont(new java.awt.Font("Roboto Light", 1, 14)); // NOI18N
+        btnInsert.setForeground(new java.awt.Color(255, 255, 255));
+        btnInsert.setText("Insert masivo");
+        btnInsert.setContentAreaFilled(false);
+        btnInsert.setOpaque(true);
+        btnInsert.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mouseEntered(java.awt.event.MouseEvent evt) {
-                btnPersonaMouseEntered(evt);
+                btnInsertMouseEntered(evt);
             }
             public void mouseExited(java.awt.event.MouseEvent evt) {
-                btnPersonaMouseExited(evt);
+                btnInsertMouseExited(evt);
             }
         });
-        btnPersona.addActionListener(new java.awt.event.ActionListener() {
+        btnInsert.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                btnPersonaActionPerformed(evt);
+                btnInsertActionPerformed(evt);
             }
         });
-        bg.add(btnPersona, new org.netbeans.lib.awtextra.AbsoluteConstraints(30, 190, 160, -1));
+        bg.add(btnInsert, new org.netbeans.lib.awtextra.AbsoluteConstraints(30, 430, 160, -1));
 
         btnHistorial.setBackground(new java.awt.Color(0, 153, 204));
         btnHistorial.setFont(new java.awt.Font("Roboto Light", 1, 14)); // NOI18N
@@ -282,6 +286,27 @@ public class frmMenuPrincipal extends javax.swing.JFrame {
         jLabel6.setIcon(new javax.swing.ImageIcon(getClass().getResource("/IMG/favicon.png"))); // NOI18N
         bg.add(jLabel6, new org.netbeans.lib.awtextra.AbsoluteConstraints(30, 40, 50, 50));
 
+        btnPersona.setBackground(new java.awt.Color(0, 153, 204));
+        btnPersona.setFont(new java.awt.Font("Roboto Light", 1, 14)); // NOI18N
+        btnPersona.setForeground(new java.awt.Color(255, 255, 255));
+        btnPersona.setText("Registrar cliente");
+        btnPersona.setContentAreaFilled(false);
+        btnPersona.setOpaque(true);
+        btnPersona.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseEntered(java.awt.event.MouseEvent evt) {
+                btnPersonaMouseEntered(evt);
+            }
+            public void mouseExited(java.awt.event.MouseEvent evt) {
+                btnPersonaMouseExited(evt);
+            }
+        });
+        btnPersona.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnPersonaActionPerformed(evt);
+            }
+        });
+        bg.add(btnPersona, new org.netbeans.lib.awtextra.AbsoluteConstraints(30, 190, 160, -1));
+
         getContentPane().add(bg, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, 800, 500));
 
         pack();
@@ -289,17 +314,17 @@ public class frmMenuPrincipal extends javax.swing.JFrame {
     }// </editor-fold>//GEN-END:initComponents
 
     /**
-     * Boton que accede al registro persona
-     * @param evt 
+     * Boton que accede al registro de 20 personas
+     * @param evt evt
      */
-    private void btnPersonaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnPersonaActionPerformed
-        // TODO add your handling code here:
+    private void btnInsertActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnInsertActionPerformed
+       
         IConexionBD conexion = new ConexionBD();
         IPersonaDAO personaDAO = new PersonaDAO(conexion);
-        frmPersona persona = new frmPersona(personaDAO);
-        persona.setVisible(true);
+        frmInsertsMasivos insert = new frmInsertsMasivos(personaDAO);
+        insert.setVisible(true);
         this.dispose();
-    }//GEN-LAST:event_btnPersonaActionPerformed
+    }//GEN-LAST:event_btnInsertActionPerformed
     /**
      * Método que al dar click en el boton si se encuentra a la persona nos
      * manda al frame de registro de vehículo
@@ -367,14 +392,20 @@ public class frmMenuPrincipal extends javax.swing.JFrame {
             
         }
     }//GEN-LAST:event_btnLicenciaActionPerformed
-
+    /**
+     * Método que al dar click al boton te manda a la pantalla de reportes
+     * @param evt evt
+     */
     private void btnReporteActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnReporteActionPerformed
-        // TODO add your handling code here:
+        
         frmReporte reporte = new frmReporte();
         reporte.setVisible(true);
         this.dispose();
     }//GEN-LAST:event_btnReporteActionPerformed
-
+    /**
+     * Método que al dar click al boton te manda a la pantalla de historial
+     * @param evt evt
+     */
     private void btnHistorialActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnHistorialActionPerformed
         // TODO add your handling code here:
         IConexionBD conexion = new ConexionBD();
@@ -395,105 +426,136 @@ public class frmMenuPrincipal extends javax.swing.JFrame {
             evt.consume();
         }
 
-        if (txtRFC.getText().length() == 13) {
+        if (txtRFC.getText().length() == 12) {
             evt.consume();
         }
 
 
     }//GEN-LAST:event_txtRFCKeyTyped
-
+    /**
+     * Método para aparentar la función de un placeholder
+     * @param evt evt
+     */
     private void txtRFCMousePressed(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_txtRFCMousePressed
         txtRFC.setText("");
         txtRFC.setForeground(Color.black);
     }//GEN-LAST:event_txtRFCMousePressed
-
-    private void btnPersonaMouseEntered(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btnPersonaMouseEntered
-        btnPersona.setBackground(new Color(0, 156, 223));
-    }//GEN-LAST:event_btnPersonaMouseEntered
-
-    private void btnPersonaMouseExited(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btnPersonaMouseExited
-        btnPersona.setBackground(new Color(0, 134, 190));
-    }//GEN-LAST:event_btnPersonaMouseExited
-
+    /**
+     * Método para cambiar el color del boton al pasar el mouse sobre el
+     * @param evt evt
+     */
+    private void btnInsertMouseEntered(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btnInsertMouseEntered
+        btnInsert.setBackground(new Color(0, 156, 223));
+    }//GEN-LAST:event_btnInsertMouseEntered
+    /**
+     * Método para cambiar el color del boton al quitar el mouse encima de el
+     * @param evt evt evt
+     */
+    private void btnInsertMouseExited(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btnInsertMouseExited
+        btnInsert.setBackground(new Color(0, 134, 190));
+    }//GEN-LAST:event_btnInsertMouseExited
+    /**
+     * Método para cambiar el color del boton al pasar el mouse sobre el
+     * @param evt evt
+     */
     private void btnVehiculoMouseEntered(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btnVehiculoMouseEntered
         btnVehiculo.setBackground(new Color(0, 156, 223));
     }//GEN-LAST:event_btnVehiculoMouseEntered
-
+    /**
+     * Método para cambiar el color del boton al quitar el mouse encima de el
+     * @param evt evt evt
+     */
     private void btnVehiculoMouseExited(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btnVehiculoMouseExited
         btnVehiculo.setBackground(new Color(0, 134, 190));
     }//GEN-LAST:event_btnVehiculoMouseExited
-
+    /**
+     * Método para cambiar el color del boton al pasar el mouse sobre el
+     * @param evt evt
+     */
     private void btnPlacasMouseEntered(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btnPlacasMouseEntered
         btnPlacas.setBackground(new Color(0, 156, 223));
     }//GEN-LAST:event_btnPlacasMouseEntered
-
+    /**
+     * Método para cambiar el color del boton al quitar el mouse encima de el
+     * @param evt evt evt
+     */
     private void btnPlacasMouseExited(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btnPlacasMouseExited
         btnPlacas.setBackground(new Color(0, 134, 190));
     }//GEN-LAST:event_btnPlacasMouseExited
-
+    /**
+     * Método para cambiar el color del boton al pasar el mouse sobre el
+     * @param evt evt
+     */
     private void btnLicenciaMouseEntered(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btnLicenciaMouseEntered
         btnLicencia.setBackground(new Color(0, 156, 223));
     }//GEN-LAST:event_btnLicenciaMouseEntered
-
+    /**
+     * Método para cambiar el color del boton al quitar el mouse encima de el
+     * @param evt evt evt
+     */
     private void btnLicenciaMouseExited(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btnLicenciaMouseExited
         btnLicencia.setBackground(new Color(0, 134, 190));
     }//GEN-LAST:event_btnLicenciaMouseExited
-
+    /**
+     * Método para cambiar el color del boton al pasar el mouse sobre el
+     * @param evt evt
+     */
     private void btnReporteMouseEntered(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btnReporteMouseEntered
         btnReporte.setBackground(new Color(0, 156, 223));
     }//GEN-LAST:event_btnReporteMouseEntered
-
+    /**
+     * Método para cambiar el color del boton al quitar el mouse encima de el
+     * @param evt evt evt
+     */
     private void btnReporteMouseExited(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btnReporteMouseExited
         btnReporte.setBackground(new Color(0, 134, 190));
     }//GEN-LAST:event_btnReporteMouseExited
-
+    /**
+     * Método para cambiar el color del boton al pasar el mouse sobre el
+     * @param evt evt
+     */
     private void btnHistorialMouseEntered(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btnHistorialMouseEntered
         btnHistorial.setBackground(new Color(0, 156, 223));
     }//GEN-LAST:event_btnHistorialMouseEntered
-
+    /**
+     * Método para cambiar el color del boton al quitar el mouse encima de el
+     * @param evt evt evt
+     */
     private void btnHistorialMouseExited(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btnHistorialMouseExited
         btnHistorial.setBackground(new Color(0, 134, 190));
     }//GEN-LAST:event_btnHistorialMouseExited
-
     /**
-     * @param args the command line arguments
+     * Método para cambiar el color del boton al pasar el mouse sobre el
+     * @param evt evt
      */
-    public static void main(String args[]) {
-        /* Set the Nimbus look and feel */
-        //<editor-fold defaultstate="collapsed" desc=" Look and feel setting code (optional) ">
-        /* If Nimbus (introduced in Java SE 6) is not available, stay with the default look and feel.
-         * For details see http://download.oracle.com/javase/tutorial/uiswing/lookandfeel/plaf.html 
-         */
-        try {
-            for (javax.swing.UIManager.LookAndFeelInfo info : javax.swing.UIManager.getInstalledLookAndFeels()) {
-                if ("Nimbus".equals(info.getName())) {
-                    javax.swing.UIManager.setLookAndFeel(info.getClassName());
-                    break;
-                }
-            }
-        } catch (ClassNotFoundException ex) {
-            java.util.logging.Logger.getLogger(frmMenuPrincipal.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
-        } catch (InstantiationException ex) {
-            java.util.logging.Logger.getLogger(frmMenuPrincipal.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
-        } catch (IllegalAccessException ex) {
-            java.util.logging.Logger.getLogger(frmMenuPrincipal.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
-        } catch (javax.swing.UnsupportedLookAndFeelException ex) {
-            java.util.logging.Logger.getLogger(frmMenuPrincipal.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
-        }
-        //</editor-fold>
-        //</editor-fold>
+    private void btnPersonaMouseEntered(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btnPersonaMouseEntered
+        btnPersona.setBackground(new Color(0, 156, 223));
+    }//GEN-LAST:event_btnPersonaMouseEntered
+    /**
+     * Método para cambiar el color del boton al quitar el mouse encima de el
+     * @param evt evt evt
+     */
+    private void btnPersonaMouseExited(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btnPersonaMouseExited
+       btnPersona.setBackground(new Color(0, 134, 190));
+    }//GEN-LAST:event_btnPersonaMouseExited
+    /**
+     * Boton que accede al registro persona
+     * @param evt evt
+     */
+    private void btnPersonaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnPersonaActionPerformed
+        IConexionBD conexion = new ConexionBD();
+        IPersonaDAO personaDAO = new PersonaDAO(conexion);
+        frmPersona persona = new frmPersona(personaDAO);
+        persona.setVisible(true);
+        this.dispose();
+    }//GEN-LAST:event_btnPersonaActionPerformed
 
-        /* Create and display the form */
-        java.awt.EventQueue.invokeLater(new Runnable() {
-            public void run() {
-                new frmMenuPrincipal().setVisible(true);
-            }
-        });
-    }
+    
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JPanel bg;
     private javax.swing.JButton btnHistorial;
+    private javax.swing.JButton btnInsert;
     private javax.swing.JButton btnLicencia;
     private javax.swing.JButton btnPersona;
     private javax.swing.JButton btnPlacas;

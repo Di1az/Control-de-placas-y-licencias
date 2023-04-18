@@ -26,11 +26,30 @@ import javax.swing.JOptionPane;
  * @author dany
  */
 public class frmPlacas extends javax.swing.JFrame {
-
+    
+    /**
+     * Objeto de tipo IPlacaDAO
+     */
     private final IPlacaDAO placaDAO;
+    
+    /**
+     * Objeto de tipo IVehiculoDAO
+     */
     private final IVehiculoDAO vehiculoDAO;
+    
+    /**
+     * Objeto de tipo Persona
+     */
     private Persona persona;
+    
+    /**
+     * Objeto de tipo Vehiculo
+     */
     private Vehiculo vehiculo;
+    
+    /**
+     * Atributo de tipo booleano para desactivar la placa
+     */
     private boolean desactivarPlaca;
 
     /**
@@ -69,25 +88,9 @@ public class frmPlacas extends javax.swing.JFrame {
     }
 
     /**
-     * Método que genera una cadena de 10 digitos aleatoria
-     *
-     * @return regresa la cadena
+     * Método para generar aleatoriamente el número de placa
+     * @return el String de la placa
      */
-//    public String generarPlacaAleatoria(int longitud) {
-//        // Lista de caracteres válidos para la placa
-//        char[] caracteresValidos = "ABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789".toCharArray();
-//
-//        // Crear un objeto Random
-//        Random rnd = new Random();
-//
-//        // Generar una placa de la longitud especificada
-//        StringBuilder placa = new StringBuilder();
-//        for (int i = 0; i < longitud; i++) {
-//            placa.append(caracteresValidos[rnd.nextInt(caracteresValidos.length)]);
-//        }
-//
-//        return placa.toString();
-//    }
     public String generarPlacaAleatoria() {
         // Lista de caracteres válidos para las letras de la placa
         char[] letrasValidas = "ABCDEFGHIJKLMNOPQRSTUVWXYZ".toCharArray();
@@ -121,7 +124,12 @@ public class frmPlacas extends javax.swing.JFrame {
 
         return placa.toString();
     }
-
+    
+    /**
+     * Método para calcular el precio del vehiculo dependiendo si es usado o nuevo
+     * @param vehiculo objeto para sacar el estado del vehiculo
+     * @return el precio de la placa
+     */
     public float calcularPrecio(Vehiculo vehiculo) {
         float precio = 0;
         if (vehiculo.getEstado() != null && vehiculo.getEstado().equals("Nuevo")) {
@@ -180,71 +188,86 @@ public class frmPlacas extends javax.swing.JFrame {
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
 
-        jLabel1 = new javax.swing.JLabel();
-        jLabel2 = new javax.swing.JLabel();
+        jPanel1 = new javax.swing.JPanel();
         btnRegresar = new javax.swing.JButton();
-        btnCancelar = new javax.swing.JButton();
         btnAceptar = new javax.swing.JButton();
         cbVehiculo = new javax.swing.JComboBox<>();
+        jLabel3 = new javax.swing.JLabel();
+        jLabel11 = new javax.swing.JLabel();
+        jLabel4 = new javax.swing.JLabel();
+        jLabel14 = new javax.swing.JLabel();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         getContentPane().setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
-        jLabel1.setText("Vehiculo");
-        getContentPane().add(jLabel1, new org.netbeans.lib.awtextra.AbsoluteConstraints(40, 100, -1, -1));
+        jPanel1.setBackground(new java.awt.Color(255, 255, 255));
+        jPanel1.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
-        jLabel2.setFont(new java.awt.Font("Segoe UI", 0, 18)); // NOI18N
-        jLabel2.setText("Solicitar placas");
-        getContentPane().add(jLabel2, new org.netbeans.lib.awtextra.AbsoluteConstraints(130, 30, -1, -1));
-
+        btnRegresar.setBackground(new java.awt.Color(0, 153, 204));
+        btnRegresar.setFont(new java.awt.Font("Roboto Light", 1, 18)); // NOI18N
+        btnRegresar.setForeground(new java.awt.Color(255, 255, 255));
         btnRegresar.setText("Regresar");
+        btnRegresar.setContentAreaFilled(false);
+        btnRegresar.setOpaque(true);
         btnRegresar.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 btnRegresarActionPerformed(evt);
             }
         });
-        getContentPane().add(btnRegresar, new org.netbeans.lib.awtextra.AbsoluteConstraints(50, 180, -1, -1));
+        jPanel1.add(btnRegresar, new org.netbeans.lib.awtextra.AbsoluteConstraints(300, 310, -1, -1));
 
-        btnCancelar.setText("Cancelar");
-        btnCancelar.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                btnCancelarActionPerformed(evt);
-            }
-        });
-        getContentPane().add(btnCancelar, new org.netbeans.lib.awtextra.AbsoluteConstraints(160, 180, -1, -1));
-
+        btnAceptar.setBackground(new java.awt.Color(0, 153, 204));
+        btnAceptar.setFont(new java.awt.Font("Roboto Light", 1, 18)); // NOI18N
+        btnAceptar.setForeground(new java.awt.Color(255, 255, 255));
         btnAceptar.setText("Aceptar");
+        btnAceptar.setContentAreaFilled(false);
+        btnAceptar.setOpaque(true);
         btnAceptar.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 btnAceptarActionPerformed(evt);
             }
         });
-        getContentPane().add(btnAceptar, new org.netbeans.lib.awtextra.AbsoluteConstraints(260, 180, -1, -1));
+        jPanel1.add(btnAceptar, new org.netbeans.lib.awtextra.AbsoluteConstraints(90, 310, -1, -1));
 
-        getContentPane().add(cbVehiculo, new org.netbeans.lib.awtextra.AbsoluteConstraints(110, 100, 180, -1));
+        cbVehiculo.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(0, 153, 204), 2));
+        jPanel1.add(cbVehiculo, new org.netbeans.lib.awtextra.AbsoluteConstraints(170, 180, 240, 30));
+
+        jLabel3.setIcon(new javax.swing.ImageIcon(getClass().getResource("/IMG/city.png"))); // NOI18N
+        jPanel1.add(jLabel3, new org.netbeans.lib.awtextra.AbsoluteConstraints(510, 0, -1, -1));
+
+        jLabel11.setFont(new java.awt.Font("Roboto Medium", 1, 36)); // NOI18N
+        jLabel11.setText("TRÁMITE PLACA");
+        jPanel1.add(jLabel11, new org.netbeans.lib.awtextra.AbsoluteConstraints(90, 40, -1, -1));
+
+        jLabel4.setIcon(new javax.swing.ImageIcon(getClass().getResource("/IMG/favicon.png"))); // NOI18N
+        jPanel1.add(jLabel4, new org.netbeans.lib.awtextra.AbsoluteConstraints(40, 50, -1, -1));
+
+        jLabel14.setFont(new java.awt.Font("Roboto Light", 0, 24)); // NOI18N
+        jLabel14.setText("Vehículo");
+        jPanel1.add(jLabel14, new org.netbeans.lib.awtextra.AbsoluteConstraints(60, 180, -1, -1));
+
+        getContentPane().add(jPanel1, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, 800, 500));
 
         pack();
         setLocationRelativeTo(null);
     }// </editor-fold>//GEN-END:initComponents
-
+    /**
+     * Método que al dar click al boton regresa al menu principal
+     * @param evt 
+     */
     private void btnRegresarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnRegresarActionPerformed
         // TODO add your handling code here:
         frmMenuPrincipal principal = new frmMenuPrincipal();
         principal.setVisible(true);
         this.dispose();
     }//GEN-LAST:event_btnRegresarActionPerformed
-
-    private void btnCancelarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnCancelarActionPerformed
-        // TODO add your handling code here:
-
-    }//GEN-LAST:event_btnCancelarActionPerformed
-
+    /**
+     * Método que al dar click en el boton agrega las placas al vehiculo seleccionado, si el 
+     * vehiculo ya cuenta con placas, pregunta si al usuario si desea sacar otras placas
+     * @param evt evt
+     */
     private void btnAceptarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnAceptarActionPerformed
-        // TODO add your handling code here:
-        /*JOptionPane.showMessageDialog(this, "Placas registradas correctamentes");
-        frmMenuPrincipal principal= new frmMenuPrincipal();
-        principal.setVisible(true);
-        this.dispose();*/
+
         IConexionBD conexion = new ConexionBD();
         IPlacaDAO pla = new PlacaDAO(conexion);
         vehiculo = (Vehiculo) cbVehiculo.getSelectedItem();
@@ -267,48 +290,15 @@ public class frmPlacas extends javax.swing.JFrame {
 
     }//GEN-LAST:event_btnAceptarActionPerformed
 
-    /**
-     * @param args the command line arguments
-     */
-    public static void main(String args[]) {
-        /* Set the Nimbus look and feel */
-        //<editor-fold defaultstate="collapsed" desc=" Look and feel setting code (optional) ">
-        /* If Nimbus (introduced in Java SE 6) is not available, stay with the default look and feel.
-         * For details see http://download.oracle.com/javase/tutorial/uiswing/lookandfeel/plaf.html 
-         */
-        try {
-            for (javax.swing.UIManager.LookAndFeelInfo info : javax.swing.UIManager.getInstalledLookAndFeels()) {
-                if ("Nimbus".equals(info.getName())) {
-                    javax.swing.UIManager.setLookAndFeel(info.getClassName());
-                    break;
-                }
-            }
-        } catch (ClassNotFoundException ex) {
-            java.util.logging.Logger.getLogger(frmPlacas.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
-        } catch (InstantiationException ex) {
-            java.util.logging.Logger.getLogger(frmPlacas.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
-        } catch (IllegalAccessException ex) {
-            java.util.logging.Logger.getLogger(frmPlacas.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
-        } catch (javax.swing.UnsupportedLookAndFeelException ex) {
-            java.util.logging.Logger.getLogger(frmPlacas.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
-        }
-        //</editor-fold>
-        //</editor-fold>
-
-        /* Create and display the form */
-        java.awt.EventQueue.invokeLater(new Runnable() {
-            public void run() {
-                //new frmPlacas().setVisible(true);
-            }
-        });
-    }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton btnAceptar;
-    private javax.swing.JButton btnCancelar;
     private javax.swing.JButton btnRegresar;
     private javax.swing.JComboBox<Vehiculo> cbVehiculo;
-    private javax.swing.JLabel jLabel1;
-    private javax.swing.JLabel jLabel2;
+    private javax.swing.JLabel jLabel11;
+    private javax.swing.JLabel jLabel14;
+    private javax.swing.JLabel jLabel3;
+    private javax.swing.JLabel jLabel4;
+    private javax.swing.JPanel jPanel1;
     // End of variables declaration//GEN-END:variables
 }
