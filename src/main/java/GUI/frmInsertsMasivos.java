@@ -42,34 +42,34 @@ public class frmInsertsMasivos extends javax.swing.JFrame {
     
     
     /**
-     * Metodo para agregar varias personas
+     * Metodo para agregar varias personas a la tabla
      */
     public void agregarVariasPersonas() {
         boolean dis = true;
 
-        for (int i = 0; i < jt.getRowCount(); i++) {
-            for (int j = 0; j < jt.getColumnCount(); j++) {
-                if (jt.getValueAt(i, j) == null) {
+        for (int i = 0; i < TblInserts.getRowCount(); i++) {
+            for (int j = 0; j < TblInserts.getColumnCount(); j++) {
+                if (TblInserts.getValueAt(i, j) == null) {
                     JOptionPane.showMessageDialog(null, "Falta una casilla");
                     return;
                 }
             }
         }
 
-        int rowCount = jt.getRowCount();
-        int colCount = jt.getColumnCount();
+        int rowCount = TblInserts.getRowCount();
+        int colCount = TblInserts.getColumnCount();
 
         for (int i = 0; i < rowCount; i++) {
-            String nombre = (String) jt.getValueAt(i, 0);
-            String apellidoPaterno = (String) jt.getValueAt(i, 1);
-            String apellidoMaterno = (String) jt.getValueAt(i, 2);
-            String rfc = (String) jt.getValueAt(i, 3);
-            String telefono = (String) jt.getValueAt(i, 4);
-            String fechaNacimiento = (String) jt.getValueAt(i, 6);
+            String nombre = (String) TblInserts.getValueAt(i, 0);
+            String apellidoPaterno = (String) TblInserts.getValueAt(i, 1);
+            String apellidoMaterno = (String) TblInserts.getValueAt(i, 2);
+            String rfc = (String) TblInserts.getValueAt(i, 3);
+            String telefono = (String) TblInserts.getValueAt(i, 4);
+            String fechaNacimiento = (String) TblInserts.getValueAt(i, 5);
 
-            if ("Si".equalsIgnoreCase((String) jt.getValueAt(i, 5))) {
+            if ("Si".equalsIgnoreCase((String) TblInserts.getValueAt(i, 6))) {
                 dis = true;
-            } else if (jt.getValueAt(i, 5) == null) {
+            } else if (TblInserts.getValueAt(i, 6) == null) {
                 dis = false;
             }
 
@@ -154,7 +154,7 @@ public class frmInsertsMasivos extends javax.swing.JFrame {
         btnAceptar = new javax.swing.JButton();
         btnRegresar = new javax.swing.JButton();
         jScrollPane1 = new javax.swing.JScrollPane();
-        jt = new javax.swing.JTable();
+        TblInserts = new javax.swing.JTable();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         getContentPane().setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
@@ -167,10 +167,10 @@ public class frmInsertsMasivos extends javax.swing.JFrame {
 
         jLabel11.setFont(new java.awt.Font("Roboto Medium", 1, 36)); // NOI18N
         jLabel11.setText("INSERTS MASIVOS ");
-        jPanel1.add(jLabel11, new org.netbeans.lib.awtextra.AbsoluteConstraints(80, 30, -1, -1));
+        jPanel1.add(jLabel11, new org.netbeans.lib.awtextra.AbsoluteConstraints(80, 50, -1, -1));
 
         jLabel2.setIcon(new javax.swing.ImageIcon(getClass().getResource("/IMG/favicon.png"))); // NOI18N
-        jPanel1.add(jLabel2, new org.netbeans.lib.awtextra.AbsoluteConstraints(30, 40, -1, -1));
+        jPanel1.add(jLabel2, new org.netbeans.lib.awtextra.AbsoluteConstraints(30, 60, -1, -1));
 
         btnAceptar.setBackground(new java.awt.Color(0, 153, 204));
         btnAceptar.setFont(new java.awt.Font("Roboto Light", 1, 18)); // NOI18N
@@ -198,7 +198,7 @@ public class frmInsertsMasivos extends javax.swing.JFrame {
         });
         jPanel1.add(btnRegresar, new org.netbeans.lib.awtextra.AbsoluteConstraints(370, 340, -1, -1));
 
-        jt.setModel(new javax.swing.table.DefaultTableModel(
+        TblInserts.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
                 {null, null, null, null, null, null, null},
                 {null, null, null, null, null, null, null},
@@ -206,31 +206,25 @@ public class frmInsertsMasivos extends javax.swing.JFrame {
                 {null, null, null, null, null, null, null}
             },
             new String [] {
-                "RFC", "Nombre", "AP", "AM", "Teléfono", "Birthday", "Discapacidad"
+                "Nombre", "AP", "AM", "RFC", "Teléfono", "Birthday", "Discapacidad"
             }
         ) {
             Class[] types = new Class [] {
-                java.lang.String.class, java.lang.String.class, java.lang.String.class, java.lang.String.class, java.lang.String.class, java.lang.Object.class, java.lang.Boolean.class
-            };
-            boolean[] canEdit = new boolean [] {
-                false, false, false, false, false, false, false
+                java.lang.String.class, java.lang.String.class, java.lang.String.class, java.lang.String.class, java.lang.String.class, java.lang.String.class, java.lang.Boolean.class
             };
 
             public Class getColumnClass(int columnIndex) {
                 return types [columnIndex];
             }
-
-            public boolean isCellEditable(int rowIndex, int columnIndex) {
-                return canEdit [columnIndex];
-            }
         });
-        jScrollPane1.setViewportView(jt);
+        jScrollPane1.setViewportView(TblInserts);
 
-        jPanel1.add(jScrollPane1, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 180, 600, 120));
+        jPanel1.add(jScrollPane1, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 160, 600, 120));
 
         getContentPane().add(jPanel1, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, 800, 500));
 
         pack();
+        setLocationRelativeTo(null);
     }// </editor-fold>//GEN-END:initComponents
     /**
      * Método que al dar click al boton realiza el metodo agregar
@@ -253,6 +247,7 @@ public class frmInsertsMasivos extends javax.swing.JFrame {
     
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
+    private javax.swing.JTable TblInserts;
     private javax.swing.JButton btnAceptar;
     private javax.swing.JButton btnRegresar;
     private javax.swing.JLabel jLabel1;
@@ -260,6 +255,5 @@ public class frmInsertsMasivos extends javax.swing.JFrame {
     private javax.swing.JLabel jLabel2;
     private javax.swing.JPanel jPanel1;
     private javax.swing.JScrollPane jScrollPane1;
-    private javax.swing.JTable jt;
     // End of variables declaration//GEN-END:variables
 }

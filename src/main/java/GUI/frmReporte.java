@@ -370,7 +370,7 @@ public class frmReporte extends javax.swing.JFrame {
      * @param evt evt
      */
     private void btnPDFActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnPDFActionPerformed
-        int opcion = JOptionPane.showConfirmDialog(null, "¿Está seguro de ejecutar este comando?", "Confirmar", JOptionPane.YES_NO_OPTION);
+        int opcion = JOptionPane.showConfirmDialog(null, "¿Quiere generar un reporte de la siguienta tabla?", "Confirmar", JOptionPane.YES_NO_OPTION);
 
         if (opcion == JOptionPane.YES_OPTION) {
             List<Reporte> listaReporte = new ArrayList<Reporte>();
