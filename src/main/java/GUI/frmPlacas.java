@@ -26,27 +26,27 @@ import javax.swing.JOptionPane;
  * @author dany
  */
 public class frmPlacas extends javax.swing.JFrame {
-    
+
     /**
      * Objeto de tipo IPlacaDAO
      */
     private final IPlacaDAO placaDAO;
-    
+
     /**
      * Objeto de tipo IVehiculoDAO
      */
     private final IVehiculoDAO vehiculoDAO;
-    
+
     /**
      * Objeto de tipo Persona
      */
     private Persona persona;
-    
+
     /**
      * Objeto de tipo Vehiculo
      */
     private Vehiculo vehiculo;
-    
+
     /**
      * Atributo de tipo booleano para desactivar la placa
      */
@@ -58,7 +58,7 @@ public class frmPlacas extends javax.swing.JFrame {
      * @param placaDAO placaDAO
      * @param vehiculoDAO vehiculoDAO
      * @param persona persona param desactivarPlaca
-     * @param desactivarPlaca 
+     * @param desactivarPlaca
      */
     public frmPlacas(IPlacaDAO placaDAO, IVehiculoDAO vehiculoDAO, Persona persona, boolean desactivarPlaca) {
         initComponents();
@@ -84,11 +84,13 @@ public class frmPlacas extends javax.swing.JFrame {
                 Vehiculo vehiculo = (Vehiculo) bonchan.next();
                 this.cbVehiculo.addItem(vehiculo);
             }
+
         }
     }
 
     /**
      * Método para generar aleatoriamente el número de placa
+     *
      * @return el String de la placa
      */
     public String generarPlacaAleatoria() {
@@ -124,9 +126,11 @@ public class frmPlacas extends javax.swing.JFrame {
 
         return placa.toString();
     }
-    
+
     /**
-     * Método para calcular el precio del vehiculo dependiendo si es usado o nuevo
+     * Método para calcular el precio del vehiculo dependiendo si es usado o
+     * nuevo
+     *
      * @param vehiculo objeto para sacar el estado del vehiculo
      * @return el precio de la placa
      */
@@ -163,7 +167,7 @@ public class frmPlacas extends javax.swing.JFrame {
 
         Placa placa = new Placa(calcularPrecio(vehiculo), p, estado, vehiculo, fechaRecepcion, fechaEmision, persona);
         if (desactivarPlaca) {
-           
+
             placaDAO.DesactivarPlaca(vehiculo.getId());
 
         }
@@ -196,6 +200,8 @@ public class frmPlacas extends javax.swing.JFrame {
         jLabel11 = new javax.swing.JLabel();
         jLabel4 = new javax.swing.JLabel();
         jLabel14 = new javax.swing.JLabel();
+        jLabel15 = new javax.swing.JLabel();
+        txtCosto = new javax.swing.JTextField();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         getContentPane().setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
@@ -230,6 +236,11 @@ public class frmPlacas extends javax.swing.JFrame {
         jPanel1.add(btnAceptar, new org.netbeans.lib.awtextra.AbsoluteConstraints(90, 310, -1, -1));
 
         cbVehiculo.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(0, 153, 204), 2));
+        cbVehiculo.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                cbVehiculoActionPerformed(evt);
+            }
+        });
         jPanel1.add(cbVehiculo, new org.netbeans.lib.awtextra.AbsoluteConstraints(170, 180, 240, 30));
 
         jLabel3.setIcon(new javax.swing.ImageIcon(getClass().getResource("/IMG/city.png"))); // NOI18N
@@ -243,8 +254,21 @@ public class frmPlacas extends javax.swing.JFrame {
         jPanel1.add(jLabel4, new org.netbeans.lib.awtextra.AbsoluteConstraints(40, 50, -1, -1));
 
         jLabel14.setFont(new java.awt.Font("Roboto Light", 0, 24)); // NOI18N
-        jLabel14.setText("Vehículo");
-        jPanel1.add(jLabel14, new org.netbeans.lib.awtextra.AbsoluteConstraints(60, 180, -1, -1));
+        jLabel14.setText("Costo");
+        jPanel1.add(jLabel14, new org.netbeans.lib.awtextra.AbsoluteConstraints(60, 240, -1, -1));
+
+        jLabel15.setFont(new java.awt.Font("Roboto Light", 0, 24)); // NOI18N
+        jLabel15.setText("Vehículo");
+        jPanel1.add(jLabel15, new org.netbeans.lib.awtextra.AbsoluteConstraints(60, 180, -1, -1));
+
+        txtCosto.setEditable(false);
+        txtCosto.setBorder(null);
+        txtCosto.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                txtCostoActionPerformed(evt);
+            }
+        });
+        jPanel1.add(txtCosto, new org.netbeans.lib.awtextra.AbsoluteConstraints(140, 240, 230, 30));
 
         getContentPane().add(jPanel1, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, 800, 500));
 
@@ -253,7 +277,8 @@ public class frmPlacas extends javax.swing.JFrame {
     }// </editor-fold>//GEN-END:initComponents
     /**
      * Método que al dar click al boton regresa al menu principal
-     * @param evt 
+     *
+     * @param evt
      */
     private void btnRegresarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnRegresarActionPerformed
         // TODO add your handling code here:
@@ -262,8 +287,10 @@ public class frmPlacas extends javax.swing.JFrame {
         this.dispose();
     }//GEN-LAST:event_btnRegresarActionPerformed
     /**
-     * Método que al dar click en el boton agrega las placas al vehiculo seleccionado, si el 
-     * vehiculo ya cuenta con placas, pregunta si al usuario si desea sacar otras placas
+     * Método que al dar click en el boton agrega las placas al vehiculo
+     * seleccionado, si el vehiculo ya cuenta con placas, pregunta si al usuario
+     * si desea sacar otras placas
+     *
      * @param evt evt
      */
     private void btnAceptarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnAceptarActionPerformed
@@ -290,6 +317,20 @@ public class frmPlacas extends javax.swing.JFrame {
 
     }//GEN-LAST:event_btnAceptarActionPerformed
 
+    private void txtCostoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txtCostoActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_txtCostoActionPerformed
+
+    private void cbVehiculoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_cbVehiculoActionPerformed
+        // TODO add your handling code here:
+        vehiculo = (Vehiculo) cbVehiculo.getSelectedItem();
+        if (vehiculo.getEstado().equalsIgnoreCase("Nuevo")){
+            this.txtCosto.setText("1500");
+        }else{
+            this.txtCosto.setText("1000");
+        }
+    }//GEN-LAST:event_cbVehiculoActionPerformed
+
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton btnAceptar;
@@ -297,8 +338,10 @@ public class frmPlacas extends javax.swing.JFrame {
     private javax.swing.JComboBox<Vehiculo> cbVehiculo;
     private javax.swing.JLabel jLabel11;
     private javax.swing.JLabel jLabel14;
+    private javax.swing.JLabel jLabel15;
     private javax.swing.JLabel jLabel3;
     private javax.swing.JLabel jLabel4;
     private javax.swing.JPanel jPanel1;
+    private javax.swing.JTextField txtCosto;
     // End of variables declaration//GEN-END:variables
 }

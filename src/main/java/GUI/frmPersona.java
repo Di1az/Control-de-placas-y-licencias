@@ -383,9 +383,11 @@ public class frmPersona extends javax.swing.JFrame {
      * @param evt evt
      */
     private void txtRFCKeyTyped(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_txtRFCKeyTyped
-        char c = evt.getKeyChar();
-        
-        if((c<'0' || c>'9') && (c<'A' )| c>'Z')evt.consume();
+       char c = evt.getKeyChar();
+
+        if ((c < '0' || c > '9') && (c < 'A') | c > 'Z') {
+            evt.consume();
+        }
         
         if(txtRFC.getText().length()==12){
             evt.consume();
@@ -421,7 +423,7 @@ public class frmPersona extends javax.swing.JFrame {
         
         if((c<'0' || c>'9'))evt.consume();
         
-        if(txtTelefono.getText().length()==11){
+        if(txtTelefono.getText().length()==10){
             evt.consume();
         }
     }//GEN-LAST:event_txtTelefonoKeyTyped

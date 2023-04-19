@@ -38,6 +38,7 @@ public class frmLicencia extends javax.swing.JFrame {
     public frmLicencia(ILicenciaDAO licenciaDAO) {
         initComponents();
         this.licenciaDAO = licenciaDAO;
+        
 
     }
 
@@ -118,6 +119,8 @@ public class frmLicencia extends javax.swing.JFrame {
         jLabel11 = new javax.swing.JLabel();
         jLabel3 = new javax.swing.JLabel();
         jLabel14 = new javax.swing.JLabel();
+        jLabel15 = new javax.swing.JLabel();
+        txtCosto = new javax.swing.JTextField();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         getContentPane().setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
@@ -151,8 +154,13 @@ public class frmLicencia extends javax.swing.JFrame {
         });
         jPanel1.add(btnAceptar, new org.netbeans.lib.awtextra.AbsoluteConstraints(290, 320, -1, -1));
 
-        cbAño.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "1", "2", "3" }));
+        cbAño.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Seleccionar", "1", "2", "3" }));
         cbAño.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(0, 153, 204), 2));
+        cbAño.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                cbAñoActionPerformed(evt);
+            }
+        });
         jPanel1.add(cbAño, new org.netbeans.lib.awtextra.AbsoluteConstraints(210, 180, 190, 30));
 
         jLabel2.setIcon(new javax.swing.ImageIcon(getClass().getResource("/IMG/city.png"))); // NOI18N
@@ -166,8 +174,16 @@ public class frmLicencia extends javax.swing.JFrame {
         jPanel1.add(jLabel3, new org.netbeans.lib.awtextra.AbsoluteConstraints(30, 60, -1, -1));
 
         jLabel14.setFont(new java.awt.Font("Roboto Light", 0, 24)); // NOI18N
-        jLabel14.setText("Vigencia");
-        jPanel1.add(jLabel14, new org.netbeans.lib.awtextra.AbsoluteConstraints(100, 180, -1, -1));
+        jLabel14.setText("Costo");
+        jPanel1.add(jLabel14, new org.netbeans.lib.awtextra.AbsoluteConstraints(130, 250, -1, -1));
+
+        jLabel15.setFont(new java.awt.Font("Roboto Light", 0, 24)); // NOI18N
+        jLabel15.setText("Vigencia");
+        jPanel1.add(jLabel15, new org.netbeans.lib.awtextra.AbsoluteConstraints(100, 180, -1, -1));
+
+        txtCosto.setEditable(false);
+        txtCosto.setBorder(null);
+        jPanel1.add(txtCosto, new org.netbeans.lib.awtextra.AbsoluteConstraints(200, 250, 230, 30));
 
         getContentPane().add(jPanel1, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, 800, 500));
 
@@ -195,6 +211,25 @@ public class frmLicencia extends javax.swing.JFrame {
 
     }//GEN-LAST:event_btnAceptarActionPerformed
 
+    private void cbAñoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_cbAñoActionPerformed
+        // TODO add your handling code here:
+        if(persona.getDiscapacidad()==true && cbAño.getSelectedItem().equals("1")){
+            txtCosto.setText("200");
+        }else if(persona.getDiscapacidad()==true && cbAño.getSelectedItem().equals("2")){
+            txtCosto.setText("500");
+        }else if(persona.getDiscapacidad()==true && cbAño.getSelectedItem().equals("3")){
+            txtCosto.setText("700");
+        }
+        
+        if(persona.getDiscapacidad()==false && cbAño.getSelectedItem().equals("1")){
+            txtCosto.setText("600");
+        }else if(persona.getDiscapacidad()==false && cbAño.getSelectedItem().equals("2")){
+            txtCosto.setText("900");
+        }else if(persona.getDiscapacidad()==false && cbAño.getSelectedItem().equals("3")){
+            txtCosto.setText("1100");
+        }
+    }//GEN-LAST:event_cbAñoActionPerformed
+
     
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
@@ -203,8 +238,10 @@ public class frmLicencia extends javax.swing.JFrame {
     private javax.swing.JComboBox<String> cbAño;
     private javax.swing.JLabel jLabel11;
     private javax.swing.JLabel jLabel14;
+    private javax.swing.JLabel jLabel15;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel3;
     private javax.swing.JPanel jPanel1;
+    private javax.swing.JTextField txtCosto;
     // End of variables declaration//GEN-END:variables
 }
