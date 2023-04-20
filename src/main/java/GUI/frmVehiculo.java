@@ -8,6 +8,7 @@ import DAO.IVehiculoDAO;
 import Entidades.Persona;
 import Entidades.Vehiculo;
 import java.awt.Color;
+import java.util.List;
 import javax.swing.JOptionPane;
 
 /**
@@ -82,6 +83,41 @@ public class frmVehiculo extends javax.swing.JFrame {
         }
     }
 
+    /**
+     * Metodo que valida que el numero de serie no se repita con alguno ya registrado
+     *
+     * @return true o false
+     */
+    public boolean validarNumero() {
+        List<Vehiculo> vehiculoL = vehiculoDAO.listaVehiculo();
+        for (Vehiculo vehiculo : vehiculoL) {
+            if (txtNumero.getText().equalsIgnoreCase(vehiculo.getNumero())) {
+                JOptionPane.showMessageDialog(this, "El numero de serie ya existe");
+                return false;
+            }
+        }
+        return true;
+
+    }
+    
+    /**
+     * Metodo que se encarga de validar que todos los campos esten
+     * llenos
+     * @return true or false 
+     */
+   private boolean validarVacios() {
+    if (txtColor.getText().equals("")
+                || txtDueño.getText().equals("")
+                || txtNumero.getText().equals("")
+                || txtLinea.getText().equals("")
+                || txtModelo.getText().equals("")
+                || txtMarca1.getText().equals("")) {
+            JOptionPane.showMessageDialog(this, "Favor de llenar los campos faltantes", "Informacion", JOptionPane.INFORMATION_MESSAGE);
+
+            return false;
+        }
+    return true;
+    }
     /**
      * This method is called from within the constructor to initialize the form.
      * WARNING: Do NOT modify this code. The content of this method is always
@@ -365,7 +401,12 @@ public class frmVehiculo extends javax.swing.JFrame {
      */
     private void btnAceptarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnAceptarActionPerformed
         // TODO add your handling code here
-        this.agregar();
+        if (validarVacios()){
+            if(validarNumero()){
+                this.agregar();
+            }
+        }
+        
     }//GEN-LAST:event_btnAceptarActionPerformed
     /**
      * Método que valida el campo de numero de serie

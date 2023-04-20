@@ -140,6 +140,27 @@ public class VehiculoDAO implements IVehiculoDAO {
             return null;
         }
     }
+
+     /**
+      * Metodo que se encarga de regresar una lista
+      * con todos los vehiculos registrados
+      * @return lista de vehiculos
+      */
+    @Override
+    public List<Vehiculo> listaVehiculo() {
+        EntityManager em = conexionBD.Conexion();
+        try {
+            em.getTransaction().begin();
+            String jpql = "SELECT v FROM Vehiculo v ";
+            TypedQuery<Vehiculo> query = em.createQuery(jpql,Vehiculo.class);
+            List<Vehiculo> listaVehiculos = query.getResultList();
+            em.getTransaction().commit();
+
+            return listaVehiculos;
+        } catch (Exception e) {
+            return null;
+        }
+    }
 }
     
 

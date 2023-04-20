@@ -21,6 +21,7 @@ import javax.swing.JOptionPane;
 
 /**
  * Frame para registrar una persona
+ *
  * @author oscar
  */
 public class frmPersona extends javax.swing.JFrame {
@@ -38,7 +39,7 @@ public class frmPersona extends javax.swing.JFrame {
     public frmPersona(IPersonaDAO personaDao) {
         initComponents();
         this.personaDAO = personaDao;
-        if(this.personaDAO.buscarPersona("LSOK7S548SD9")!=null){
+        if (this.personaDAO.buscarPersona("LSOK7S548SD9") != null) {
             btnInsert.setEnabled(false);
         }
     }
@@ -73,7 +74,8 @@ public class frmPersona extends javax.swing.JFrame {
      * nacimiento sea mayor a la actual
      *
      * @param fechaNacimiento fecha de nacimiento de la persona
-     * @return falso si no pasa por le filtro de validaciones, true de lo contrario
+     * @return falso si no pasa por le filtro de validaciones, true de lo
+     * contrario
      */
     public static boolean validarFecha(Date fechaNacimiento) {
         Date fechaActual = new Date(); // Obtener la fecha actual
@@ -455,10 +457,12 @@ public class frmPersona extends javax.swing.JFrame {
      */
     private void btnAceptarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnAceptarActionPerformed
         if (validarVacios()) {
-            if (validarFecha(txtFechaN.getDate())) {              
-            }
+
             if (validarRFC()) {
-                this.agregar();
+                if (validarFecha(txtFechaN.getDate())) {
+                    this.agregar();
+                }
+
             }
         }
 
@@ -600,6 +604,7 @@ public class frmPersona extends javax.swing.JFrame {
 
     /**
      * Método que cambia el color del boton al pasar el mouse sobre el
+     *
      * @param evt evt
      */
     private void btnInsertMouseEntered(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btnInsertMouseEntered
@@ -607,6 +612,7 @@ public class frmPersona extends javax.swing.JFrame {
     }//GEN-LAST:event_btnInsertMouseEntered
     /**
      * Método que cambia el color del boton al quitar el mouse encima de el
+     *
      * @param evt evt
      */
     private void btnInsertMouseExited(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btnInsertMouseExited
@@ -614,143 +620,123 @@ public class frmPersona extends javax.swing.JFrame {
     }//GEN-LAST:event_btnInsertMouseExited
     /**
      * Método que al dar click al boton genera los 20 inserts masivos
+     *
      * @param evt evt
      */
     private void btnInsertActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnInsertActionPerformed
-        
+
         int opcion = JOptionPane.showConfirmDialog(null, "¿Quiere generar un insert de 20 personas?", "Confirmar", JOptionPane.YES_NO_OPTION);
 
         if (opcion == JOptionPane.YES_OPTION) {
             boolean si = true, no = false;
-        GregorianCalendar gfn1 = new GregorianCalendar(2002, Calendar.MARCH, 15);
-        Date fn1 = gfn1.getTime();
-        Persona persona1 = new Persona("CUDO880714FF8", "Ivan", "Bustillos", "Angulo", "6441587941", fn1, si);
-        
-        GregorianCalendar gfn2 = new GregorianCalendar(2003, Calendar.MARCH, 20);
-        Date fn2 = gfn2.getTime();
-        Persona persona2 = new Persona("DSA4F77SAFAS", "Jorge", "Pacheco", "Rubio", "6442154789", fn2, si);
-        
+            GregorianCalendar gfn1 = new GregorianCalendar(2002, Calendar.MARCH, 15);
+            Date fn1 = gfn1.getTime();
+            Persona persona1 = new Persona("CUDO880714FF8", "Ivan", "Bustillos", "Angulo", "6441587941", fn1, si);
 
-        GregorianCalendar gfn3 = new GregorianCalendar(2003, Calendar.DECEMBER, 22);
-        Date fn3 = gfn3.getTime();
-        Persona persona3 = new Persona("AD785ERT471S", "Jose Carlos", "Trista", "Rosales", "6442785885", fn3, si);
-        
+            GregorianCalendar gfn2 = new GregorianCalendar(2003, Calendar.MARCH, 20);
+            Date fn2 = gfn2.getTime();
+            Persona persona2 = new Persona("DSA4F77SAFAS", "Jorge", "Pacheco", "Rubio", "6442154789", fn2, si);
 
-        GregorianCalendar gfn4 = new GregorianCalendar(2002, Calendar.DECEMBER, 12);
-        Date fn4 = gfn4.getTime();
-        Persona persona4 = new Persona("DRET47SF6332", "Carmen", "Hernandez", "Echeverria", "6442781414", fn4, si);
-        
+            GregorianCalendar gfn3 = new GregorianCalendar(2003, Calendar.DECEMBER, 22);
+            Date fn3 = gfn3.getTime();
+            Persona persona3 = new Persona("AD785ERT471S", "Jose Carlos", "Trista", "Rosales", "6442785885", fn3, si);
 
-        GregorianCalendar gfn5 = new GregorianCalendar(2003, Calendar.NOVEMBER, 10);
-        Date fn5 = gfn5.getTime();
-        Persona persona5 = new Persona("JJIK658OP42S", "Jesus David", "Garcia", "Moroyoqui", "6441144123", fn5, si);
-        
+            GregorianCalendar gfn4 = new GregorianCalendar(2002, Calendar.DECEMBER, 12);
+            Date fn4 = gfn4.getTime();
+            Persona persona4 = new Persona("DRET47SF6332", "Carmen", "Hernandez", "Echeverria", "6442781414", fn4, si);
 
-        GregorianCalendar gfn6 = new GregorianCalendar(2002, Calendar.NOVEMBER, 5);
-        Date fn6 = gfn6.getTime();
-        Persona persona6 = new Persona("P45H7SDR87SF", "Luffy", "D", "Monkey", "6445789581", fn6, si);
-       
+            GregorianCalendar gfn5 = new GregorianCalendar(2003, Calendar.NOVEMBER, 10);
+            Date fn5 = gfn5.getTime();
+            Persona persona5 = new Persona("JJIK658OP42S", "Jesus David", "Garcia", "Moroyoqui", "6441144123", fn5, si);
 
-        GregorianCalendar gfn7 = new GregorianCalendar(2002, Calendar.OCTOBER, 1);
-        Date fn7 = gfn7.getTime();
-        Persona persona7 = new Persona("KKK45O812SW4", "Ramon", "Olivas", "Jaime", "6445878412", fn7, si);
-        
+            GregorianCalendar gfn6 = new GregorianCalendar(2002, Calendar.NOVEMBER, 5);
+            Date fn6 = gfn6.getTime();
+            Persona persona6 = new Persona("P45H7SDR87SF", "Luffy", "D", "Monkey", "6445789581", fn6, si);
 
-        GregorianCalendar gfn8 = new GregorianCalendar(2004, Calendar.MARCH, 22);
-        Date fn8 = gfn8.getTime();
-        Persona persona8 = new Persona("LSOK7S548SD9", "Emir", "Ali", "Beder", "6445714485", fn8, si);
-        
+            GregorianCalendar gfn7 = new GregorianCalendar(2002, Calendar.OCTOBER, 1);
+            Date fn7 = gfn7.getTime();
+            Persona persona7 = new Persona("KKK45O812SW4", "Ramon", "Olivas", "Jaime", "6445878412", fn7, si);
 
-        GregorianCalendar gfn9 = new GregorianCalendar(1980, Calendar.APRIL, 30);
-        Date fn9 = gfn9.getTime();
-        Persona persona9 = new Persona("POL84RFTE45S", "Oscar Daniel", "Nuñez", "Shirmitev", "6445784141", fn9, si);
-        
+            GregorianCalendar gfn8 = new GregorianCalendar(2004, Calendar.MARCH, 22);
+            Date fn8 = gfn8.getTime();
+            Persona persona8 = new Persona("LSOK7S548SD9", "Emir", "Ali", "Beder", "6445714485", fn8, si);
 
-        GregorianCalendar gfn10 = new GregorianCalendar(1985, Calendar.APRIL, 2);
-        Date fn10 = gfn10.getTime();
-        Persona persona10 = new Persona("LKI4SO74ED50", "Mario Enrique", "Osuna", "Cuen", "6447818889", fn10, si);
-        
+            GregorianCalendar gfn9 = new GregorianCalendar(1980, Calendar.APRIL, 30);
+            Date fn9 = gfn9.getTime();
+            Persona persona9 = new Persona("POL84RFTE45S", "Oscar Daniel", "Nuñez", "Shirmitev", "6445784141", fn9, si);
 
-        GregorianCalendar gfn11 = new GregorianCalendar(1990, Calendar.APRIL, 2);
-        Date fn11 = gfn11.getTime();
-        Persona persona11 = new Persona("LKNMMM745J", "Nikita", "Shirmitev", "Loera", "6441121274", fn11, no);
-        
+            GregorianCalendar gfn10 = new GregorianCalendar(1985, Calendar.APRIL, 2);
+            Date fn10 = gfn10.getTime();
+            Persona persona10 = new Persona("LKI4SO74ED50", "Mario Enrique", "Osuna", "Cuen", "6447818889", fn10, si);
 
-        GregorianCalendar gfn12 = new GregorianCalendar(2000, Calendar.MAY, 15);
-        Date fn12 = gfn12.getTime();
-        Persona persona12 = new Persona("SSDF47SDER21", "Timofey", "Chromov", "Vlasof", "6442151587", fn12, no);
-        
+            GregorianCalendar gfn11 = new GregorianCalendar(1990, Calendar.APRIL, 2);
+            Date fn11 = gfn11.getTime();
+            Persona persona11 = new Persona("LKNMMM745J", "Nikita", "Shirmitev", "Loera", "6441121274", fn11, no);
 
-        GregorianCalendar gfn13 = new GregorianCalendar(2001, Calendar.MAY, 30);
-        Date fn13 = gfn13.getTime();
-        Persona persona13 = new Persona("DLERT7485SER", "Dominikas", "Lukas", "Evicius", "6442151587", fn13, no);
-        
+            GregorianCalendar gfn12 = new GregorianCalendar(2000, Calendar.MAY, 15);
+            Date fn12 = gfn12.getTime();
+            Persona persona12 = new Persona("SSDF47SDER21", "Timofey", "Chromov", "Vlasof", "6442151587", fn12, no);
 
-        GregorianCalendar gfn14 = new GregorianCalendar(2004, Calendar.MAY, 12);
-        Date fn14 = gfn14.getTime();
-        Persona persona14 = new Persona("DLERT7485SER", "Rikardas", "Lukas", "Evicius", "6442151587", fn14, no);
-        
+            GregorianCalendar gfn13 = new GregorianCalendar(2001, Calendar.MAY, 30);
+            Date fn13 = gfn13.getTime();
+            Persona persona13 = new Persona("DLERT7485SER", "Dominikas", "Lukas", "Evicius", "6442151587", fn13, no);
 
-        GregorianCalendar gfn15 = new GregorianCalendar(2003, Calendar.JANUARY, 13);
-        Date fn15 = gfn15.getTime();
-        Persona persona15 = new Persona("PPO41SE854LK", "Leo", "Janneson", "Pereira", "6447811898", fn15, no);
-        
+            GregorianCalendar gfn14 = new GregorianCalendar(2004, Calendar.MAY, 12);
+            Date fn14 = gfn14.getTime();
+            Persona persona14 = new Persona("DLERT7485SER", "Rikardas", "Lukas", "Evicius", "6442151587", fn14, no);
 
-        GregorianCalendar gfn16 = new GregorianCalendar(2003, Calendar.JANUARY, 20);
-        Date fn16 = gfn16.getTime();
-        Persona persona16 = new Persona("54DS7RF458SD", "James", "Homelet", "Arimendez", "6442141458", fn16, no);
-        
+            GregorianCalendar gfn15 = new GregorianCalendar(2003, Calendar.JANUARY, 13);
+            Date fn15 = gfn15.getTime();
+            Persona persona15 = new Persona("PPO41SE854LK", "Leo", "Janneson", "Pereira", "6447811898", fn15, no);
 
-        GregorianCalendar gfn17 = new GregorianCalendar(2004, Calendar.FEBRUARY, 2);
-        Date fn17 = gfn17.getTime();
-        Persona persona17 = new Persona("OPOOPO574SDR", "Roy", "Vazquez", "Calleros", "6441877898", fn17, no);
-        
+            GregorianCalendar gfn16 = new GregorianCalendar(2003, Calendar.JANUARY, 20);
+            Date fn16 = gfn16.getTime();
+            Persona persona16 = new Persona("54DS7RF458SD", "James", "Homelet", "Arimendez", "6442141458", fn16, no);
 
-        GregorianCalendar gfn18 = new GregorianCalendar(2002, Calendar.JUNE, 17);
-        Date fn18 = gfn18.getTime();
-        Persona persona18 = new Persona("JVG5478LPO45", "Jesus Eduardo", "Villanueva", "Godoy", "6442121272", fn18, no);
-        
+            GregorianCalendar gfn17 = new GregorianCalendar(2004, Calendar.FEBRUARY, 2);
+            Date fn17 = gfn17.getTime();
+            Persona persona17 = new Persona("OPOOPO574SDR", "Roy", "Vazquez", "Calleros", "6441877898", fn17, no);
 
-        GregorianCalendar gfn19 = new GregorianCalendar(2002, Calendar.JUNE, 30);
-        Date fn19 = gfn19.getTime();
-        Persona persona19 = new Persona("LLLL47SPOK45", "Cristian Gibran", "Duran", "Solano", "6441585759", fn19, no);
-        
+            GregorianCalendar gfn18 = new GregorianCalendar(2002, Calendar.JUNE, 17);
+            Date fn18 = gfn18.getTime();
+            Persona persona18 = new Persona("JVG5478LPO45", "Jesus Eduardo", "Villanueva", "Godoy", "6442121272", fn18, no);
 
-        GregorianCalendar gfn20 = new GregorianCalendar(1979, Calendar.JULY, 4);
-        Date fn20 = gfn20.getTime();
-        Persona persona20 = new Persona("AADD87SD45ER", "Carlos", "Gonzalez", "Vega", "6442588585", fn20, no);
-        
+            GregorianCalendar gfn19 = new GregorianCalendar(2002, Calendar.JUNE, 30);
+            Date fn19 = gfn19.getTime();
+            Persona persona19 = new Persona("LLLL47SPOK45", "Cristian Gibran", "Duran", "Solano", "6441585759", fn19, no);
 
-        Persona g1 = personaDAO.registrarPersona(persona1);
-        Persona g2 = personaDAO.registrarPersona(persona2);
-        Persona g3 = personaDAO.registrarPersona(persona3);
-        Persona g4 = personaDAO.registrarPersona(persona4);
-        Persona g5 = personaDAO.registrarPersona(persona5);
-        Persona g6 = personaDAO.registrarPersona(persona6);
-        Persona g7 = personaDAO.registrarPersona(persona7);
-        Persona g8 = personaDAO.registrarPersona(persona8);
-        Persona g9 = personaDAO.registrarPersona(persona9);
-        Persona g10 = personaDAO.registrarPersona(persona10);
-        Persona g11 = personaDAO.registrarPersona(persona11);
-        Persona g12 = personaDAO.registrarPersona(persona12);
-        Persona g13 = personaDAO.registrarPersona(persona13);
-        Persona g14 = personaDAO.registrarPersona(persona14);
-        Persona g15 = personaDAO.registrarPersona(persona15);
-        Persona g16 = personaDAO.registrarPersona(persona16);
-        Persona g17 = personaDAO.registrarPersona(persona17);
-        Persona g18 = personaDAO.registrarPersona(persona18);
-        Persona g19 = personaDAO.registrarPersona(persona19);
-        Persona g20 = personaDAO.registrarPersona(persona20);
-        
-        JOptionPane.showMessageDialog(this, "Se han insertado los 20 registros correctamente", "Informacion", JOptionPane.INFORMATION_MESSAGE);
-        
-        btnInsert.setEnabled(false);
-        } 
-        
+            GregorianCalendar gfn20 = new GregorianCalendar(1979, Calendar.JULY, 4);
+            Date fn20 = gfn20.getTime();
+            Persona persona20 = new Persona("AADD87SD45ER", "Carlos", "Gonzalez", "Vega", "6442588585", fn20, no);
+
+            Persona g1 = personaDAO.registrarPersona(persona1);
+            Persona g2 = personaDAO.registrarPersona(persona2);
+            Persona g3 = personaDAO.registrarPersona(persona3);
+            Persona g4 = personaDAO.registrarPersona(persona4);
+            Persona g5 = personaDAO.registrarPersona(persona5);
+            Persona g6 = personaDAO.registrarPersona(persona6);
+            Persona g7 = personaDAO.registrarPersona(persona7);
+            Persona g8 = personaDAO.registrarPersona(persona8);
+            Persona g9 = personaDAO.registrarPersona(persona9);
+            Persona g10 = personaDAO.registrarPersona(persona10);
+            Persona g11 = personaDAO.registrarPersona(persona11);
+            Persona g12 = personaDAO.registrarPersona(persona12);
+            Persona g13 = personaDAO.registrarPersona(persona13);
+            Persona g14 = personaDAO.registrarPersona(persona14);
+            Persona g15 = personaDAO.registrarPersona(persona15);
+            Persona g16 = personaDAO.registrarPersona(persona16);
+            Persona g17 = personaDAO.registrarPersona(persona17);
+            Persona g18 = personaDAO.registrarPersona(persona18);
+            Persona g19 = personaDAO.registrarPersona(persona19);
+            Persona g20 = personaDAO.registrarPersona(persona20);
+
+            JOptionPane.showMessageDialog(this, "Se han insertado los 20 registros correctamente", "Informacion", JOptionPane.INFORMATION_MESSAGE);
+
+            btnInsert.setEnabled(false);
+        }
+
 
     }//GEN-LAST:event_btnInsertActionPerformed
-
-    
 
 
     // Variables declaration - do not modify//GEN-BEGIN:variables

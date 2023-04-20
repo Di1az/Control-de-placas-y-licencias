@@ -49,4 +49,11 @@ public interface IVehiculoDAO {
       * @return vehiculo con el estado actualizado
       */
      public Vehiculo cambiarEstado(int id_vehiculo);
+     
+     /**
+      * Metodo que se encarga de regresar una lista
+      * con todos los vehiculos registrados
+      * @return lista de vehiculos
+      */
+     public List<Vehiculo> listaVehiculo();
 }
