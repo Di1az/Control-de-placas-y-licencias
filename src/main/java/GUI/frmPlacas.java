@@ -22,7 +22,7 @@ import javax.persistence.metamodel.SingularAttribute;
 import javax.swing.JOptionPane;
 
 /**
- *
+ * Frame de generación de Placas
  * @author dany
  */
 public class frmPlacas extends javax.swing.JFrame {
@@ -58,7 +58,7 @@ public class frmPlacas extends javax.swing.JFrame {
      * @param placaDAO placaDAO
      * @param vehiculoDAO vehiculoDAO
      * @param persona persona param desactivarPlaca
-     * @param desactivarPlaca
+     * @param desactivarPlaca atributo para desactivar la placa
      */
     public frmPlacas(IPlacaDAO placaDAO, IVehiculoDAO vehiculoDAO, Persona persona, boolean desactivarPlaca) {
         initComponents();
@@ -266,11 +266,6 @@ public class frmPlacas extends javax.swing.JFrame {
 
         txtCosto.setEditable(false);
         txtCosto.setBorder(null);
-        txtCosto.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                txtCostoActionPerformed(evt);
-            }
-        });
         jPanel1.add(txtCosto, new org.netbeans.lib.awtextra.AbsoluteConstraints(140, 240, 230, 30));
 
         getContentPane().add(jPanel1, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, 800, 500));
@@ -281,7 +276,7 @@ public class frmPlacas extends javax.swing.JFrame {
     /**
      * Método que al dar click al boton regresa al menu principal
      *
-     * @param evt
+     * @param evt evt
      */
     private void btnRegresarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnRegresarActionPerformed
         // TODO add your handling code here:
@@ -319,11 +314,10 @@ public class frmPlacas extends javax.swing.JFrame {
         }
 
     }//GEN-LAST:event_btnAceptarActionPerformed
-
-    private void txtCostoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txtCostoActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_txtCostoActionPerformed
-
+    /**
+     * Método que calcula el costo de las placas del vehiculo dependiendo de su estado
+     * @param evt evt
+     */
     private void cbVehiculoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_cbVehiculoActionPerformed
         // TODO add your handling code here:
         vehiculo = (Vehiculo) cbVehiculo.getSelectedItem();

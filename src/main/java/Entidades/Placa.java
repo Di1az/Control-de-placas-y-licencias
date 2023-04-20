@@ -21,23 +21,13 @@ import javax.persistence.OneToOne;
 import javax.persistence.Table;
 
 /**
- *
- * @author Dany
- */
-/**
- *
- * Clase que representa un trámite para obtener una placa de vehículo.
- *
  * Extiende de la clase Tramite y utiliza la anotación @DiscriminatorValue para
  * su discriminación en la base de datos.
- *
- * Contiene información sobre el costo, número de placa, estado y vehículo
- * asociado.
+ * @author Dany
  */
+
+
 @Entity
-/**
- * Nombre de la tabla
- */
 @Table(name = "Placas")
 @DiscriminatorValue(value = "Placa")
 public class Placa extends Tramite implements Serializable {
@@ -48,18 +38,21 @@ public class Placa extends Tramite implements Serializable {
      */
     @Column(name = "Costo")
     private float costo;
+    
     /**
      *
      * Número de la placa.
      */
     @Column(name = "Número_placa")
     private String numeroPlaca;
+    
     /**
      *
      * Estado de la placa.
      */
     @Column(name = "Estado")
     private String estado;
+    
     /**
      *
      * Vehículo asociado a la placa.
@@ -144,7 +137,7 @@ public class Placa extends Tramite implements Serializable {
     /**
      * Metodo que establece el costo de la placa
      *
-     * @param costo
+     * @param costo costo de placa
      */
     public void setCosto(float costo) {
         this.costo = costo;
@@ -162,7 +155,7 @@ public class Placa extends Tramite implements Serializable {
     /**
      * Metodo que establece el numero de la placa
      *
-     * @param numeroPlaca
+     * @param numeroPlaca numero de la placa
      */
     public void setNumeroPlaca(String numeroPlaca) {
         this.numeroPlaca = numeroPlaca;
@@ -180,7 +173,7 @@ public class Placa extends Tramite implements Serializable {
     /**
      * Metodo que establece el estado
      *
-     * @param estado
+     * @param estado estado de la placa
      */
     public void setEstado(String estado) {
         this.estado = estado;

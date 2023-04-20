@@ -13,18 +13,11 @@ import javax.persistence.Entity;
 import javax.persistence.Table;
 
 /**
- *
+ * Clase entidad de Licencia
  * @author Daniel y oscar
  */
 @Entity
-/**
- * Nombre de la tabla
- */
 @Table(name="Licencias")
-/**
- * Valor que se le da al valor
- * discriminante
- */
 @DiscriminatorValue(value="Licencia")
 public class Licencia extends Tramite implements Serializable {
 
@@ -58,9 +51,9 @@ public class Licencia extends Tramite implements Serializable {
     /**
      * Constructor que regresa las variables vigencia estado 
      * y costo
-     * @param Vigencia
-     * @param estado
-     * @param costo 
+     * @param Vigencia vigencia de la licencia
+     * @param estado estado de la licencia
+     * @param costo costo de la licencia
      */
     public Licencia(int Vigencia, String estado, float costo) {
         this.vigencia = Vigencia;
@@ -71,12 +64,12 @@ public class Licencia extends Tramite implements Serializable {
     /**
      * Constructor que regresa las variables vigencia, estado 
      * costo, fechaRecepcion, fechaEmision y persona
-     * @param vigencia
-     * @param estado
-     * @param costo
-     * @param fechaRecepcion
-     * @param fechaEmision
-     * @param persona 
+     * @param vigencia vigencia de la licencia
+     * @param estado estado de la licencia
+     * @param costo costo de la licencia
+     * @param fechaRecepcion fecha de entrega de la licencia
+     * @param fechaEmision fecha de vencimiento de la licencia
+     * @param persona persona que saco la licencia
      */
     public Licencia(int vigencia,String estado, float costo, Date fechaRecepcion, Date fechaEmision, Persona persona) {
         super(fechaRecepcion, fechaEmision, persona);
@@ -97,7 +90,7 @@ public class Licencia extends Tramite implements Serializable {
     /**
      * Metodo que establece la vigencia de
      * la licencia
-     * @param Vigencia 
+     * @param Vigencia vigencia de la licencia
      */
     public void setVigencia(int Vigencia) {
         this.vigencia = Vigencia;
@@ -105,7 +98,7 @@ public class Licencia extends Tramite implements Serializable {
 
     /**
      * Metodo que regresa el costo de la licencia
-     * @return costo
+     * @return costo de la licencia
      */
     public float getCosto() {
         return costo;
@@ -113,7 +106,7 @@ public class Licencia extends Tramite implements Serializable {
 
     /**
      * Metodo que establece el costo de la licencia
-     * @param costo
+     * @param costo costo de la licencia
      */
     public void setCosto(float costo) {
         this.costo = costo;
@@ -122,7 +115,7 @@ public class Licencia extends Tramite implements Serializable {
     /**
      * Metodo que regresa el estado de la
      * licencia
-     * @return estado
+     * @return estado de la licencia
      */
     public String getEstado() {
         return estado;
@@ -131,7 +124,7 @@ public class Licencia extends Tramite implements Serializable {
     /**
      * Metodo que establece el estado de la
      * licencia
-     * @param estado
+     * @param estado estado de licencia
      */
     public void setEstado(String estado) {
         this.estado = estado;

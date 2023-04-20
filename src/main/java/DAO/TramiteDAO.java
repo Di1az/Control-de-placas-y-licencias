@@ -20,7 +20,7 @@ import javax.persistence.criteria.Predicate;
 import javax.persistence.criteria.Root;
 
 /**
- *
+ * Clase que implementa la interfaz ITramiteDAO
  * @author oscar
  */
 public class TramiteDAO implements ITramiteDAO{
@@ -37,7 +37,15 @@ public class TramiteDAO implements ITramiteDAO{
     public TramiteDAO(IConexionBD conexionBD) {
         this.conexionBD = conexionBD;
     }
-
+    
+    /**
+     * Método que genera una lista de tramites
+     * @param licencia boolean si es licencia o no
+     * @param placa boolean si es placa o no
+     * @param fecha_inicio atributo utilizado para el filtro de fechas
+     * @param fecha_fin atributo utilizado para el filtro de fechas
+     * @return lista de tramites
+     */
     @Override
     public List<Tramite> ListaTramite(boolean licencia, boolean placa, Date fecha_inicio, Date fecha_fin) {
         EntityManager entityManager = this.conexionBD.Conexion();

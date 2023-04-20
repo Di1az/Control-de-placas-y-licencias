@@ -13,7 +13,7 @@ import javax.persistence.EntityManager;
 import javax.persistence.TypedQuery;
 
 /**
- *  
+ * Clase que implementa la interfaz IPersonaDAO
  * @author oscar
  */
 public class PersonaDAO implements IPersonaDAO {
@@ -24,7 +24,7 @@ public class PersonaDAO implements IPersonaDAO {
     /**
      * Metodo constructor que se encarga de obtener la conexion a la BD
      *
-     * @param conexionBD
+     * @param conexionBD conexionBD
      */
     public PersonaDAO(IConexionBD conexionBD) {
         this.conexionBD = conexionBD;
@@ -78,8 +78,12 @@ public class PersonaDAO implements IPersonaDAO {
             em.getTransaction().commit();
 
             for (Persona persona : listaPersonas) {
-
-                desencriptarPersona(persona);
+                
+                
+                
+             persona=desencriptarPersona(persona);
+             System.out.println(persona.getNombre());
+                
 
             }
             return listaPersonas;
@@ -116,7 +120,7 @@ public class PersonaDAO implements IPersonaDAO {
      * Metodo que se encarga de regresar una lista de persona dependiendo de la
      * RFC recibido en el parametro
      *
-     * @param rfc
+     * @param rfc RFC
      * @return persona
      */
     @Override
@@ -143,7 +147,7 @@ public class PersonaDAO implements IPersonaDAO {
      * Metodo que se encarga de regresar una lista de persona dependiendo de la
      * fecha de nacimientos recibida en el parametro
      *
-     * @param fechaN
+     * @param fechaN fecha de nacimiento
      * @return persona
      */
     @Override
@@ -170,9 +174,9 @@ public class PersonaDAO implements IPersonaDAO {
     /**
      * Metodo que se encarga de desencriptar el nombre de la persona
      *
-     * @param persona
+     * @param persona persona a desencriptar
      */
-    public void desencriptarPersona(Persona persona) {
+    public Persona desencriptarPersona(Persona persona) {
         Encriptar en = new Encriptar();
         String nombre = en.desencriptar(persona.getNombre());
         String apellidoP = en.desencriptar(persona.getApellidoP());
@@ -180,5 +184,6 @@ public class PersonaDAO implements IPersonaDAO {
         persona.setNombre(nombre);
         persona.setApellidoP(apellidoP);
         persona.setApellidoM(apellidoM);
+        return persona;
     }
 }

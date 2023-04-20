@@ -27,17 +27,8 @@ import javax.persistence.TemporalType;
  * @author Dany
  */
 @Entity
-/**
- * Nombre de la tabla
- */
 @Table(name = "Tramite")
-/**
- * Nombre de la columna nueva
- */
 @DiscriminatorColumn(name = "Tipo_Tramite")
-/**
- * Herencia utilizada
- */
 @Inheritance(strategy = InheritanceType.JOINED)
 public class Tramite implements Serializable {
 
@@ -79,10 +70,10 @@ public class Tramite implements Serializable {
     /**
      * Constructor que recibe todas las variables de la clase
      *
-     * @param id
-     * @param fechaRecepcion
-     * @param fechaEmision
-     * @param persona
+     * @param id id del tramite
+     * @param fechaRecepcion fecha de la recepcion
+     * @param fechaEmision fecha de emision
+     * @param persona persona que hizo el tramite
      */
     public Tramite(Integer id, Date fechaRecepcion, Date fechaEmision, Persona persona) {
         this.id = id;
@@ -94,9 +85,9 @@ public class Tramite implements Serializable {
     /**
      * Constructor que recibe todas las variables de la clase excepto el id
      *
-     * @param fechaRecepcion
-     * @param fechaEmision
-     * @param persona
+     * @param fechaRecepcion fecha de recepcion
+     * @param fechaEmision fecha de emision
+     * @param persona persona que hizo el tramite
      */
     public Tramite(Date fechaRecepcion, Date fechaEmision, Persona persona) {
         this.fechaRecepcion = fechaRecepcion;
@@ -108,8 +99,8 @@ public class Tramite implements Serializable {
      * Contructor que establece las variables fecha recepcion y emision al valor
      * de sus parametros
      *
-     * @param fechaRecepcion
-     * @param fechaEmision
+     * @param fechaRecepcion fecha de recepcion
+     * @param fechaEmision fecha de emision
      */
     public Tramite(Date fechaRecepcion, Date fechaEmision) {
         this.fechaRecepcion = fechaRecepcion;
@@ -128,7 +119,7 @@ public class Tramite implements Serializable {
     /**
      * Metodo que establece el id
      *
-     * @param id
+     * @param id id del tramite
      */
     public void setId(Integer id) {
         this.id = id;
@@ -146,7 +137,7 @@ public class Tramite implements Serializable {
     /**
      * Metodo que establece la fecha de recepcion
      *
-     * @param fechaRecepcion
+     * @param fechaRecepcion fecha de la recepcion
      */
     public void setFechaRecepcion(Date fechaRecepcion) {
         this.fechaRecepcion = fechaRecepcion;
@@ -155,7 +146,7 @@ public class Tramite implements Serializable {
     /**
      * Metodo que regresa la fecha de emision
      *
-     * @return
+     * @return la fecha de emision
      */
     public Date getFechaEmision() {
         return fechaEmision;
@@ -164,7 +155,7 @@ public class Tramite implements Serializable {
     /**
      * Metodo que establece la fecha de emision
      *
-     * @param fechaEmision
+     * @param fechaEmision fecha de emision
      */
     public void setFechaEmision(Date fechaEmision) {
         this.fechaEmision = fechaEmision;
@@ -185,7 +176,7 @@ public class Tramite implements Serializable {
     /**
      * Metodo equals
      *
-     * @param object
+     * @param object object
      * @return true or false
      */
     @Override
@@ -204,7 +195,7 @@ public class Tramite implements Serializable {
     /**
      * Metodo toString
      *
-     * @return Entidades.Tramite[ id=" + id + " ]"
+     * @return el toString con el id"
      */
     @Override
     public String toString() {
@@ -214,7 +205,7 @@ public class Tramite implements Serializable {
     /**
      * Metodo que regresa la persona
      *
-     * @return persona
+     * @return persona que hizo el tramite
      */
     public Persona getPersona() {
         return persona;
@@ -223,7 +214,7 @@ public class Tramite implements Serializable {
     /**
      * Metodo que establece la persona
      *
-     * @param persona
+     * @param persona persona qeu hizo el tramite
      */
     public void setPersona(Persona persona) {
         this.persona = persona;

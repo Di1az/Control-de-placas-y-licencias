@@ -26,7 +26,7 @@ import java.util.List;
 import javax.swing.JOptionPane;
 
 /**
- *
+ * Frame del Menu Principal
  * @author oscar
  */
 public class frmMenuPrincipal extends javax.swing.JFrame {
@@ -57,7 +57,6 @@ public class frmMenuPrincipal extends javax.swing.JFrame {
     /**
      * Método utilizado para encontrar si una persona encuentra almacenada en la
      * bd mediante el rfc
-     *
      * @return falso si no lo encuentra, true de lo contrario
      */
     public boolean encontrarPersona() {
@@ -335,7 +334,7 @@ public class frmMenuPrincipal extends javax.swing.JFrame {
 
     /**
      * Boton que accede al menu licencia
-     * @param evt 
+     * @param evt evt
      */
     private void btnLicenciaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnLicenciaActionPerformed
         if (encontrarPersona()) {
@@ -420,7 +419,7 @@ public class frmMenuPrincipal extends javax.swing.JFrame {
     }//GEN-LAST:event_btnVehiculoMouseEntered
     /**
      * Método para cambiar el color del boton al quitar el mouse encima de el
-     * @param evt evt evt
+     * @param evt evt 
      */
     private void btnVehiculoMouseExited(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btnVehiculoMouseExited
         btnVehiculo.setBackground(new Color(0, 134, 190));
@@ -434,7 +433,7 @@ public class frmMenuPrincipal extends javax.swing.JFrame {
     }//GEN-LAST:event_btnPlacasMouseEntered
     /**
      * Método para cambiar el color del boton al quitar el mouse encima de el
-     * @param evt evt evt
+     * @param evt evt 
      */
     private void btnPlacasMouseExited(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btnPlacasMouseExited
         btnPlacas.setBackground(new Color(0, 134, 190));
@@ -448,7 +447,7 @@ public class frmMenuPrincipal extends javax.swing.JFrame {
     }//GEN-LAST:event_btnLicenciaMouseEntered
     /**
      * Método para cambiar el color del boton al quitar el mouse encima de el
-     * @param evt evt evt
+     * @param evt evt 
      */
     private void btnLicenciaMouseExited(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btnLicenciaMouseExited
         btnLicencia.setBackground(new Color(0, 134, 190));
@@ -462,7 +461,7 @@ public class frmMenuPrincipal extends javax.swing.JFrame {
     }//GEN-LAST:event_btnReporteMouseEntered
     /**
      * Método para cambiar el color del boton al quitar el mouse encima de el
-     * @param evt evt evt
+     * @param evt evt 
      */
     private void btnReporteMouseExited(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btnReporteMouseExited
         btnReporte.setBackground(new Color(0, 134, 190));
@@ -476,7 +475,7 @@ public class frmMenuPrincipal extends javax.swing.JFrame {
     }//GEN-LAST:event_btnHistorialMouseEntered
     /**
      * Método para cambiar el color del boton al quitar el mouse encima de el
-     * @param evt evt evt
+     * @param evt evt 
      */
     private void btnHistorialMouseExited(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btnHistorialMouseExited
         btnHistorial.setBackground(new Color(0, 134, 190));

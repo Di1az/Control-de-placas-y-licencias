@@ -11,18 +11,33 @@ package DAO;
  */
 public class Reporte {
     
-    //Atributos que queremos que aparezcan en el reporte
+    /**
+     * Atributo de tipo String que se refiere al tipo de tramite (licencia o placa)
+     */
     private String tipoTramite;
+    
+    /**
+     * Atributo de tipo String que se refiere al nombre de la persona que hizo
+     * el tramite
+     */
     private String nombre;
+    
+    /**
+     * Atributo de tipo String que se refiere al costo del tramite
+     */
     private String costo;
+    
+    /**
+     * Atributo de tipo String que se refiere a la fecha en que se saco el tramite
+     */
     private String fecha;
     
     /**
      * Método constructor que inicializa los atributos
-     * @param tipoTramite
-     * @param nombre
-     * @param costo
-     * @param fecha 
+     * @param tipoTramite placa o licencia
+     * @param nombre nombre del que tramito
+     * @param costo costo del tramite
+     * @param fecha fecha en que se hizo el tramite
      */
     public Reporte(String tipoTramite, String nombre, String costo, String fecha) {
         this.tipoTramite = tipoTramite;
@@ -39,7 +54,7 @@ public class Reporte {
     
     /**
      * Método getter para el tipo de tramite
-     * @return tipo de tramite
+     * @return licencia o placa
      */
     public String getTipoTramite() {
         return tipoTramite;
@@ -47,7 +62,7 @@ public class Reporte {
     
     /**
      * Método setter para setearle la informacion al tipo de tramite
-     * @param tipoTramite 
+     * @param tipoTramite licencia o placa
      */
     public void setTipoTramite(String tipoTramite) {
         this.tipoTramite = tipoTramite;
@@ -55,7 +70,7 @@ public class Reporte {
     
     /**
      * Método getter para obtener el nombre
-     * @return el nombre
+     * @return nombre nombre de la persona que tramito
      */
     public String getNombre() {
         return nombre;

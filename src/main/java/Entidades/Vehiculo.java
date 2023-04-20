@@ -18,13 +18,10 @@ import javax.persistence.OneToMany;
 import javax.persistence.Table;
 
 /**
- *
+ * Clase Entidad de Vehiculo
  * @author oscar
  */
 @Entity
-/**
- * Nombre de la tabla
- */
 @Table(name = "Vehículos")
 public class Vehiculo implements Serializable {
 
@@ -101,15 +98,15 @@ public class Vehiculo implements Serializable {
      * Metodo constructor que establece todas las variables al valor de sus
      * parametros
      *
-     * @param id
-     * @param numero
-     * @param marca
-     * @param modelo
-     * @param linea
-     * @param color
-     * @param tipo
-     * @param estado
-     * @param persona
+     * @param id id del vehiculo
+     * @param numero numero de serie del vehiculo
+     * @param marca marca del vehiculo
+     * @param modelo modelo del vehiculo
+     * @param linea linea del vehiculo
+     * @param color color del vehiculo
+     * @param tipo tipo del vehiculo
+     * @param estado estado del vehiculo
+     * @param persona persona dueña del vehiculo
      */
     public Vehiculo(Integer id, String numero, String marca, String modelo, String linea, String color, String tipo, String estado, Persona persona) {
         this.id = id;
@@ -234,7 +231,7 @@ public class Vehiculo implements Serializable {
 
     /**
      * Metodo que regresa la persona
-     * @return persona
+     * @return persona dueña
      */
     public Persona getPersona() {
         return persona;
@@ -242,7 +239,7 @@ public class Vehiculo implements Serializable {
 
     /**
      * Metodo que establece la persona
-     * @param persona 
+     * @param persona persona dueña del vehiculo
      */
     public void setPersona(Persona persona) {
         this.persona = persona;
@@ -250,7 +247,7 @@ public class Vehiculo implements Serializable {
 
     /**
      * Metodo que regresa el numero
-     * @return numero
+     * @return numero del vehiculo
      */
     public String getNumero() {
         return numero;
@@ -258,7 +255,7 @@ public class Vehiculo implements Serializable {
 
     /**
      * Metodo que establece el numero
-     * @param numero 
+     * @param numero numero del vehiculo
      */
     public void setNumero(String numero) {
         this.numero = numero;
@@ -266,7 +263,7 @@ public class Vehiculo implements Serializable {
 
     /**
      * Metodo que regresa la marca
-     * @return marca
+     * @return marca del vehiculo
      */
     public String getMarca() {
         return marca;
@@ -274,7 +271,7 @@ public class Vehiculo implements Serializable {
 
     /**
      * Metodo que establece la marca
-     * @param marca 
+     * @param marca marca del vehiculo
      */
     public void setMarca(String marca) {
         this.marca = marca;
@@ -282,7 +279,7 @@ public class Vehiculo implements Serializable {
 
     /**
      * Metodo que regresa el modelo
-     * @return modelo
+     * @return modelo del vehiculo
      */
     public String getModelo() {
         return modelo;
@@ -290,7 +287,7 @@ public class Vehiculo implements Serializable {
 
     /**
      * Metodo que establece el modelo
-     * @param modelo 
+     * @param modelo modelo del vehiculo
      */
     public void setModelo(String modelo) {
         this.modelo = modelo;
@@ -298,7 +295,7 @@ public class Vehiculo implements Serializable {
 
     /**
      * Metodo que regresa la linea
-     * @return 
+     * @return linea del vehiculo
      */
     public String getLinea() {
         return linea;
@@ -306,7 +303,7 @@ public class Vehiculo implements Serializable {
 
     /**
      * Metodo que establece la linea
-     * @param linea 
+     * @param linea linea del vehiculo
      */
     public void setLinea(String linea) {
         this.linea = linea;
@@ -322,7 +319,7 @@ public class Vehiculo implements Serializable {
 
     /**
      * Metodo que establece el color
-     * @param color 
+     * @param color color del vehiculo
      */
     public void setColor(String color) {
         this.color = color;
@@ -330,7 +327,7 @@ public class Vehiculo implements Serializable {
 
     /**
      * Metodo que regresa el tipo
-     * @return 
+     * @return tipo de vehiculo
      */
     public String getTipo() {
         return tipo;
@@ -338,7 +335,7 @@ public class Vehiculo implements Serializable {
 
     /**
      * Metodo que establece el tipo
-     * @param tipo 
+     * @param tipo tipo de vehiculo
      */
     public void setTipo(String tipo) {
         this.tipo = tipo;
@@ -346,7 +343,7 @@ public class Vehiculo implements Serializable {
 
     /**
      * Metodo que regresa el estado
-     * @return 
+     * @return estado del vehiculo
      */
     public String getEstado() {
         return estado;
@@ -354,7 +351,7 @@ public class Vehiculo implements Serializable {
 
     /**
      * Metodo que establece el estado
-     * @param estado 
+     * @param estado estado del vehiculo
      */
     public void setEstado(String estado) {
         this.estado = estado;

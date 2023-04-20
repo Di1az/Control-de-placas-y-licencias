@@ -9,7 +9,7 @@ import java.util.Date;
 import java.util.List;
 
 /**
- *
+ * Interfaz a implementar en PersonaDAO con todos los metodos de Persona
  * @author oscar
  */
 public interface IPersonaDAO {
@@ -35,14 +35,6 @@ public interface IPersonaDAO {
      * @return
      */
     public List<Persona> listaPersonasRFC (String rfc);
-
-    /**
-     * Metodo que se encarga de buscar tramites mediante el nombre de la persona
-     *
-     * @param nombre
-     * @return
-     */
-//    public List<Persona> listaPersonasNombre (String nombre);
 
     /**
      * Metodo que se encarga de buscar tramites mediante la fecha de nacimiento

@@ -49,7 +49,11 @@ public class PlacaDAO implements IPlacaDAO {
             return null;
         }
     }
-
+    
+    /**
+     * Método que genera una lista de las placas 
+     * @return lista de placas
+     */
     @Override
     public List<Placa> listaPlaca() {
         EntityManager em = conexionBD.Conexion();
@@ -69,7 +73,7 @@ public class PlacaDAO implements IPlacaDAO {
     /**
      * Metodo que se encarga de comprobar que el vehiculo cuenta con una placa
      * activa
-     * @param id_vehiculo
+     * @param id_vehiculo id del vehiculo
      * @return placa que se encuentre activa
      */
     @Override
@@ -96,7 +100,7 @@ public class PlacaDAO implements IPlacaDAO {
     /**
      * Metodo que se encarga de desactivar placa del vehiculo
      *
-     * @param id_vehiculo
+     * @param id_vehiculo id del vehiculo
      * @return placa que se encuentre activa
      */
     @Override

@@ -10,11 +10,16 @@ import javax.persistence.Persistence;
 import javax.persistence.PersistenceException;
 
 /**
- *
- * @author oscar
+ * Clase para establecer la conexion a la BD
+ * @author oscar 
  */
 public class ConexionBD implements IConexionBD{
-
+    
+    /**
+     * Método para generar la conexion
+     * @return entity Manager
+     * @throws PersistenceException 
+     */
     @Override
     public EntityManager Conexion() throws PersistenceException{
         //Creamos un Entitiy Manager factory

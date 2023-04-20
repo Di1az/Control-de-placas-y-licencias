@@ -11,7 +11,7 @@ import java.awt.Color;
 import javax.swing.JOptionPane;
 
 /**
- *
+ * Frame de registro de vehiculos
  * @author dany
  */
 public class frmVehiculo extends javax.swing.JFrame {

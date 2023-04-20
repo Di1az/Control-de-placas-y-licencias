@@ -11,7 +11,7 @@ import java.util.Date;
 import javax.swing.JOptionPane;
 
 /**
- *
+ * Frame de generación de licencias
  * @author dany
  */
 public class frmLicencia extends javax.swing.JFrame {
@@ -44,9 +44,9 @@ public class frmLicencia extends javax.swing.JFrame {
 
     /**
      * Metodo constructor
-     * @param persona
-     * @param licenciaDAO
-     * @param desactivarLic 
+     * @param persona personaDAO
+     * @param licenciaDAO licenciaDAO
+     * @param desactivarLic atributo para desactivar la licencia
      */
     public frmLicencia(Persona persona, ILicenciaDAO licenciaDAO, boolean desactivarLic) {
         initComponents();
@@ -210,7 +210,10 @@ public class frmLicencia extends javax.swing.JFrame {
         this.agregar();
 
     }//GEN-LAST:event_btnAceptarActionPerformed
-
+    /**
+     * Método que calcula el precio dependiendo año del comboBox
+     * @param evt evt
+     */
     private void cbAñoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_cbAñoActionPerformed
         // TODO add your handling code here:
         if(persona.getDiscapacidad()==true && cbAño.getSelectedItem().equals("1")){

@@ -10,7 +10,7 @@ import java.util.List;
 import Entidades.Persona;
 
 /**
- * Interfaz VehiculoDAO
+ * Interfaz a implementar en VehiculoDAO con los metodos de Vehculo
  * @author dany
  */
 public interface IVehiculoDAO {
@@ -31,8 +31,8 @@ public interface IVehiculoDAO {
      
      /**
       * Metodo que se encarga de buscar un vehiculo
-      * @param id
-      * @return 
+      * @param id id del vehiculo
+      * @return el vehiculo buscado
       */
      public Vehiculo buscarVehiculo(int id);
      

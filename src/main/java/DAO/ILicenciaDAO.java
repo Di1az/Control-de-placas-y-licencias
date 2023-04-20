@@ -22,16 +22,10 @@ public interface ILicenciaDAO {
     public Licencia agregarLicencia (Licencia licencia);
     
     /**
-     * Método que regresa la lista de las licencias
-     * @return lista de licencias
-     */
-    public List <Licencia> listaLicencia();
-    
-    /**
      * Metodo que se encarga de regresar las licencias
      * que se encuentren vigentes
-     * @param rfc
-     * @return 
+     * @param rfc RFC
+     * @return lista de licencias vigentes
      */
     public List<Licencia> listarLicenciaVigentesPersona(String rfc);
     
@@ -39,7 +33,7 @@ public interface ILicenciaDAO {
      * Metodo que se encarga de obtener la licencia que la persona tiene
      * actualmente
      *
-     * @param id_persona
+     * @param id_persona id de la persona
      * @return Licencia que se encuentre activa
      */
     public Licencia LicenciaActiva(int id_persona);
@@ -48,7 +42,7 @@ public interface ILicenciaDAO {
      * Metodo que se encarga de desactivar la licencia que la persona tiene
      * actualmente
      *
-     * @param id_persona
+     * @param id_persona id de la persona
      * @return Licencia desactivada
      */
     public Licencia DesactivarActual(int id_persona);

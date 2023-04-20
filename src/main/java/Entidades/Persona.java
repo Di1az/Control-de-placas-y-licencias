@@ -19,13 +19,10 @@ import javax.persistence.Temporal;
 import javax.persistence.TemporalType;
 
 /**
- *
+ * Clase entidad de Persona
  * @author oscar
  */
 @Entity
-/**
- * Nombre de la tabla
- */
 @Table(name = "Personas")
 public class Persona implements Serializable {
 

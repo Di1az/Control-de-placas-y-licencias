@@ -12,7 +12,7 @@ import javax.persistence.Query;
 import javax.persistence.TypedQuery;
 
 /**
- * Clase que implementa la interfaz ILicenciaDAO
+ * Clase que implementa la interfaz ILicenciaDAO 
  *
  * @author Dany
  */
@@ -35,8 +35,8 @@ public class LicenciaDAO implements ILicenciaDAO {
     /**
      * Metodo que se encarga de insertar licencia
      *
-     * @param licencia
-     * @return licencia
+     * @param licencia licencia a agregar
+     * @return la licencia si es agregada, null de lo contrario
      */
     @Override
     public Licencia agregarLicencia(Licencia licencia) {
@@ -53,20 +53,10 @@ public class LicenciaDAO implements ILicenciaDAO {
     }
 
     /**
-     * Metodo que regresa una lista con todas las licecias registradas
-     *
-     * @return
-     */
-    @Override
-    public List<Licencia> listaLicencia() {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
-    }
-
-    /**
      * Metodo que se encarga de regresar una lista de licencias dependiendo del
      * rfc recibido en el parametro
      *
-     * @param rfc
+     * @param rfc RFC de la persona
      * @return Licencias vigentes de personas
      */
     @Override
@@ -89,7 +79,7 @@ public class LicenciaDAO implements ILicenciaDAO {
      * Metodo que se encarga de obtener la licencia que la persona tiene
      * actualmente
      *
-     * @param id_persona
+     * @param id_persona id de la persona
      * @return Licencia que se encuentre activa
      */
     @Override
@@ -118,7 +108,7 @@ public class LicenciaDAO implements ILicenciaDAO {
      * Metodo que se encarga de desactivar la licencia que la persona tiene
      * actualmente
      *
-     * @param id_persona
+     * @param id_persona id de la persona
      * @return Licencia desactivada
      */
     @Override

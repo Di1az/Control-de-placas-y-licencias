@@ -33,7 +33,7 @@ import net.sf.jasperreports.engine.JasperReport;
 import net.sf.jasperreports.engine.data.JRBeanCollectionDataSource;
 
 /**
- *
+ * Frame de reportes
  * @author oscar
  */
 public class frmReporte extends javax.swing.JFrame {
@@ -113,7 +113,7 @@ public class frmReporte extends javax.swing.JFrame {
      * Metodo que se encaega de regresar una lista de tramite con el nombre de
      * la persona desencriptado
      *
-     * @param lista
+     * @param lista lista desencriptada de los tramites
      * @return Lista de tramite con el nombre de la persona desencriptado
      */
     public List<Tramite> desencriptarListaTramite(List<Tramite> lista) {
@@ -307,7 +307,7 @@ public class frmReporte extends javax.swing.JFrame {
     /**
      * Metodo que se encarga de regresar al menu principal
      *
-     * @param evt
+     * @param evt evt
      */
     private void btnRegresarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnRegresarActionPerformed
         // TODO add your handling code here:
@@ -320,7 +320,7 @@ public class frmReporte extends javax.swing.JFrame {
      * Metodo que se encarga de aceptar los filtros que el usuario desea
      * utilizar
      *
-     * @param evt
+     * @param evt evt
      */
     private void btnAceptarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnAceptarActionPerformed
         // TODO add your handling code here:
@@ -331,7 +331,7 @@ public class frmReporte extends javax.swing.JFrame {
      * Metodo que se encarga de mostrar la tabla si el check button de placa se
      * encuentra seleccionado
      *
-     * @param evt
+     * @param evt evt
      */
     private void cbPlacaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_cbPlacaActionPerformed
         // TODO add your handling code here:
@@ -342,7 +342,7 @@ public class frmReporte extends javax.swing.JFrame {
      * Metodo que se encarga de mostrar la tabla si el check button de placa se
      * encuentra seleccionado
      *
-     * @param evt
+     * @param evt evt
      */
     private void cbLicenciaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_cbLicenciaActionPerformed
         // TODO add your handling code here:
@@ -353,7 +353,7 @@ public class frmReporte extends javax.swing.JFrame {
      * Metodo para que mientras vayas escribiendo en un txt se vaya llenando la
      * tabla
      *
-     * @param evt
+     * @param evt evt
      */
     private void txtNombreKeyReleased(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_txtNombreKeyReleased
         // TODO add your handling code here:

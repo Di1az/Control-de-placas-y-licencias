@@ -14,7 +14,7 @@ import javax.swing.table.DefaultTableModel;
 
 
 /**
- *
+ * Frame del historial de tramites
  * @author oscar
  */
 public class frmHistorial extends javax.swing.JFrame {

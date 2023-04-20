@@ -8,9 +8,14 @@ import javax.persistence.EntityManager;
 import javax.persistence.PersistenceException;
 
 /**
- *
+ * Interfaz implementada en ConexionDAO
  * @author oscar
  */
 public interface IConexionBD {
+    /**
+     * Método para realizar la conexión a la BD
+     * @return entity manager
+     * @throws PersistenceException 
+     */
     public EntityManager Conexion() throws PersistenceException; 
 }
