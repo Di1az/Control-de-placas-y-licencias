@@ -14,10 +14,14 @@ import DAO.LicenciaDAO;
 import DAO.PersonaDAO;
 import DAO.PlacaDAO;
 import DAO.VehiculoDAO;
+import Encriptacion.Encriptar;
 import Entidades.Licencia;
 import Entidades.Persona;
 import Entidades.Vehiculo;
 import java.awt.Color;
+import java.util.Calendar;
+import java.util.Date;
+import java.util.GregorianCalendar;
 import java.util.List;
 import javax.swing.JOptionPane;
 
@@ -38,16 +42,16 @@ public class frmMenuPrincipal extends javax.swing.JFrame {
     public frmMenuPrincipal() {
         initComponents();
     }
-
+    
     /**
      * Método constructor utilizado para devolver la rfc de la persona
      * registrada
-     *
      * @param persona Persona a la cual se registro
      */
     public frmMenuPrincipal(Persona persona) {
         initComponents();
         txtRFC.setText(persona.getRfc());
+         
     }
 
     /**
@@ -104,7 +108,6 @@ public class frmMenuPrincipal extends javax.swing.JFrame {
         btnLicencia = new javax.swing.JButton();
         btnReporte = new javax.swing.JButton();
         jLabel2 = new javax.swing.JLabel();
-        btnInsert = new javax.swing.JButton();
         btnHistorial = new javax.swing.JButton();
         txtRFC = new javax.swing.JTextField();
         jLabel5 = new javax.swing.JLabel();
@@ -212,27 +215,6 @@ public class frmMenuPrincipal extends javax.swing.JFrame {
         jLabel2.setText("Persona interesada (RFC)");
         bg.add(jLabel2, new org.netbeans.lib.awtextra.AbsoluteConstraints(30, 110, -1, -1));
 
-        btnInsert.setBackground(new java.awt.Color(0, 153, 204));
-        btnInsert.setFont(new java.awt.Font("Roboto Light", 1, 14)); // NOI18N
-        btnInsert.setForeground(new java.awt.Color(255, 255, 255));
-        btnInsert.setText("Insert masivo");
-        btnInsert.setContentAreaFilled(false);
-        btnInsert.setOpaque(true);
-        btnInsert.addMouseListener(new java.awt.event.MouseAdapter() {
-            public void mouseEntered(java.awt.event.MouseEvent evt) {
-                btnInsertMouseEntered(evt);
-            }
-            public void mouseExited(java.awt.event.MouseEvent evt) {
-                btnInsertMouseExited(evt);
-            }
-        });
-        btnInsert.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                btnInsertActionPerformed(evt);
-            }
-        });
-        bg.add(btnInsert, new org.netbeans.lib.awtextra.AbsoluteConstraints(30, 430, 160, -1));
-
         btnHistorial.setBackground(new java.awt.Color(0, 153, 204));
         btnHistorial.setFont(new java.awt.Font("Roboto Light", 1, 14)); // NOI18N
         btnHistorial.setForeground(new java.awt.Color(255, 255, 255));
@@ -313,19 +295,7 @@ public class frmMenuPrincipal extends javax.swing.JFrame {
         setLocationRelativeTo(null);
     }// </editor-fold>//GEN-END:initComponents
 
-    /**
-     * Boton que accede al registro de 20 personas
-     * @param evt evt
-     */
-    private void btnInsertActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnInsertActionPerformed
-       
-        IConexionBD conexion = new ConexionBD();
-        IPersonaDAO personaDAO = new PersonaDAO(conexion);
-        frmInsertsMasivos insert = new frmInsertsMasivos(personaDAO);
-        insert.setVisible(true);
-        this.dispose();
-    }//GEN-LAST:event_btnInsertActionPerformed
-    /**
+   /**
      * Método que al dar click en el boton si se encuentra a la persona nos
      * manda al frame de registro de vehículo
      *
@@ -440,21 +410,8 @@ public class frmMenuPrincipal extends javax.swing.JFrame {
         txtRFC.setText("");
         txtRFC.setForeground(Color.black);
     }//GEN-LAST:event_txtRFCMousePressed
-    /**
-     * Método para cambiar el color del boton al pasar el mouse sobre el
-     * @param evt evt
-     */
-    private void btnInsertMouseEntered(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btnInsertMouseEntered
-        btnInsert.setBackground(new Color(0, 156, 223));
-    }//GEN-LAST:event_btnInsertMouseEntered
-    /**
-     * Método para cambiar el color del boton al quitar el mouse encima de el
-     * @param evt evt evt
-     */
-    private void btnInsertMouseExited(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btnInsertMouseExited
-        btnInsert.setBackground(new Color(0, 134, 190));
-    }//GEN-LAST:event_btnInsertMouseExited
-    /**
+
+   /**
      * Método para cambiar el color del boton al pasar el mouse sobre el
      * @param evt evt
      */
@@ -555,7 +512,6 @@ public class frmMenuPrincipal extends javax.swing.JFrame {
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JPanel bg;
     private javax.swing.JButton btnHistorial;
-    private javax.swing.JButton btnInsert;
     private javax.swing.JButton btnLicencia;
     private javax.swing.JButton btnPersona;
     private javax.swing.JButton btnPlacas;
