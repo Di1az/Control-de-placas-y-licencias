@@ -15,7 +15,6 @@ GUI\frmPersona$13.class
 Entidades\Vehiculo.class
 GUI\frmVehiculo$10.class
 GUI\frmMenuPrincipal$9.class
-GUI\frmHistorial$6.class
 GUI\frmMenuPrincipal$15.class
 GUI\frmMenuPrincipal$6.class
 GUI\frmHistorial$3.class
@@ -39,6 +38,7 @@ DAO\IConexionBD.class
 GUI\frmPersona$8.class
 GUI\frmPersona$1.class
 Entidades\Licencia.class
+GUI\frmLicencia$3.class
 GUI\frmVehiculo$7.class
 GUI\frmMenuPrincipal$11.class
 GUI\frmHistorial$4.class
@@ -47,7 +47,6 @@ GUI\frmVehiculo$1.class
 GUI\frmMenuPrincipal$1.class
 Encriptacion\Encriptar.class
 GUI\frmMenuPrincipal.class
-GUI\frmHistorial$5.class
 Entidades\Persona.class
 GUI\frmMenuPrincipal$16.class
 GUI\frmVehiculo$8.class
@@ -62,7 +61,6 @@ Entidades\Placa_.class
 GUI\frmPlacas$1.class
 GUI\frmVehiculo.class
 Entidades\Placa.class
-GUI\frmReporte$7.class
 GUI\frmMenuPrincipal$2.class
 GUI\frmInsertsMasivos.class
 GUI\frmPersona$3.class
