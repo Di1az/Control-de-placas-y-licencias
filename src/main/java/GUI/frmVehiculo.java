@@ -424,6 +424,19 @@ public class frmVehiculo extends javax.swing.JFrame {
         if(txtNumero.getText().length()==12){
             evt.consume();
         }
+        
+        String entrada = txtNumero.getText();
+        
+        // Obtener el caracter que se acaba de teclear
+        char caracter = evt.getKeyChar();
+        
+        // Verificar si el caracter tecleado es una letra en minúscula
+        if (Character.isLowerCase(caracter)) {
+            // Mostrar un mensaje de error
+            JOptionPane.showMessageDialog(null, "Favor de utilizar solo mayúsculas");
+            
+            
+        }
     }//GEN-LAST:event_txtNumeroKeyTyped
     /**
      * Método que llama al metodo validarMarca para realizar obvios trabajos 

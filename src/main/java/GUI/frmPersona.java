@@ -244,8 +244,6 @@ public class frmPersona extends javax.swing.JFrame {
         });
         bg.add(btnAceptar, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 450, -1, -1));
 
-        txtRFC.setForeground(new java.awt.Color(204, 204, 204));
-        txtRFC.setText("Ingrese su RFC");
         txtRFC.setBorder(null);
         txtRFC.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mousePressed(java.awt.event.MouseEvent evt) {
@@ -481,6 +479,19 @@ public class frmPersona extends javax.swing.JFrame {
 
         if (txtRFC.getText().length() == 12) {
             evt.consume();
+        }
+        
+        String entrada = txtRFC.getText();
+        
+        // Obtener el caracter que se acaba de teclear
+        char caracter = evt.getKeyChar();
+        
+        // Verificar si el caracter tecleado es una letra en minúscula
+        if (Character.isLowerCase(caracter)) {
+            // Mostrar un mensaje de error
+            JOptionPane.showMessageDialog(null, "Favor de utilizar solo mayúsculas");
+            
+            
         }
     }//GEN-LAST:event_txtRFCKeyTyped
     /**

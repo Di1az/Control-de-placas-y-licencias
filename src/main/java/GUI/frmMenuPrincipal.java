@@ -235,14 +235,7 @@ public class frmMenuPrincipal extends javax.swing.JFrame {
         });
         bg.add(btnHistorial, new org.netbeans.lib.awtextra.AbsoluteConstraints(30, 390, 160, -1));
 
-        txtRFC.setForeground(new java.awt.Color(204, 204, 204));
-        txtRFC.setText("Ingrese su RFC");
         txtRFC.setBorder(null);
-        txtRFC.addMouseListener(new java.awt.event.MouseAdapter() {
-            public void mousePressed(java.awt.event.MouseEvent evt) {
-                txtRFCMousePressed(evt);
-            }
-        });
         txtRFC.addKeyListener(new java.awt.event.KeyAdapter() {
             public void keyTyped(java.awt.event.KeyEvent evt) {
                 txtRFCKeyTyped(evt);
@@ -398,17 +391,22 @@ public class frmMenuPrincipal extends javax.swing.JFrame {
         if (txtRFC.getText().length() == 12) {
             evt.consume();
         }
+        
+        String entrada = txtRFC.getText();
+        
+        // Obtener el caracter que se acaba de teclear
+        char caracter = evt.getKeyChar();
+        
+        // Verificar si el caracter tecleado es una letra en minúscula
+        if (Character.isLowerCase(caracter)) {
+            // Mostrar un mensaje de error
+            JOptionPane.showMessageDialog(null, "Favor de utilizar solo mayúsculas");
+            
+            
+        }
 
 
     }//GEN-LAST:event_txtRFCKeyTyped
-    /**
-     * Método para aparentar la función de un placeholder
-     * @param evt evt
-     */
-    private void txtRFCMousePressed(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_txtRFCMousePressed
-        txtRFC.setText("");
-        txtRFC.setForeground(Color.black);
-    }//GEN-LAST:event_txtRFCMousePressed
 
    /**
      * Método para cambiar el color del boton al pasar el mouse sobre el
