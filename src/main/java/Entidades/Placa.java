@@ -35,6 +35,9 @@ import javax.persistence.Table;
  * asociado.
  */
 @Entity
+/**
+ * Nombre de la tabla
+ */
 @Table(name = "Placas")
 @DiscriminatorValue(value = "Placa")
 public class Placa extends Tramite implements Serializable {
@@ -131,6 +134,7 @@ public class Placa extends Tramite implements Serializable {
 
     /**
      * Metodo que regresa el costo de la placa
+     *
      * @return costo
      */
     public float getCosto() {
@@ -139,6 +143,7 @@ public class Placa extends Tramite implements Serializable {
 
     /**
      * Metodo que establece el costo de la placa
+     *
      * @param costo
      */
     public void setCosto(float costo) {
@@ -147,6 +152,7 @@ public class Placa extends Tramite implements Serializable {
 
     /**
      * Metodo que regresa el numero de la placa
+     *
      * @return numeroPlaca
      */
     public String getNumeroPlaca() {
@@ -155,7 +161,8 @@ public class Placa extends Tramite implements Serializable {
 
     /**
      * Metodo que establece el numero de la placa
-     * @param numeroPlaca 
+     *
+     * @param numeroPlaca
      */
     public void setNumeroPlaca(String numeroPlaca) {
         this.numeroPlaca = numeroPlaca;
@@ -163,6 +170,7 @@ public class Placa extends Tramite implements Serializable {
 
     /**
      * Metodo que regresa el estado
+     *
      * @return estado
      */
     public String getEstado() {
@@ -171,7 +179,8 @@ public class Placa extends Tramite implements Serializable {
 
     /**
      * Metodo que establece el estado
-     * @param estado 
+     *
+     * @param estado
      */
     public void setEstado(String estado) {
         this.estado = estado;
