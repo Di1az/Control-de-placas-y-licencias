@@ -7,9 +7,11 @@ package GUI;
 import DAO.IPersonaDAO;
 import Entidades.Persona;
 import java.awt.Color;
+import java.awt.Font;
 import java.util.ArrayList;
 import java.util.List;
 import javax.swing.table.DefaultTableModel;
+
 
 /**
  *
@@ -161,6 +163,10 @@ public class frmHistorial extends javax.swing.JFrame {
             }
         ));
         jScrollPane1.setViewportView(tblHistorial);
+        tblHistorial.getTableHeader().setFont(new Font("Segoe UI", Font.BOLD, 12));
+        tblHistorial.getTableHeader().setOpaque(false);
+        tblHistorial.getTableHeader().setBackground(new Color(102,89,222));
+        tblHistorial.getTableHeader().setForeground(new Color(255,255,255));
 
         jPanel1.add(jScrollPane1, new org.netbeans.lib.awtextra.AbsoluteConstraints(40, 260, 450, 120));
 
@@ -190,13 +196,7 @@ public class frmHistorial extends javax.swing.JFrame {
         });
         jPanel1.add(btnAceptar, new org.netbeans.lib.awtextra.AbsoluteConstraints(110, 420, -1, -1));
 
-        txtNombre.setForeground(new java.awt.Color(204, 204, 204));
         txtNombre.setBorder(null);
-        txtNombre.addMouseListener(new java.awt.event.MouseAdapter() {
-            public void mousePressed(java.awt.event.MouseEvent evt) {
-                txtNombreMousePressed(evt);
-            }
-        });
         txtNombre.addKeyListener(new java.awt.event.KeyAdapter() {
             public void keyReleased(java.awt.event.KeyEvent evt) {
                 txtNombreKeyReleased(evt);
@@ -204,13 +204,7 @@ public class frmHistorial extends javax.swing.JFrame {
         });
         jPanel1.add(txtNombre, new org.netbeans.lib.awtextra.AbsoluteConstraints(100, 150, 130, -1));
 
-        txtRFC.setForeground(new java.awt.Color(204, 204, 204));
         txtRFC.setBorder(null);
-        txtRFC.addMouseListener(new java.awt.event.MouseAdapter() {
-            public void mousePressed(java.awt.event.MouseEvent evt) {
-                txtRFCMousePressed(evt);
-            }
-        });
         txtRFC.addKeyListener(new java.awt.event.KeyAdapter() {
             public void keyReleased(java.awt.event.KeyEvent evt) {
                 txtRFCKeyReleased(evt);
@@ -261,7 +255,7 @@ public class frmHistorial extends javax.swing.JFrame {
 
     /**
      * Metodo que se encarga de regresar al menu principal
-     * @param evt 
+     * @param evt evt
      */
     private void btnRegresarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnRegresarActionPerformed
         
@@ -273,7 +267,7 @@ public class frmHistorial extends javax.swing.JFrame {
      /**
      * Metodo que se encarga de aceptar los filtros
      * que el usuario desea utilizar
-     * @param evt 
+     * @param evt evt
      */
     private void btnAceptarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnAceptarActionPerformed
         
@@ -283,7 +277,7 @@ public class frmHistorial extends javax.swing.JFrame {
     /**
      * Metodo para que mientras vayas escribiendo en un txt
      * se vaya llenando la tabla
-     * @param evt 
+     * @param evt evt
      */
     private void txtNombreKeyReleased(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_txtNombreKeyReleased
          llenarTabla();
@@ -292,27 +286,11 @@ public class frmHistorial extends javax.swing.JFrame {
      /**
      * Metodo para que mientras vayas escribiendo en un txt
      * se vaya llenando la tabla
-     * @param evt 
+     * @param evt evt
      */
     private void txtRFCKeyReleased(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_txtRFCKeyReleased
          llenarTabla();
     }//GEN-LAST:event_txtRFCKeyReleased
-    /**
-     * Método para aparentar un placeholder
-     * @param evt evt
-     */
-    private void txtNombreMousePressed(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_txtNombreMousePressed
-       txtNombre.setText("");
-       txtNombre.setForeground(Color.black);
-    }//GEN-LAST:event_txtNombreMousePressed
-    /**
-     * Método para aparentar un placeholder
-     * @param evt evt
-     */
-    private void txtRFCMousePressed(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_txtRFCMousePressed
-       txtRFC.setText("");
-       txtRFC.setForeground(Color.black);
-    }//GEN-LAST:event_txtRFCMousePressed
 
     
 

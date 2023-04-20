@@ -22,12 +22,6 @@ public interface IVehiculoDAO {
      */
     public Vehiculo agregarVehiculo (Vehiculo vehiculo);
     
-    /**
-     * Método que regresa la lista de los vehículos
-     * @return lista de vehículos
-     */
-    public List <Vehiculo> listaVehiculo();
-    
      /**
       * Lista de cuentas utilizada para el comboBox
       * @param persona cliente
@@ -37,8 +31,22 @@ public interface IVehiculoDAO {
      
      /**
       * Metodo que se encarga de buscar un vehiculo
-      * @param vehiculo
+      * @param id
       * @return 
       */
      public Vehiculo buscarVehiculo(int id);
+     
+     /**
+      * Método que te regresa el estado de un vehiculo
+      * @param id_vehiculo id del vehiculo
+      * @return el estado del vehiculo
+      */
+     public Vehiculo estadoNuevo(int id_vehiculo);
+     
+     /**
+      * Método que cambia el estado a usado
+      * @param id_vehiculo id del vehiculo
+      * @return vehiculo con el estado actualizado
+      */
+     public Vehiculo cambiarEstado(int id_vehiculo);
 }

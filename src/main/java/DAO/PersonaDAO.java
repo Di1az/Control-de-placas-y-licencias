@@ -13,7 +13,7 @@ import javax.persistence.EntityManager;
 import javax.persistence.TypedQuery;
 
 /**
- *
+ *  
  * @author oscar
  */
 public class PersonaDAO implements IPersonaDAO {

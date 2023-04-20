@@ -233,13 +233,7 @@ public class frmReporte extends javax.swing.JFrame {
 
         jPanel1.add(jScrollPane1, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 250, 530, 110));
 
-        txtNombre.setForeground(new java.awt.Color(204, 204, 204));
         txtNombre.setBorder(null);
-        txtNombre.addMouseListener(new java.awt.event.MouseAdapter() {
-            public void mousePressed(java.awt.event.MouseEvent evt) {
-                txtNombreMousePressed(evt);
-            }
-        });
         txtNombre.addKeyListener(new java.awt.event.KeyAdapter() {
             public void keyReleased(java.awt.event.KeyEvent evt) {
                 txtNombreKeyReleased(evt);
@@ -426,14 +420,6 @@ public class frmReporte extends javax.swing.JFrame {
             }
         }
     }//GEN-LAST:event_btnPDFActionPerformed
-    /**
-     * Método para aparentar un placeholder
-     * @param evt evt
-     */
-    private void txtNombreMousePressed(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_txtNombreMousePressed
-        txtNombre.setText("");
-        txtNombre.setForeground(Color.black);
-    }//GEN-LAST:event_txtNombreMousePressed
 
     
 

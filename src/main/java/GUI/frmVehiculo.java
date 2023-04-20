@@ -232,6 +232,7 @@ public class frmVehiculo extends javax.swing.JFrame {
         btnAceptar.setForeground(new java.awt.Color(255, 255, 255));
         btnAceptar.setText("Aceptar");
         btnAceptar.setContentAreaFilled(false);
+        btnAceptar.setOpaque(true);
         btnAceptar.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 btnAceptarActionPerformed(evt);
@@ -372,11 +373,14 @@ public class frmVehiculo extends javax.swing.JFrame {
      * @param evt evt
      */
     private void txtNumeroKeyTyped(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_txtNumeroKeyTyped
-        char c = evt.getKeyChar();
         
-        if((c<'0' || c>'9'))evt.consume();
+        char c = evt.getKeyChar();
 
-        if (txtNumero.getText().length() == 17) {
+        if ((c < '0' || c > '9') && (c < 'A') | c > 'Z') {
+            evt.consume();
+        }
+        
+        if(txtNumero.getText().length()==12){
             evt.consume();
         }
     }//GEN-LAST:event_txtNumeroKeyTyped

@@ -32,9 +32,9 @@ public class PlacaDAO implements IPlacaDAO {
     }
 
     /**
-     *
-     * @param placa
-     * @return
+     * Método que agrega una placa 
+     * @param placa placa a agregar
+     * @return la placa
      */
     @Override
     public Placa agregarPlaca(Placa placa) {
@@ -69,7 +69,6 @@ public class PlacaDAO implements IPlacaDAO {
     /**
      * Metodo que se encarga de comprobar que el vehiculo cuenta con una placa
      * activa
-     *
      * @param id_vehiculo
      * @return placa que se encuentre activa
      */

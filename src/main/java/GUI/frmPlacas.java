@@ -166,17 +166,20 @@ public class frmPlacas extends javax.swing.JFrame {
         }
 
         Placa placa = new Placa(calcularPrecio(vehiculo), p, estado, vehiculo, fechaRecepcion, fechaEmision, persona);
+        
         if (desactivarPlaca) {
 
             placaDAO.DesactivarPlaca(vehiculo.getId());
 
         }
+        
         if (placaDAO.agregarPlaca(placa) == null) {
             JOptionPane.showMessageDialog(this, "No se pudo registrar la placa");
         } else {
 
             JOptionPane.showMessageDialog(this, "Registro exitoso");
             frmMenuPrincipal principal = new frmMenuPrincipal(persona);
+            vehiculoDAO.cambiarEstado(vehiculo.getId());
             principal.setVisible(true);
             this.dispose();
         }

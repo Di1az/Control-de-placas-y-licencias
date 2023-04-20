@@ -360,7 +360,7 @@ public class frmPersona extends javax.swing.JFrame {
     }// </editor-fold>//GEN-END:initComponents
     /**
      * Método para volver al menu principal al dar click al boton
-     * @param evt 
+     * @param evt evt
      */
     private void btnVolverActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnVolverActionPerformed
         // TODO add your handling code here:

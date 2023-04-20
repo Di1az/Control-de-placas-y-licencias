@@ -50,15 +50,6 @@ public class VehiculoDAO implements IVehiculoDAO {
     }
     
     /**
-     * Genera una lista de todos los vehículos
-     * @return lista de vehículos
-     */
-    @Override
-    public List<Vehiculo> listaVehiculo() {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
-    }
-    
-    /**
      * Método que imprime una lista de los vehiculos de una persona en especifico
      * @param persona persona en especifico 
      * @return la lista de vehiculos 
@@ -82,8 +73,8 @@ public class VehiculoDAO implements IVehiculoDAO {
     /**
      * Metodo que se encarga de devolver un vehiculo
      * dependiendo del id ingresado en el parametro
-     * @param id
-     * @return vehiculo
+     * @param id id del vehiculo
+     * @return vehiculo 
      */
     @Override
     public Vehiculo buscarVehiculo(int id) {
@@ -97,6 +88,55 @@ public class VehiculoDAO implements IVehiculoDAO {
             em.getTransaction().commit();
             return vehiculo;
         } catch (Exception e) {
+            return null;
+        }
+    }
+    
+    /**
+     * Metodo que se encarga de devolver el estado del vehiculo
+     * @param id_vehiculo id del vehiculo
+     * @return estado del coche nuevo
+     */
+    @Override
+    public Vehiculo estadoNuevo(int id_vehiculo) {
+        EntityManager em = conexionBD.Conexion();
+        try {
+            em.getTransaction().begin();
+
+            TypedQuery<Vehiculo> consultaPlaca = em.createQuery("SELECT v FROM Vehiculo v WHERE v.id = :id AND v.estado = 'Nuevo'", Vehiculo.class);
+            consultaPlaca.setParameter("id", id_vehiculo);
+            Vehiculo vehiculoNuevo = consultaPlaca.getSingleResult();
+
+            em.getTransaction().commit();
+
+            return vehiculoNuevo;
+        } catch (Exception e) {
+            return null;
+        } finally {
+            em.close();
+        }
+    }
+
+    /**
+     * Metodo que se encarga de cambiar el estado del vehiculo a usado
+     * @param id_vehiculo id del vehiculo a cambiar el estado
+     * @return vehiculo con el estado en Usado
+     */
+    @Override
+    public Vehiculo cambiarEstado(int id_vehiculo) {
+        EntityManager em = conexionBD.Conexion();
+        try {
+            em.getTransaction().begin();
+            Vehiculo vehiculo = this.estadoNuevo(id_vehiculo);
+
+            Vehiculo estadoUsado = em.find(Vehiculo.class, vehiculo.getId());
+
+            estadoUsado.setEstado("Usado");
+            em.merge(estadoUsado); //Agrega la nueva placa en la base de datos
+            em.getTransaction().commit();
+            return vehiculo;
+        } catch (Exception e) {
+
             return null;
         }
     }
