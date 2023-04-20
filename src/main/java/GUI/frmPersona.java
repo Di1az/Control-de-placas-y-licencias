@@ -8,10 +8,15 @@ package GUI;
 import DAO.IPersonaDAO;
 import Encriptacion.Encriptar;
 import Entidades.Persona;
+import com.toedter.calendar.JDateChooser;
 import java.awt.Color;
 import java.util.Calendar;
 import java.util.Date;
 import java.util.GregorianCalendar;
+import java.time.temporal.ChronoUnit;
+import java.util.Calendar;
+import java.util.Date;
+import java.util.List;
 import javax.swing.JOptionPane;
 
 /**
@@ -19,21 +24,22 @@ import javax.swing.JOptionPane;
  * @author oscar
  */
 public class frmPersona extends javax.swing.JFrame {
-    
+
     /**
      * Objeto de tipo IPersonaDAO
      */
     private final IPersonaDAO personaDAO;
-    
+
     /**
      * Método constructor que inicializa los atributos
+     *
      * @param personaDao personaDao
      */
     public frmPersona(IPersonaDAO personaDao) {
         initComponents();
         this.personaDAO = personaDao;
     }
-    
+
     /**
      * Método que agrega a una persona
      */
@@ -46,6 +52,7 @@ public class frmPersona extends javax.swing.JFrame {
         }
 
         Persona persona = new Persona(txtRFC.getText(), txtNombre.getText(), txtApellidoP.getText(), txtApellidoM.getText(), txtTelefono.getText(), inicio, discapacidad);
+
         if (personaDAO.registrarPersona(persona) == null) {
             JOptionPane.showMessageDialog(this, "No se pudo registrar a la persona");
         } else {
@@ -57,35 +64,78 @@ public class frmPersona extends javax.swing.JFrame {
         }
 
     }
-    
+
+    /**
+     * Metodo que valida que la persona no sea menor a 18 años ni la fecha de
+     * nacimiento sea mayor a la actual
+     *
+     * @param fechaNacimiento
+     * @return
+     */
+    public static boolean validarFecha(Date fechaNacimiento) {
+        Date fechaActual = new Date(); // Obtener la fecha actual
+        Calendar dob = Calendar.getInstance();
+        dob.setTime(fechaNacimiento);
+        dob.add(Calendar.YEAR, 18); // Añadir 18 años a la fecha de nacimiento
+
+        if (dob.after(Calendar.getInstance())) { // Si la fecha de nacimiento + 18 años es posterior a la fecha actual
+            JOptionPane.showMessageDialog(null, "Debe ser mayor de 18 años para registrarse");
+            return false;
+        } else if (fechaNacimiento.after(fechaActual)) { // Si la fecha de nacimiento es posterior a la fecha actual
+            JOptionPane.showMessageDialog(null, "La fecha no puede ser mayor al día de hoy");
+            return false;
+        } else {
+            return true;
+        }
+    }
+
     /**
      * Método de validación que solo permite letras y el espacio
+     *
      * @param evento evt
      */
-    public void validarNombre(java.awt.event.KeyEvent evento){
-        if(evento.getKeyChar()>=33 && evento.getKeyChar() <=64
-                ||evento.getKeyChar()>=91 && evento.getKeyChar() <=96
-                || evento.getKeyChar()>=123 && evento.getKeyChar() <=127){
-            
+    public void validarNombre(java.awt.event.KeyEvent evento) {
+        if (evento.getKeyChar() >= 33 && evento.getKeyChar() <= 64
+                || evento.getKeyChar() >= 91 && evento.getKeyChar() <= 96
+                || evento.getKeyChar() >= 123 && evento.getKeyChar() <= 127) {
+
             evento.consume();
-            
+
         }
     }
-    
+
     /**
      * Método utilizado para validar la discapacidad
+     *
      * @param evento evento
      */
-    public void validarDiscapacidad(java.awt.event.KeyEvent evento){
-        if(evento.getKeyChar()>=32 && evento.getKeyChar() <=77
-                ||evento.getKeyChar()>=79 && evento.getKeyChar() <=88
-                || evento.getKeyChar()>=90 && evento.getKeyChar() <=126){
-            
+    public void validarDiscapacidad(java.awt.event.KeyEvent evento) {
+        if (evento.getKeyChar() >= 32 && evento.getKeyChar() <= 77
+                || evento.getKeyChar() >= 79 && evento.getKeyChar() <= 88
+                || evento.getKeyChar() >= 90 && evento.getKeyChar() <= 126) {
+
             evento.consume();
-            
+
         }
     }
-    
+
+    /**
+     * Metodo que valida que el rfc no se repita con alguno ya registrado
+     *
+     * @return true o false
+     */
+    public boolean validarRFC() {
+        List<Persona> personaL = personaDAO.listaPersona();
+        for (Persona persona : personaL) {
+            if (txtRFC.getText().equalsIgnoreCase(persona.getRfc())) {
+                JOptionPane.showMessageDialog(this, "El RFC ya existe");
+                return false;
+            }
+        }
+        return true;
+
+    }
+
     /**
      * Método que nos ayuda para que no existan vacíos dentro del cuadro de
      * texto.
@@ -104,15 +154,14 @@ public class frmPersona extends javax.swing.JFrame {
                 || txtDiscapacidad.getText().equals("")
                 || txtFechaN.getDate() == null) {
             JOptionPane.showMessageDialog(this, "Favor de llenar los campos faltantes", "Informacion", JOptionPane.INFORMATION_MESSAGE);
-            
+
             return false;
         }
-        if (txtRFC.getText().length()!=12) {
+        if (txtRFC.getText().length() != 12) {
             JOptionPane.showMessageDialog(this, "El RFC debe de contener un total de 12 caracteres", "Informacion", JOptionPane.INFORMATION_MESSAGE);
-            
+
             return false;
         }
-        
 
         return error;
     }
@@ -386,6 +435,7 @@ public class frmPersona extends javax.swing.JFrame {
     }// </editor-fold>//GEN-END:initComponents
     /**
      * Método para volver al menu principal al dar click al boton
+     *
      * @param evt evt
      */
     private void btnVolverActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnVolverActionPerformed
@@ -395,32 +445,42 @@ public class frmPersona extends javax.swing.JFrame {
         this.dispose();
     }//GEN-LAST:event_btnVolverActionPerformed
     /**
-     * Método que si no hay ningun campo vacio llama al metodo para agregar a la persona
-     * @param evt evt 
+     * Método que si no hay ningun campo vacio llama al metodo para agregar a la
+     * persona
+     *
+     * @param evt evt
      */
     private void btnAceptarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnAceptarActionPerformed
-        if(validarVacios()){
-            this.agregar();
+        if (validarVacios()) {
+            if (validarRFC()) {
+
+            }
+            if (validarFecha(txtFechaN.getDate())) {
+                this.agregar();
+            }
+
         }
-        
+
     }//GEN-LAST:event_btnAceptarActionPerformed
     /**
      * Método que validad el campo rfc
+     *
      * @param evt evt
      */
     private void txtRFCKeyTyped(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_txtRFCKeyTyped
-       char c = evt.getKeyChar();
+        char c = evt.getKeyChar();
 
         if ((c < '0' || c > '9') && (c < 'A') | c > 'Z') {
             evt.consume();
         }
-        
-        if(txtRFC.getText().length()==12){
+
+        if (txtRFC.getText().length() == 12) {
             evt.consume();
         }
     }//GEN-LAST:event_txtRFCKeyTyped
     /**
      * Método que utiliza el validarNombre para solo permitir letras y espacio
+     *
      * @param evt evt
      */
     private void txtNombreKeyTyped(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_txtNombreKeyTyped
@@ -428,6 +488,7 @@ public class frmPersona extends javax.swing.JFrame {
     }//GEN-LAST:event_txtNombreKeyTyped
     /**
      * Método que utiliza el validarNombre para solo permitir letras y espacio
+     *
      * @param evt evt
      */
     private void txtApellidoPKeyTyped(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_txtApellidoPKeyTyped
@@ -435,6 +496,7 @@ public class frmPersona extends javax.swing.JFrame {
     }//GEN-LAST:event_txtApellidoPKeyTyped
     /**
      * Método que utiliza el validarNombre para solo permitir letras y espacio
+     *
      * @param evt evt
      */
     private void txtApellidoMKeyTyped(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_txtApellidoMKeyTyped
@@ -442,30 +504,35 @@ public class frmPersona extends javax.swing.JFrame {
     }//GEN-LAST:event_txtApellidoMKeyTyped
     /**
      * Método que valida el telefono
+     *
      * @param evt evt
      */
     private void txtTelefonoKeyTyped(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_txtTelefonoKeyTyped
         char c = evt.getKeyChar();
-        
-        if((c<'0' || c>'9'))evt.consume();
-        
-        if(txtTelefono.getText().length()==10){
+
+        if ((c < '0' || c > '9')) {
+            evt.consume();
+        }
+
+        if (txtTelefono.getText().length() == 10) {
             evt.consume();
         }
     }//GEN-LAST:event_txtTelefonoKeyTyped
     /**
      * Método que valida la pregunta de discapacidad
+     *
      * @param evt evt
      */
     private void txtDiscapacidadKeyTyped(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_txtDiscapacidadKeyTyped
         validarDiscapacidad(evt);
-        
-        if(txtDiscapacidad.getText().length()==1){
+
+        if (txtDiscapacidad.getText().length() == 1) {
             evt.consume();
         }
     }//GEN-LAST:event_txtDiscapacidadKeyTyped
     /**
      * Método para aparentar un placeholder
+     *
      * @param evt evt
      */
     private void txtRFCMousePressed(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_txtRFCMousePressed
@@ -474,6 +541,7 @@ public class frmPersona extends javax.swing.JFrame {
     }//GEN-LAST:event_txtRFCMousePressed
     /**
      * Método para aparentar un placeholder
+     *
      * @param evt evt
      */
     private void txtNombreMousePressed(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_txtNombreMousePressed
@@ -482,6 +550,7 @@ public class frmPersona extends javax.swing.JFrame {
     }//GEN-LAST:event_txtNombreMousePressed
     /**
      * Método para aparentar un placeholder
+     *
      * @param evt evt
      */
     private void txtApellidoPMousePressed(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_txtApellidoPMousePressed
@@ -490,6 +559,7 @@ public class frmPersona extends javax.swing.JFrame {
     }//GEN-LAST:event_txtApellidoPMousePressed
     /**
      * Método para aparentar un placeholder
+     *
      * @param evt evt
      */
     private void txtApellidoMMousePressed(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_txtApellidoMMousePressed
@@ -498,6 +568,7 @@ public class frmPersona extends javax.swing.JFrame {
     }//GEN-LAST:event_txtApellidoMMousePressed
     /**
      * Método para aparentar un placeholder
+     *
      * @param evt evt
      */
     private void txtTelefonoMousePressed(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_txtTelefonoMousePressed
@@ -506,6 +577,7 @@ public class frmPersona extends javax.swing.JFrame {
     }//GEN-LAST:event_txtTelefonoMousePressed
     /**
      * Método para aparentar un placeholder
+     *
      * @param evt evt
      */
     private void txtDiscapacidadMousePressed(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_txtDiscapacidadMousePressed
@@ -514,6 +586,7 @@ public class frmPersona extends javax.swing.JFrame {
     }//GEN-LAST:event_txtDiscapacidadMousePressed
     /**
      * Método para limpiar los textfields al dar click en el boton
+     *
      * @param evt evt
      */
     private void btnCancelar1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnCancelar1ActionPerformed
@@ -523,6 +596,7 @@ public class frmPersona extends javax.swing.JFrame {
         txtRFC.setText("");
         txtTelefono.setText("");
     }//GEN-LAST:event_btnCancelar1ActionPerformed
+
 
     private void btnInsertMouseEntered(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btnInsertMouseEntered
         btnInsert.setBackground(new Color(0, 156, 223));
@@ -707,6 +781,7 @@ public class frmPersona extends javax.swing.JFrame {
     }//GEN-LAST:event_btnInsertActionPerformed
 
     
+
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JPanel bg;
